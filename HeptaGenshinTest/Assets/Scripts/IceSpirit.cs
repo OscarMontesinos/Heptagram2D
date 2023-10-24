@@ -11,9 +11,9 @@ public class IceSpirit : Enemy
     public float spellDamage;
     public float atqSpd;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        
+        base.Start();
         AI();
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface HitInteract
 {
-    void Interact(PjBase user, Enemy enemy, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
+    void Interact(PjBase user, PjBase enemy, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
     {
 
     }

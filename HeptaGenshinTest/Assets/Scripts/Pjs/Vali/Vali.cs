@@ -213,22 +213,22 @@ public class Vali : PjBase
     }
     void HomingArrow(GameObject target)
     {
-        ValiHomingArrow arrow = Instantiate(homingIceArrow, transform.position, transform.rotation).GetComponent<ValiHomingArrow>();
+        ValiHomingArrow arrow = Instantiate(homingIceArrow, PlayerController.Instance.character.transform.position, PlayerController.Instance.character.transform.rotation).GetComponent<ValiHomingArrow>();
         arrow.SetUp(this, target, homingSpd, CalculateSinergy(homingDmg),homingTorque);
         arrow.transform.up = target.transform.position - arrow.transform.position;
         if (homingDir)
         {
-            arrow.transform.localEulerAngles = new Vector3(arrow.transform.localEulerAngles.x, arrow.transform.localEulerAngles.y, arrow.transform.localEulerAngles.z + homingDetour);
+            arrow.transform.localEulerAngles = new Vector3(arrow.transform.localEulerAngles.x, arrow.transform.localEulerAngles.y, arrow.transform.localEulerAngles.z + Random.Range( homingDetour - 50 , homingDetour));
         }
         else
         {
-            arrow.transform.localEulerAngles = new Vector3(arrow.transform.localEulerAngles.x, arrow.transform.localEulerAngles.y, arrow.transform.localEulerAngles.z - homingDetour);
+            arrow.transform.localEulerAngles = new Vector3(arrow.transform.localEulerAngles.x, arrow.transform.localEulerAngles.y, arrow.transform.localEulerAngles.z - Random.Range(homingDetour - 50, homingDetour));
         }
 
         homingDir = !homingDir;
     }
 
-    public override void Interact(PjBase user, Enemy target,  HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
+    public override void Interact(PjBase user, PjBase target,  HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
     {
         if (CharacterManager.Instance.data[0].convergence >= 1 && habType == HitData.HabType.basic && attackType == HitData.AttackType.range)
         {

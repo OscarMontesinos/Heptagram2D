@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.SpriteAssetUtilities;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -12,15 +13,15 @@ public class ValiMistMark : Buff, HitInteract
         this.time = time;
         this.user = user;
         this.dmg = dmg;
-        eTarget = GetComponent<Enemy>();
+        target = GetComponent<PjBase>();
     }
-    void HitInteract.Interact(PjBase user, Enemy enemy, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
+    void HitInteract.Interact(PjBase user, PjBase enemy, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
     {
         if (!triggered && user != this.user)
         {
             triggered = true;
-            eTarget.GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.ice);
-            user.DamageDealed(user, eTarget, HitData.Element.ice, HitData.AttackType.range, HitData.HabType.hability);
+            target.GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.ice);
+            user.DamageDealed(user, target, HitData.Element.ice, HitData.AttackType.range, HitData.HabType.hability);
             Die();
         }
     }

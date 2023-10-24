@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        playerController = FindObjectOfType<PlayerController>();
+        playerController = PlayerController.Instance;
         zPos = transform.position.z;
         if (playerController != null)
         {

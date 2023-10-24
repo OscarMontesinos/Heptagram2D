@@ -8,8 +8,6 @@ public class Buff : MonoBehaviour
     public Vali user;
     [HideInInspector]
     public PjBase target;
-    [HideInInspector]
-    public Enemy eTarget;
     public float time;
     [HideInInspector]
     public bool untimed;

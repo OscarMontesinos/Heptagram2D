@@ -38,6 +38,8 @@ public class ValiHomingArrow : Projectile
         {
             Die();
         }
+
+        torque += Time.deltaTime * 400;
     }
 
     public override void OnTriggerEnter2D(Collider2D collision)

@@ -7,6 +7,8 @@ public class PjBase : MonoBehaviour, TakeDamage
 {
     public PlayerController controller;
     [HideInInspector]
+    public bool isActive;
+    [HideInInspector]
     public float currentComboReset;
     public float strongAtSpdMultiplier;
     [HideInInspector]
@@ -27,10 +29,9 @@ public class PjBase : MonoBehaviour, TakeDamage
     public Stats stats;
     public Stats statsPerLevel;
     public float damageTextOffset;
-    private void Awake()
+    public virtual void Awake()
     {
-        controller = GetComponent<PlayerController>();
-        controller.team.Add(this);
+        controller = PlayerController.Instance;
     }
     public virtual void Start()
     {
@@ -52,6 +53,8 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     public virtual void Update()
     {
+        
+
         if (currentComboReset > 0)
         {
             currentComboReset -= Time.deltaTime;
@@ -64,6 +67,12 @@ public class PjBase : MonoBehaviour, TakeDamage
         {
             currentHab2Cd -= Time.deltaTime;
         }
+    }
+
+    public void Activate(bool active)
+    {
+        isActive = active;
+        gameObject.SetActive(active);
     }
     public virtual void MainAttack()
     {
@@ -127,9 +136,9 @@ public class PjBase : MonoBehaviour, TakeDamage
         }
     }
 
-    public virtual void DamageDealed(PjBase user, Enemy target, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
+    public virtual void DamageDealed(PjBase user, PjBase target, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
     {
-        foreach(PjBase pj in controller.team)
+        foreach (PjBase pj in controller.team)
         {
             pj.Interact(this, target, element, attackType, habType);
         }

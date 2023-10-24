@@ -5,6 +5,7 @@ using CodeMonkey.Utils;
 
 public class PlayerController : MonoBehaviour
 {   
+    public static PlayerController Instance;
     [HideInInspector]
     public Vector2 inputMov;
     public Camera cam;
@@ -25,7 +26,14 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        rb= GetComponent<Rigidbody2D>().GetComponent<Rigidbody2D>();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -33,11 +41,16 @@ public class PlayerController : MonoBehaviour
     {
         HandlePointer();
 
+        HandleHabilities();
+
+        HandleMovement();
+
+        transform.position = character.transform.position;
+
 
         //if (unit.pointer != null) { unit.pointer.transform.position = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z - cam.transform.position.z)); }
-       
-        
-        HandleHabilities();
+
+
 
 
         /*foreach (Unit unit_ in unit.manager.units)
@@ -59,7 +72,6 @@ public class PlayerController : MonoBehaviour
             }
         }*/
 
-        HandleMovement();
 
         /*if (unit.aim)
         {

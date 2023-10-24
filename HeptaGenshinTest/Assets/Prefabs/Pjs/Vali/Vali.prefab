@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6379600470355968157}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5753555656276338128
 SpriteRenderer:
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 18ef3dfc3c2d79d43bd94105594b80ba, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.41037738, g: 1, b: 0.98820996, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,37 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &6379600469941186391
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6379600469941186388}
-  m_Layer: 0
-  m_Name: Pointer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6379600469941186388
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6379600469941186391}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6379600470355968157}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6379600470355968158
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +94,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6379600470355968157}
   - component: {fileID: 6379600470355968152}
-  - component: {fileID: 6379600470355968159}
   - component: {fileID: 6379600470355968154}
   - component: {fileID: 6379600470355968155}
   m_Layer: 0
@@ -143,11 +111,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6379600470355968158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.0510807, y: -1.5437, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6379600469941186388}
   - {fileID: 2623482027429703342}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -165,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  isActive: 0
   currentComboReset: 0
   strongAtSpdMultiplier: 0.6
   currentHab1Cd: 0
@@ -240,8 +208,8 @@ MonoBehaviour:
   fogIceDeb: 50
   homingIceArrow: {fileID: 8600196668912157451, guid: eccfb78d2f2662f4d8d2db4bb15c3e49, type: 3}
   homingSpd: 20
-  homingTorque: 500
-  homingDetour: 90
+  homingTorque: 700
+  homingDetour: 140
   homingDmg: 10
   dashArrow: {fileID: 8600196668912157451, guid: 515ae42dab6a1ba4caba465cf4421673, type: 3}
   currentArrowDashCd: 0
@@ -250,27 +218,6 @@ MonoBehaviour:
   arrowDashRange: 20
   arrowDashDmg: 20
   valiConvAtSpd: 70
---- !u!114 &6379600470355968159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6379600470355968158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58994d5931d137f488e0d5cfd23ed654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputMov: {x: 0, y: 0}
-  cam: {fileID: 0}
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  rb: {fileID: 0}
-  pointer: {fileID: 6379600469941186391}
-  character: {fileID: 6379600470355968152}
-  team: []
 --- !u!50 &6379600470355968154
 Rigidbody2D:
   serializedVersion: 4
