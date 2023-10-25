@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2623482027429703342}
   - component: {fileID: 5753555656276338128}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6379600470355968152}
   - component: {fileID: 6379600470355968154}
   - component: {fileID: 6379600470355968155}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Vali
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  sprite: {fileID: 2692231894551362283}
   isActive: 0
   currentComboReset: 0
   strongAtSpdMultiplier: 0.6

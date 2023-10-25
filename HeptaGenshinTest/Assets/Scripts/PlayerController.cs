@@ -39,13 +39,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position = character.transform.position;
+
         HandlePointer();
 
         HandleHabilities();
 
         HandleMovement();
 
-        transform.position = character.transform.position;
+        HandleCamera();
+
 
 
         //if (unit.pointer != null) { unit.pointer.transform.position = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z - cam.transform.position.z)); }
@@ -102,6 +105,7 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = Vector3.zero;
             }
         }
+
     }
 
     void HandlePointer()

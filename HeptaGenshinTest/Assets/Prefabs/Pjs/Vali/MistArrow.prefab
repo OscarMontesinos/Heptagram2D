@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8053739371425066826}
   - component: {fileID: 3505365487533409293}
   - component: {fileID: 9102888820339106200}
+  - component: {fileID: 2575640876510091382}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -4896,6 +4897,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2575640876510091382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885004140497439716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d609b54657fadd64499b3da8c4311af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 3
 --- !u!1 &8600196668912157451
 GameObject:
   m_ObjectHideFlags: 0
@@ -4951,14 +4965,13 @@ MonoBehaviour:
   arrowSprite: {fileID: 8737771865701277727}
   particleMist: {fileID: 5076697050843929518, guid: a46c555e83dcb5b40adf8f4727d77abb, type: 3}
   arrow: {fileID: 8600196668912157451, guid: 515ae42dab6a1ba4caba465cf4421673, type: 3}
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  detour: 22.5
-  bounceRange: 20
+  dmg: 0
+  stunTime: 0
+  arrowDetour: 0
+  arrowBounceRange: 0
+  arrowSpeed: 0
+  arrowRange: 0
+  arrowDmg: 0
 --- !u!50 &8600196668912157454
 Rigidbody2D:
   serializedVersion: 4

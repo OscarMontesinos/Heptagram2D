@@ -16,6 +16,10 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+    }
+
+    private void Start()
+    {
         playerController = PlayerController.Instance;
         zPos = transform.position.z;
         if (playerController != null)
@@ -27,11 +31,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerController != null )
-        {
-            transform.position = new Vector3(playerController.transform.position.x, playerController.transform.position.y, zPos);
-        }
-        else
+        if (playerController == null )
         {
             moveAlone = true;
             cam = FindObjectOfType<Camera>();

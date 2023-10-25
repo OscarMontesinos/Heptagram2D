@@ -6,6 +6,7 @@ using UnityEngine;
 public class PjBase : MonoBehaviour, TakeDamage
 {
     public PlayerController controller;
+    public GameObject sprite;
     [HideInInspector]
     public bool isActive;
     [HideInInspector]
@@ -69,10 +70,10 @@ public class PjBase : MonoBehaviour, TakeDamage
         }
     }
 
-    public void Activate(bool active)
+    public virtual void Activate(bool active)
     {
         isActive = active;
-        gameObject.SetActive(active);
+        sprite.SetActive(active);
     }
     public virtual void MainAttack()
     {
@@ -153,59 +154,62 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     void TakeDamage.TakeDamage(float value, HitData.Element element)
     {
-        float calculo=0;
-        DamageText dText = null;
-        switch (element)
+        if (isActive)
         {
-            case HitData.Element.ice:
-                calculo = stats.iceResist;
-                dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                dText.textColor = GameManager.Instance.iceColor;
-                break;
-            case HitData.Element.fire:
-                calculo = stats.fireResist;
-                dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                dText.textColor = GameManager.Instance.fireColor;
-                break;
-            case HitData.Element.water:
-                calculo = stats.waterResist;
-                dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                dText.textColor = GameManager.Instance.waterColor;
-                break;
-            case HitData.Element.desert:
-                calculo = stats.desertResist;
-                dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                dText.textColor = GameManager.Instance.desertColor;
-                break;
-            case HitData.Element.wind:
-                calculo = stats.windResist;
-                dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                dText.textColor = GameManager.Instance.windColor;
-                break;
-            case HitData.Element.nature:
-                calculo = stats.natureResist;
-                dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                dText.textColor = GameManager.Instance.natureColor;
-                break;
-            case HitData.Element.lightning:
-                calculo = stats.lightningResist;
-                dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                dText.textColor = GameManager.Instance.lightningColor;
-                break;
-        }
+            float calculo = 0;
+            DamageText dText = null;
+            switch (element)
+            {
+                case HitData.Element.ice:
+                    calculo = stats.iceResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.iceColor;
+                    break;
+                case HitData.Element.fire:
+                    calculo = stats.fireResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.fireColor;
+                    break;
+                case HitData.Element.water:
+                    calculo = stats.waterResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.waterColor;
+                    break;
+                case HitData.Element.desert:
+                    calculo = stats.desertResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.desertColor;
+                    break;
+                case HitData.Element.wind:
+                    calculo = stats.windResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.windColor;
+                    break;
+                case HitData.Element.nature:
+                    calculo = stats.natureResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.natureColor;
+                    break;
+                case HitData.Element.lightning:
+                    calculo = stats.lightningResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.lightningColor;
+                    break;
+            }
 
-        if (calculo < 0)
-        {
-            calculo = 0;
-        }
-        value -= ((value * ((calculo / (100 + calculo) * 100))) / 100);
+            if (calculo < 0)
+            {
+                calculo = 0;
+            }
+            value -= ((value * ((calculo / (100 + calculo) * 100))) / 100);
 
-        dText.damageText.text = value.ToString("F0");
+            dText.damageText.text = value.ToString("F0");
 
-        stats.hp -= value;
-        if(stats.hp < 0)
-        {
-            GetComponent<TakeDamage>().Die();
+            stats.hp -= value;
+            if (stats.hp < 0)
+            {
+                GetComponent<TakeDamage>().Die();
+            }
         }
     }
     void TakeDamage.Stunn(float stunTime)
@@ -255,7 +259,7 @@ public class PjBase : MonoBehaviour, TakeDamage
         }
         Vector2 distance = destinyPoint - new Vector2(transform.position.x, transform.position.y);
         yield return null;
-        while (distance.magnitude > 0.2 && dashing)
+        while (distance.magnitude > 1 && dashing)
         {
             if (distance.magnitude > 0.7)
             {

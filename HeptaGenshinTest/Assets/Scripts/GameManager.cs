@@ -41,7 +41,11 @@ public class GameManager : MonoBehaviour
         }
 
 
-         character1 = Instantiate(character1, transform.position, transform.rotation);
+       
+    }
+    void Start()
+    {
+        character1 = Instantiate(character1, transform.position, transform.rotation);
         PlayerController.Instance.team.Add(character1.GetComponent<PjBase>());
         if (character2 != null)
         {
@@ -56,10 +60,6 @@ public class GameManager : MonoBehaviour
         }
 
         DisplayCharacter(1);
-    }
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case 2:
-                if (PlayerController.Instance.character != character1)
+                if (PlayerController.Instance.character != character2)
                 {
                     character1.GetComponent<PjBase>().Activate(false);
                     character2.GetComponent<PjBase>().Activate(true);
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case 3:
-                if (PlayerController.Instance.character != character1)
+                if (PlayerController.Instance.character != character3)
                 {
                     character1.GetComponent<PjBase>().Activate(false); 
                     if (character2 != null)

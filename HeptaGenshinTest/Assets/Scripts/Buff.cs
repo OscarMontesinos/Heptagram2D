@@ -5,7 +5,7 @@ using UnityEngine;
 public class Buff : MonoBehaviour
 {
     [HideInInspector]
-    public Vali user;
+    public PjBase user;
     [HideInInspector]
     public PjBase target;
     public float time;

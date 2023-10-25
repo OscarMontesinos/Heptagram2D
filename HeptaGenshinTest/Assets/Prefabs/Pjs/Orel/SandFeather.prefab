@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 16737ceb330f367459736ee956cb0b5e, type: 3}
-  m_Color: {r: 0.6792453, g: 0.6021279, b: 0.54147387, a: 1}
+  m_Color: {r: 0.8584906, g: 0.79680794, b: 0.6762638, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3000708233827542595}
+  - component: {fileID: 984448013890708719}
   m_Layer: 0
   m_Name: Particle
   m_TagString: Untagged
@@ -116,6 +117,19 @@ Transform:
   m_Father: {fileID: 8600196668912157449}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &984448013890708719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594167402355699248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d609b54657fadd64499b3da8c4311af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 2
 --- !u!1 &3767619176057102781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,8 +1435,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.6784314, g: 0.6039216, b: 0.5411765, a: 1}
-        key1: {r: 0.6784314, g: 0.6039216, b: 0.5411765, a: 0.22352941}
+        key0: {r: 0.8588236, g: 0.7960785, b: 0.6745098, a: 1}
+        key1: {r: 0.8588236, g: 0.7960785, b: 0.6745098, a: 0.22352941}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
