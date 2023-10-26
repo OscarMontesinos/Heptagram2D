@@ -20,9 +20,9 @@ public class IceSpirit : Enemy
     
    
 
-    void AI()
+    public override void AI()
     {
-        if (target != null)
+        if (target != null && stunTime <= 0)
         {
             StartCoroutine(ShootSpell(true));
         }
@@ -30,6 +30,7 @@ public class IceSpirit : Enemy
         {
             StartCoroutine(RestartAi());
         }
+        base.AI();
     }
 
     IEnumerator ShootSpell(bool loopAI)
@@ -46,9 +47,4 @@ public class IceSpirit : Enemy
         }
     }
 
-    IEnumerator RestartAi()
-    {
-        yield return null;
-        AI();
-    }
 }

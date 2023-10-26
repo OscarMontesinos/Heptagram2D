@@ -53,9 +53,15 @@ public class Vali : PjBase
     public override void Start()
     {
         base.Start();
-        if(CharacterManager.Instance.data[0].convergence >= 6)
+        StartCoroutine(PostStart());
+    }
+    IEnumerator PostStart()
+    {
+        yield return null;
+
+        if (CharacterManager.Instance.data[0].convergence >= 6)
         {
-            foreach(PjBase pj in GameManager.Instance.pjList)
+            foreach (PjBase pj in GameManager.Instance.pjList)
             {
                 ValiBuff buff = pj.AddComponent<ValiBuff>();
                 buff.SetUp(this, CalculateControl(valiConvAtSpd));

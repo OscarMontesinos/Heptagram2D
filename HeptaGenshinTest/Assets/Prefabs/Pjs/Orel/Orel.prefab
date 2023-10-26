@@ -134,6 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   sprite: {fileID: 2692231894551362283}
+  chName: Orel
+  element: 3
   isActive: 0
   currentComboReset: 0
   strongAtSpdMultiplier: 0.5
@@ -152,7 +154,7 @@ MonoBehaviour:
     hp: 0
     shield: 0
     sinergy: 50
-    atSpd: 1.6
+    atSpd: 1.3
     control: 35
     cdr: 0
     spd: 8

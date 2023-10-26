@@ -7,9 +7,7 @@ using UnityEngine;
 public class Stats
 {
     public float mHp;
-    [HideInInspector]
     public float hp;
-    [HideInInspector]
     public float shield;
 
     public float sinergy;

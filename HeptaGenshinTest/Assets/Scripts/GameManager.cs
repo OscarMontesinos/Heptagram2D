@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public LayerMask wallLayer;
     public LayerMask enemyLayer;
+    public LayerMask playerLayer;
 
 
 
@@ -41,7 +42,8 @@ public class GameManager : MonoBehaviour
         }
 
 
-       
+
+
     }
     void Start()
     {

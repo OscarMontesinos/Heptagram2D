@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   sprite: {fileID: 2692231894551362283}
+  chName: Vali
   isActive: 0
   currentComboReset: 0
   strongAtSpdMultiplier: 0.6

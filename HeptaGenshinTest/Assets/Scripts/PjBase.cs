@@ -7,6 +7,9 @@ public class PjBase : MonoBehaviour, TakeDamage
 {
     public PlayerController controller;
     public GameObject sprite;
+    public string chName;
+    public HitData.Element element;
+    public GameObject spinObjects;
     [HideInInspector]
     public bool isActive;
     [HideInInspector]
@@ -26,6 +29,8 @@ public class PjBase : MonoBehaviour, TakeDamage
     public bool softCasting;
     [HideInInspector]
     public bool dashing;
+    [HideInInspector]
+    public float stunTime;
     public int level;
     public Stats stats;
     public Stats statsPerLevel;
@@ -36,7 +41,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     public virtual void Start()
     {
-        level = PlayerPrefs.GetInt(gameObject.name + "Level");
+        level = PlayerPrefs.GetInt(chName + "Level");
         stats.mHp += statsPerLevel.mHp * (level-1);
         stats.sinergy += statsPerLevel.sinergy * (level - 1);
         stats.control += statsPerLevel.control * (level - 1);
@@ -54,7 +59,10 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     public virtual void Update()
     {
-        
+        if(stunTime > 0)
+        {
+            stunTime -= Time.deltaTime;
+        }
 
         if (currentComboReset > 0)
         {
@@ -67,6 +75,10 @@ public class PjBase : MonoBehaviour, TakeDamage
         if (currentHab2Cd > 0)
         {
             currentHab2Cd -= Time.deltaTime;
+        }
+        if(spinObjects != null)
+        {
+            spinObjects.transform.rotation = controller.pointer.transform.rotation;
         }
     }
 
@@ -206,15 +218,32 @@ public class PjBase : MonoBehaviour, TakeDamage
             dText.damageText.text = value.ToString("F0");
 
             stats.hp -= value;
-            if (stats.hp < 0)
+            if (stats.hp <= 0)
             {
                 GetComponent<TakeDamage>().Die();
             }
+            else if(!CompareTag("Enemy"))
+            {
+                OnDamageTaken();
+                foreach(PjBase pj in controller.team)
+                {
+                    pj.OnGlobalDamageTaken();
+                }
+            }
         }
+    }
+
+    public virtual void OnGlobalDamageTaken()
+    {
+
+    }
+    public virtual void OnDamageTaken()
+    {
+
     }
     void TakeDamage.Stunn(float stunTime)
     {
-        
+        this.stunTime = stunTime;
     }
     void TakeDamage.Die()
     {
@@ -251,7 +280,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
         GetComponent<Collider2D>().enabled = false;
         dashing = true;
-        Vector2 destinyPoint = Physics2D.Raycast(transform.position, direction, range, controller.wallLayer).point;
+        Vector2 destinyPoint = Physics2D.Raycast(transform.position, direction, range, GameManager.Instance.wallLayer).point;
         yield return null;
         if (destinyPoint == new Vector2(0, 0))
         {

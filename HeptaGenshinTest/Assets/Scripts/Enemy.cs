@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Enemy : PjBase
 {
-
-    public float stunTime;
+    public Rigidbody2D rb;
     public PjBase target;
     public float viewDist;
     public GameObject pointer;
@@ -15,6 +14,7 @@ public class Enemy : PjBase
     public override void Awake()
     {
         isActive = true;
+        rb = GetComponent<Rigidbody2D>();
     }
     public override void Start()
     {
@@ -35,7 +35,6 @@ public class Enemy : PjBase
     public override void Update()
     {
         base.Update();
-        stunTime -= Time.deltaTime;
 
         if (target == null)
         {
@@ -57,9 +56,9 @@ public class Enemy : PjBase
             Vector2 dist = target.transform.position - transform.position;
             if (dist.magnitude > viewDist || Physics2D.Raycast(transform.position, dist, dist.magnitude, GameManager.Instance.wallLayer))
             {
-                
+
                 target = null;
-               
+
             }
             else
             {
@@ -67,10 +66,54 @@ public class Enemy : PjBase
             }
         }
     }
+    public virtual void AI()
+    {
 
-    private void OnDrawGizmosSelected()
+    }
+    public virtual IEnumerator RestartAi()
+    {
+        yield return null;
+        AI();
+    }
+
+    public virtual void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, viewDist);
     }
 
+
+    public override IEnumerator Dash(Vector2 direction, float speed, float range, bool isBasicDash)
+    {
+        GetComponent<Collider2D>().isTrigger = true;
+        dashing = true;
+        Vector2 destinyPoint = Physics2D.Raycast(transform.position, direction, range, GameManager.Instance.wallLayer).point;
+        yield return null;
+        if (destinyPoint == new Vector2(0, 0))
+        {
+            destinyPoint = new Vector2(transform.position.x, transform.position.y) + direction.normalized * range;
+        }
+        Vector2 distance = destinyPoint - new Vector2(transform.position.x, transform.position.y);
+        yield return null;
+        while (distance.magnitude > 1 && dashing)
+        {
+            if (distance.magnitude > 0.7)
+            {
+                rb.velocity = distance.normalized * speed;
+            }
+            else
+            {
+                rb.velocity = distance * speed;
+            }
+            distance = destinyPoint - new Vector2(transform.position.x, transform.position.y);
+            yield return null;
+        }
+        dashing = false;
+        GetComponent<Collider2D>().isTrigger = false;
+        rb.velocity = new Vector2(0, 0);
+        if (isBasicDash)
+        {
+            EndedBasicDash();
+        }
+
+    }
 }
