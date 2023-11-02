@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Enemy
+  - PlayerBarrier
   layers:
   - Default
   - TransparentFX
@@ -57,6 +58,9 @@ TagManager:
     locked: 0
   - name: Character
     uniqueID: 3000837211
+    locked: 0
+  - name: UpperEffect
+    uniqueID: 439866655
     locked: 0
   - name: UpperProp
     uniqueID: 3860531867

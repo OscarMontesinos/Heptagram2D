@@ -49,17 +49,22 @@ public class GameManager : MonoBehaviour
     {
         character1 = Instantiate(character1, transform.position, transform.rotation);
         PlayerController.Instance.team.Add(character1.GetComponent<PjBase>());
+        UIManager.Instance.ch1 =character1.GetComponent<PjBase>();
         if (character2 != null)
         {
             character2 = Instantiate(character2, transform.position, transform.rotation);
             PlayerController.Instance.team.Add(character2.GetComponent<PjBase>());
+            UIManager.Instance.ch2 = character2.GetComponent<PjBase>();
         }
 
         if (character3 != null)
         {
             character3 = Instantiate(character3, transform.position, transform.rotation);
             PlayerController.Instance.team.Add(character3.GetComponent<PjBase>());
+            UIManager.Instance.ch3 = character3.GetComponent<PjBase>();
         }
+
+        UIManager.Instance.UpdateHabIndicatorsImages();
 
         DisplayCharacter(1);
     }
@@ -67,15 +72,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && character1.GetComponent<PjBase>().stats.hp > 0)
         {
             DisplayCharacter(1);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && character2.GetComponent<PjBase>().stats.hp > 0)
         {
             DisplayCharacter(2);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3) && character3.GetComponent<PjBase>().stats.hp > 0)
         {
             DisplayCharacter(3);
         }
@@ -85,6 +90,22 @@ public class GameManager : MonoBehaviour
             {
                 pj.transform.position = PlayerController.Instance.character.transform.position;
             }
+        }
+    }
+
+    public void DisplayAliveCharacter()
+    {
+        if(character1.GetComponent<PjBase>().stats.hp > 0)
+        {
+            DisplayCharacter(1);
+        }
+        else if (character2.GetComponent<PjBase>().stats.hp > 0)
+        {
+            DisplayCharacter(2);
+        }
+        else if(character3.GetComponent<PjBase>().stats.hp > 0)
+        {
+            DisplayCharacter(3);
         }
     }
 
@@ -106,6 +127,8 @@ public class GameManager : MonoBehaviour
                     }
                     PlayerController.Instance.character = character1.GetComponent<PjBase>();
                     PlayerController.Instance.rb = character1.GetComponent<Rigidbody2D>();
+                    PlayerController.Instance.backCharacter1 = character2.GetComponent<PjBase>();
+                    PlayerController.Instance.backCharacter2 = character3.GetComponent<PjBase>();
                 }
                 break;
             case 2:
@@ -119,6 +142,8 @@ public class GameManager : MonoBehaviour
                     }
                     PlayerController.Instance.rb = character2.GetComponent<Rigidbody2D>().GetComponent<Rigidbody2D>();
                     PlayerController.Instance.character = character2.GetComponent<PjBase>();
+                    PlayerController.Instance.backCharacter1 = character1.GetComponent<PjBase>();
+                    PlayerController.Instance.backCharacter2 = character3.GetComponent<PjBase>();
                 }
                 break;
             case 3:
@@ -132,6 +157,8 @@ public class GameManager : MonoBehaviour
                     character3.GetComponent<PjBase>().Activate(true);
                     PlayerController.Instance.rb = character3.GetComponent<Rigidbody2D>().GetComponent<Rigidbody2D>();
                     PlayerController.Instance.character = character3.GetComponent<PjBase>();
+                    PlayerController.Instance.backCharacter1 = character1.GetComponent<PjBase>();
+                    PlayerController.Instance.backCharacter2 = character2.GetComponent<PjBase>();
                 }
                 break;
         }

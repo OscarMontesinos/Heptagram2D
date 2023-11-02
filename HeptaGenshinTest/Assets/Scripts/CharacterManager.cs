@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
@@ -37,7 +38,8 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    void UploadInfo()
+    [ContextMenu("Upload Info")]
+    public void UploadInfo()
     {
         foreach (CharacterData data in data)
         {
@@ -53,7 +55,8 @@ public class CharacterManager : MonoBehaviour
             }
         }
     }
-    void SafeInfo()
+    [ContextMenu("Safe Info")]
+    public void SafeInfo()
     {
         foreach (CharacterData data in data)
         {

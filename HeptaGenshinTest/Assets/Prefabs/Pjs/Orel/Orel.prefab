@@ -136,18 +136,23 @@ MonoBehaviour:
   sprite: {fileID: 2692231894551362283}
   chName: Orel
   element: 3
+  spinObjects: {fileID: 0}
+  hpBar: {fileID: 0}
+  hab1Image: {fileID: 21300000, guid: 0303da94fd09ccc4f9fe31a9d17bbbf6, type: 3}
+  hab2Image: {fileID: 21300000, guid: 8f762e925c1acfd498c22492f25e2ca2, type: 3}
   isActive: 0
   currentComboReset: 0
   strongAtSpdMultiplier: 0.5
   currentHab1Cd: 0
   hab1Cd: 5
   currentHab2Cd: 0
-  hab2Cd: 30
+  hab2Cd: 120
   bDashSpeed: 30
   bDashRange: 7
   casting: 0
   softCasting: 0
   dashing: 0
+  stunTime: 0
   level: 0
   stats:
     mHp: 75
@@ -188,7 +193,7 @@ MonoBehaviour:
   a1Range: 15
   a1detour: 5
   a1Modifier: 2
-  a2Damage: 10
+  a2Damage: 15
   a2Spd: 40
   a2Range: 10
   a2Detour: 10

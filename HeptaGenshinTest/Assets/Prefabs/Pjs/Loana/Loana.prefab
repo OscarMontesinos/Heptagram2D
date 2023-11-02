@@ -318,13 +318,16 @@ MonoBehaviour:
   chName: Loana
   element: 2
   spinObjects: {fileID: 294524932057363568}
+  hpBar: {fileID: 0}
+  hab1Image: {fileID: 21300000, guid: a6dbe4e8d55646d4b83271d7ddea4604, type: 3}
+  hab2Image: {fileID: 21300000, guid: 9a92d350aa0f8f048ab6f640d3a8a427, type: 3}
   isActive: 0
   currentComboReset: 0
   strongAtSpdMultiplier: 1.5
   currentHab1Cd: 0
-  hab1Cd: 0
+  hab1Cd: 15
   currentHab2Cd: 0
-  hab2Cd: 0
+  hab2Cd: 300
   bDashSpeed: 30
   bDashRange: 7
   casting: 0
@@ -372,10 +375,28 @@ MonoBehaviour:
   a2Length: 5.5
   a2Weight: 2.5
   a2Dmg: 70
-  a2Stunn: 1.5
+  a2Stunn: 1
+  h1Wave: {fileID: 428383520916342995, guid: 6842318b4509f0a47bdd552c39f258e3, type: 3}
+  h1Dmg: 50
+  h1Range: 20
+  h1Spd: 30
+  h1SpdOverTime: 50
+  h1Duration: 20
+  h1ShldAmount: 50
+  h2Bubble: {fileID: 3387212674506252671, guid: 97889451c96699a49a9333f5842d9da0, type: 3}
+  h2Amount: 350
+  h2Duration: 30
   c6Particle: {fileID: 5819749510567234324, guid: 07bcc18768d7d8b48be84c0d57959a8a, type: 3}
-  c6Area: 10
-  c6Dmg: 50
+  c3Area: 9
+  c3Dmg: 40
+  c4Heal: 17.5
+  c4CurrentCd: 0
+  c4Cd: 7
+  c5BuffAmount: 0
+  c6BuffAmount: 35
+  c7DebuffAmount: 40
+  c7Slow: 2
+  c7StunnTime: 2
 --- !u!50 &6379600470355968154
 Rigidbody2D:
   serializedVersion: 4

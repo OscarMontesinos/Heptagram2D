@@ -46,14 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - name: Vali
-    level: 0
-    unlocked: 0
-    convergence: 0
+    level: 1
+    unlocked: 1
+    convergence: 7
   - name: Orel
-    level: 0
-    unlocked: 0
-    convergence: 0
+    level: 1
+    unlocked: 1
+    convergence: 7
   - name: Loana
-    level: 0
-    unlocked: 0
-    convergence: 0
+    level: 1
+    unlocked: 1
+    convergence: 7

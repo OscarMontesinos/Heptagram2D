@@ -20,7 +20,7 @@ public class IceWolf : Enemy
         if (target != null && stunTime <= 0)
         {
             Vector2 dir = target.transform.position - transform.position;
-            if (dir.magnitude <= attackRange)
+            if (dir.magnitude <= attackRange && currentHab1Cd <= 0)
             {
                 StartCoroutine(AttackDash());
             }
@@ -39,30 +39,33 @@ public class IceWolf : Enemy
 
     IEnumerator AttackDash()
     {
-        StartCoroutine(Cast(0.5f));
-        Vector2 dir = target.transform.position - transform.position;
-        StartCoroutine(Dash(dir,attackSpd,attackRange*2,false));
-
-        List<PjBase> enemiesHitted = new List<PjBase>();
-
-        while (dashing)
+        yield return (StartCoroutine(Cast(0.5f)));
+        if (target != null)
         {
-            Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position, attackArea, GameManager.Instance.playerLayer);
-            PjBase enemy;
-            foreach (Collider2D enemyColl in enemiesHit)
+            Vector2 dir = target.transform.position - transform.position;
+            StartCoroutine(Dash(dir, attackSpd, attackRange * 2, false));
+
+            List<PjBase> enemiesHitted = new List<PjBase>();
+
+            while (dashing)
             {
-                enemy = enemyColl.GetComponent<PjBase>();
-                if (!enemiesHitted.Contains(enemy))
+                Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position, attackArea, GameManager.Instance.playerLayer);
+                PjBase enemy;
+                foreach (Collider2D enemyColl in enemiesHit)
                 {
-                    enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(attackDmg), HitData.Element.ice);
+                    enemy = enemyColl.GetComponent<PjBase>();
+                    if (!enemiesHitted.Contains(enemy))
+                    {
+                        enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(attackDmg), HitData.Element.ice);
 
-                    enemiesHitted.Add(enemy);
+                        enemiesHitted.Add(enemy);
+                    }
                 }
+                yield return null;
             }
-            yield return null;
+            yield return StartCoroutine(Cast(1));
+            currentHab1Cd = CDR(attackCd);
         }
-
-        yield return StartCoroutine(Cast(attackCd));
         StartCoroutine(RestartAi());
     }
 

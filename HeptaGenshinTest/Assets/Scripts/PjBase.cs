@@ -1,7 +1,9 @@
+using Microsoft.Win32.SafeHandles;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PjBase : MonoBehaviour, TakeDamage
 {
@@ -10,6 +12,9 @@ public class PjBase : MonoBehaviour, TakeDamage
     public string chName;
     public HitData.Element element;
     public GameObject spinObjects;
+    public Slider hpBar;
+    public Sprite hab1Image;
+    public Sprite hab2Image;
     [HideInInspector]
     public bool isActive;
     [HideInInspector]
@@ -84,6 +89,7 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     public virtual void Activate(bool active)
     {
+        GetComponent<Collider2D>().enabled = active;
         isActive = active;
         sprite.SetActive(active);
     }
@@ -215,6 +221,24 @@ public class PjBase : MonoBehaviour, TakeDamage
             }
             value -= ((value * ((calculo / (100 + calculo) * 100))) / 100);
 
+            if (controller != null)
+            {
+                while (Shield.shieldAmount > 0 && value > 0)
+                {
+                    Shield chosenShield = null;
+                    foreach (Shield shield in controller.GetComponents<Shield>())
+                    {
+                        if (chosenShield == null || shield.time < chosenShield.time && shield.singularShieldAmount > 0)
+                        {
+                            chosenShield = shield;
+                        }
+                    }
+                    value = chosenShield.ChangeShieldAmount(-value);
+
+                }
+            }
+
+
             dText.damageText.text = value.ToString("F0");
 
             stats.hp -= value;
@@ -230,7 +254,60 @@ public class PjBase : MonoBehaviour, TakeDamage
                     pj.OnGlobalDamageTaken();
                 }
             }
+            if(hpBar != null)
+            {
+                hpBar.maxValue = stats.mHp;
+                hpBar.value = stats.hp;
+            }
         }
+    }
+
+    public void Heal(float value, HitData.Element element)
+    {
+        if (stats.hp > 0)
+        {
+            stats.hp += value;
+            if (stats.hp > stats.mHp)
+            {
+                stats.hp = stats.mHp;
+            }
+
+            DamageText dText = null;
+            switch (element)
+            {
+                case HitData.Element.ice:
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.iceColor;
+                    break;
+                case HitData.Element.fire:
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.fireColor;
+                    break;
+                case HitData.Element.water:
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.waterColor;
+                    break;
+                case HitData.Element.desert:
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.desertColor;
+                    break;
+                case HitData.Element.wind:
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.windColor;
+                    break;
+                case HitData.Element.nature:
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.natureColor;
+                    break;
+                case HitData.Element.lightning:
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.lightningColor;
+                    break;
+            }
+
+            dText.damageText.text = "+" + value.ToString("F0");
+        }
+
     }
 
     public virtual void OnGlobalDamageTaken()
@@ -247,7 +324,15 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     void TakeDamage.Die()
     {
-        Destroy(gameObject);
+        if (PlayerController.Instance.team.Contains(this))
+        {
+            stats.hp = 0;
+            GameManager.Instance.DisplayAliveCharacter();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public virtual float CalculateSinergy(float calculo)
@@ -258,6 +343,7 @@ public class PjBase : MonoBehaviour, TakeDamage
         return value;
 
     }
+
     public virtual float CalculateControl(float calculo)
     {
         float value = stats.control;
@@ -288,7 +374,7 @@ public class PjBase : MonoBehaviour, TakeDamage
         }
         Vector2 distance = destinyPoint - new Vector2(transform.position.x, transform.position.y);
         yield return null;
-        while (distance.magnitude > 1 && dashing)
+        while (distance.magnitude > 1 && dashing && stunTime <=0)
         {
             if (distance.magnitude > 0.7)
             {

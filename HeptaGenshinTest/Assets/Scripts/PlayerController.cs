@@ -15,8 +15,11 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject pointer;
     public PjBase character;
+    public PjBase backCharacter1;
+    public PjBase backCharacter2;
     bool lockPointer;
-
+    public GameObject targetBoss;
+    float maxViewportDistance;
     public List<PjBase> team = new List<PjBase>();
 
     public void LockPointer(bool value)
@@ -34,18 +37,21 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        maxViewportDistance = Camera.main.orthographicSize;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position = character.transform.position;
+        if (character.stunTime <= 0)
+        {
+            HandlePointer();
 
-        HandlePointer();
+            HandleHabilities();
 
-        HandleHabilities();
-
-        HandleMovement();
+            HandleMovement();
+        }
 
         HandleCamera();
 
@@ -89,7 +95,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!character.dashing)
         {
-            if (!character.casting)
+            if (!character.casting && character.stunTime <= 0)
             {
                 if (!character.softCasting)
                 {
@@ -119,6 +125,22 @@ public class PlayerController : MonoBehaviour
     void HandleCamera()
     {
         cam.transform.position = new Vector3(transform.position.x, transform.position.y, cam.transform.position.z);
+        if (targetBoss == null)
+        {
+            
+        }
+        else
+        {
+            Vector3 dist = targetBoss.transform.position - character.transform.position;
+            dist = character.transform.position + (dist * 0.5f);
+            cam.transform.position = new Vector3(dist.x, dist.y , cam.transform.position.z);
+
+            dist = targetBoss.transform.position - character.transform.position;
+            if (dist.magnitude > maxViewportDistance)
+            {
+                Camera.main.orthographicSize = dist.magnitude;
+            }
+        }
     }
 
     void HandleHabilities()

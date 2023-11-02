@@ -15,9 +15,9 @@ public class PhantomSpell : Projectile
     }
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") || collision.CompareTag("PlayerBarrier"))
         {
-            collision.GetComponent<PjBase>().GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.ice);
+            collision.GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.ice);
             Die();
         }
         base.OnTriggerEnter2D(collision);

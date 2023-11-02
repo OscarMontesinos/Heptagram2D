@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed;
+    public float spdOverTime;
     public float range;
     Rigidbody2D _rigidbody;
     Vector2 startPos;
@@ -14,6 +15,11 @@ public class Projectile : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         startPos = transform.position;
+    }
+
+    private void Update()
+    {
+        speed += spdOverTime * Time.deltaTime;
     }
     private void FixedUpdate()
     {
