@@ -146,12 +146,14 @@ public class Orel : PjBase
     {
         currentHab2Cd = CDR(hab2Cd);
         controller.LockPointer(true);
-        yield return StartCoroutine(Cast(h2CastTime));
+
+
+        yield return StartCoroutine(Dash(controller.pointer.transform.up, h2DashSpd, h2DashRange, false));
+
 
         OrelPredatorBuff buff = gameObject.AddComponent<OrelPredatorBuff>();
-        buff.SetUp(this, h2Duration, h2Spd, CalculateControl(h2AtSpd), actualResistBuff, CalculateControl(h2Pot));
+        buff.SetUp(this, h2Duration, h2Spd, h2AtSpd, actualResistBuff, CalculateControl(h2Pot));
 
-        StartCoroutine(Dash(controller.pointer.transform.up, h2DashSpd, h2DashRange, false));
         controller.LockPointer(false);
     }
 

@@ -30,7 +30,7 @@ public class ValiArrow : Projectile
 
                 if (CharacterManager.Instance.data[0].convergence >= 3)
                 {
-                    user.currentHab1Cd -= 1;
+                    user.currentHab1Cd -= 1.5f;
                 }
 
             }

@@ -220,7 +220,7 @@ public class PjBase : MonoBehaviour, TakeDamage
                 calculo = 0;
             }
             value -= ((value * ((calculo / (100 + calculo) * 100))) / 100);
-
+            float originalValue = value;
             if (controller != null)
             {
                 while (Shield.shieldAmount > 0 && value > 0)
@@ -236,6 +236,14 @@ public class PjBase : MonoBehaviour, TakeDamage
                     value = chosenShield.ChangeShieldAmount(-value);
 
                 }
+                
+                /*if(value != originalValue)
+                {
+                    originalValue -= value;
+                    DamageText sText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    sText.textColor = Color.white;
+                    sText.damageText.text = originalValue.ToString("F0");
+                }*/
             }
 
 
@@ -331,6 +339,10 @@ public class PjBase : MonoBehaviour, TakeDamage
         }
         else
         {
+            foreach(PjBase pj in PlayerController.Instance.team)
+            {
+                pj.OnKill(this.GetComponent<Enemy>());
+            }
             Destroy(gameObject);
         }
     }
@@ -394,6 +406,11 @@ public class PjBase : MonoBehaviour, TakeDamage
         {
             EndedBasicDash();
         }
+    }
+
+    public virtual void OnKill(Enemy enemy)
+    {
+
     }
 
     public virtual void Interact(PjBase user, Enemy target, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)

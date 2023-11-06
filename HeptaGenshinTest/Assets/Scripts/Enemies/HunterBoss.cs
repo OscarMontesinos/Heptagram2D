@@ -22,6 +22,8 @@ public class HunterBoss : Enemy
     public float axeKnockSpd;
     public float axeStunn;
 
+    float reachTime;
+
     public override void Awake()
     {
         base.Awake();
@@ -39,6 +41,8 @@ public class HunterBoss : Enemy
         {
             stunTime -= Time.deltaTime;
         }
+
+        reachTime += Time.deltaTime;
 
         if (target == null)
         {
@@ -59,7 +63,11 @@ public class HunterBoss : Enemy
         {
             Vector2 dist = target.transform.position - transform.position;
 
-            pointer.transform.up = dist;
+
+            if (point)
+            {
+                pointer.transform.up = dist;
+            }
         }
     }
     public override void AI()
@@ -68,7 +76,11 @@ public class HunterBoss : Enemy
         if (target != null && stunTime <= 0)
         {
             Vector2 dir = target.transform.position - transform.position;
-            if (Random.Range(0, 2) == 1)
+            if (Physics2D.Raycast(transform.position, dir, dir.magnitude, GameManager.Instance.wallLayer))
+            {
+                StartCoroutine(ComboReach());
+            }
+            else if (Random.Range(0, 2) == 1)
             {
                 StartCoroutine(ComboAxe());
             }
@@ -201,6 +213,79 @@ public class HunterBoss : Enemy
         {
             DashRandomDirection();
         }
+        yield return StartCoroutine(Cast(0.3f));
+        attacking = true;
+        animator.Play("BossQuickAxeThrow");
+        while (attacking || stunTime > 0)
+        {
+            yield return null;
+        }
+        DashToPlayerWithoutRange();
+        attacking = true;
+        animator.Play("BossHit2");
+        while (attacking || stunTime > 0)
+        {
+            yield return null;
+        }
+        animator.Play("IdleBoss");
+        yield return StartCoroutine(Cast(1f));
+        AI();
+    }
+    IEnumerator ComboReach()
+    {
+        Vector2 dir = target.transform.position - transform.position;
+        reachTime = 0;
+        if (Random.Range(0, 2) == 1)
+        {
+            while (Physics2D.Raycast(transform.position, dir, dir.magnitude, GameManager.Instance.wallLayer))
+            {
+                if (((int)reachTime) % 2 == 0)
+                {
+                    yield return StartCoroutine(Dash(pointer.transform.right, dashSpd, maxDashRange / 2, true));
+                }
+                else
+                {
+                    yield return StartCoroutine(Dash(-pointer.transform.right, dashSpd, maxDashRange / 2, true));
+                }
+                dir = target.transform.position - transform.position;
+
+            }
+            if (((int)reachTime) % 2 == 0)
+            {
+                yield return StartCoroutine(Dash(pointer.transform.right, dashSpd, maxDashRange / 2, true));
+            }
+            else
+            {
+                yield return StartCoroutine(Dash(-pointer.transform.right, dashSpd, maxDashRange / 2, true));
+            }
+        }
+        else
+        {
+            while (Physics2D.Raycast(transform.position, dir, dir.magnitude, GameManager.Instance.wallLayer))
+            {
+                if (((int)reachTime) % 2 == 0)
+                {
+                    yield return StartCoroutine(Dash(-pointer.transform.right, dashSpd, maxDashRange / 2, true));
+                }
+                else
+                {
+                    yield return StartCoroutine(Dash(pointer.transform.right, dashSpd, maxDashRange / 2, true));
+                }
+
+                dir = target.transform.position - transform.position;
+
+
+            }
+            if (((int)reachTime) % 2 == 0)
+            {
+                yield return StartCoroutine(Dash(-pointer.transform.right, dashSpd, maxDashRange / 2, true));
+            }
+            else
+            {
+                yield return StartCoroutine(Dash(pointer.transform.right, dashSpd, maxDashRange / 2, true));
+            }
+        }
+
         yield return StartCoroutine(Cast(0.3f));
         attacking = true;
         animator.Play("BossQuickAxeThrow");

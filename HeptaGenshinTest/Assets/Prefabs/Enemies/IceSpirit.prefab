@@ -170,6 +170,8 @@ MonoBehaviour:
   element: 0
   spinObjects: {fileID: 0}
   hpBar: {fileID: 7998548566664082281}
+  hab1Image: {fileID: 0}
+  hab2Image: {fileID: 0}
   isActive: 0
   currentComboReset: 0
   strongAtSpdMultiplier: 0
@@ -221,6 +223,7 @@ MonoBehaviour:
   target: {fileID: 0}
   viewDist: 40
   pointer: {fileID: 4470652349570724847}
+  point: 1
   spell: {fileID: 2570800995855543621, guid: 4d2a511e277607e4fa0a9a4a9f2ccda4, type: 3}
   spellSpeed: 10
   spellRange: 30

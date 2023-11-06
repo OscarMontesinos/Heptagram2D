@@ -9,6 +9,7 @@ public class Enemy : PjBase
     public PjBase target;
     public float viewDist;
     public GameObject pointer;
+    public bool point = true;
     // Start is called before the first frame update
 
     public override void Awake()
@@ -60,7 +61,7 @@ public class Enemy : PjBase
                 target = null;
 
             }
-            else
+            else if (point)
             {
                 pointer.transform.up = dist;
             }
@@ -117,4 +118,17 @@ public class Enemy : PjBase
 
     }
 
+    public void PointerLock(int value)
+    {
+        if (value == 1)
+        {
+            point = true;
+        }
+        else
+        {
+            point = false;
+        }
+    }
+
+    
 }

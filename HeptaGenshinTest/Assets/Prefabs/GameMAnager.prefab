@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character1: {fileID: 6379600470355968158, guid: 31fa933b775c63d44a2cdad1fa2f32f3, type: 3}
-  character2: {fileID: 6379600470355968158, guid: 10f7efaa08d82e64cb43fefbe15254ad, type: 3}
+  character2: {fileID: 6379600470355968158, guid: f2bbd8c208226994cbad9186ff3f2aff, type: 3}
   character3: {fileID: 6379600470355968158, guid: 03445fd36424447409a3bc61698833db, type: 3}
   pjList: []
   wallLayer:
@@ -63,7 +63,7 @@ MonoBehaviour:
     rgba: 4294704597
   fireColor:
     serializedVersion: 2
-    rgba: 4282212093
+    rgba: 4279911404
   waterColor:
     serializedVersion: 2
     rgba: 4293687132

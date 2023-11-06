@@ -200,6 +200,8 @@ MonoBehaviour:
   element: 0
   spinObjects: {fileID: 0}
   hpBar: {fileID: 1535872022552165158}
+  hab1Image: {fileID: 0}
+  hab2Image: {fileID: 0}
   isActive: 0
   currentComboReset: 0
   strongAtSpdMultiplier: 0
@@ -213,7 +215,7 @@ MonoBehaviour:
   softCasting: 0
   dashing: 0
   stunTime: 0
-  level: 20
+  level: 1
   stats:
     mHp: 1000
     hp: 0
@@ -231,7 +233,7 @@ MonoBehaviour:
     natureResist: 60
     lightningResist: 30
   statsPerLevel:
-    mHp: 10
+    mHp: 100
     hp: 0
     shield: 0
     sinergy: 5
@@ -251,6 +253,7 @@ MonoBehaviour:
   target: {fileID: 0}
   viewDist: 50
   pointer: {fileID: 446603575523894538}
+  point: 0
   attackPoint: {fileID: 5205610274486845087}
   attackDmg: 40
   attackRange: 4
@@ -263,7 +266,7 @@ MonoBehaviour:
   axeSpd: 70
   axeKnockRange: 10
   axeKnockSpd: 40
-  axeStunn: 1
+  axeStunn: 1.5
 --- !u!1 &446603575523894538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,7 +1629,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 8860255691334485516}
   m_HandleRect: {fileID: 0}

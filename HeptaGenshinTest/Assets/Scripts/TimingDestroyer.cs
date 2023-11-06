@@ -9,10 +9,13 @@ public class TimingDestroyer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time -= Time.deltaTime;
-        if(time <= 0)
+        if (transform.parent == null)
         {
-            Destroy(gameObject);
+            time -= Time.deltaTime;
+            if (time <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

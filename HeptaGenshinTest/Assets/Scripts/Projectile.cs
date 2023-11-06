@@ -11,13 +11,14 @@ public class Projectile : MonoBehaviour
     Vector2 startPos;
     public bool collideWalls;
     public GameObject particle;
+    public bool withoutRange;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         startPos = transform.position;
     }
 
-    private void Update()
+    public virtual void Update()
     {
         speed += spdOverTime * Time.deltaTime;
     }
@@ -25,10 +26,13 @@ public class Projectile : MonoBehaviour
     {
         Vector2 dir = transform.up;
         _rigidbody.velocity = dir.normalized * speed;
-        Vector2 dist = startPos - new Vector2(transform.position.x, transform.position.y);
-        if (dist.magnitude >range)
+        if (!withoutRange)
         {
-            Die();
+            Vector2 dist = startPos - new Vector2(transform.position.x, transform.position.y);
+            if (dist.magnitude > range)
+            {
+                Die();
+            }
         }
     }
 
@@ -40,7 +44,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Die()
+    public virtual void Die()
     {
         if(particle != null)
         {

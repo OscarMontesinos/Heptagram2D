@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI shieldText;
     public List<HabilityUIIndicator> habIndicators = new List<HabilityUIIndicator>();
 
+    public GameObject pauseMenu;
+
     public PjBase ch1;
     public PjBase ch2;
     public PjBase ch3;
@@ -42,6 +44,20 @@ public class UIManager : MonoBehaviour
         UpdateHpBars();
 
         UpdateHabIndicators();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(Time.timeScale == 0)
+            {
+                Time.timeScale = 1;
+                pauseMenu.SetActive(false);
+            }
+            else
+            {
+                Time.timeScale = 0;
+                pauseMenu.SetActive(true);
+            }
+        }
     }
 
     void UpdateHpBars()

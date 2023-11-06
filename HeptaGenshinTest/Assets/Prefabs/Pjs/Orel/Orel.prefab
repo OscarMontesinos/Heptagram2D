@@ -208,13 +208,13 @@ MonoBehaviour:
   h1Dmg: 25
   h1Debuff: 50
   h1Time: 5
-  h2CastTime: 1
+  h2CastTime: 0
   h2Duration: 20
-  h2Spd: 2
-  h2AtSpd: 80
+  h2Spd: 3
+  h2AtSpd: 40
   h2Pot: 90
-  h2DashSpd: 35
-  h2DashRange: 6
+  h2DashSpd: 25
+  h2DashRange: 8
   resistBuff: 25
 --- !u!50 &6379600470355968154
 Rigidbody2D:

@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 7860000832780830950}
   - component: {fileID: 3305297395668818029}
   - component: {fileID: 2365845194863104785}
+  - component: {fileID: 454569495074501891}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -419,6 +420,27 @@ MonoBehaviour:
   user: {fileID: 0}
   time: 0
   untimed: 0
+--- !u!50 &454569495074501891
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843499632590191682}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &4712582257853995701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -426,6 +448,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3387212674506252668}
     m_Modifications:
+    - target: {fileID: 2369449134891691676, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6428835361692622154, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -143,7 +143,7 @@ MonoBehaviour:
   currentComboReset: 0
   strongAtSpdMultiplier: 0.6
   currentHab1Cd: 0
-  hab1Cd: 5
+  hab1Cd: 10
   currentHab2Cd: 0
   hab2Cd: 300
   bDashSpeed: 30
@@ -204,7 +204,7 @@ MonoBehaviour:
   h1ArrowSpeed: 35
   h1ArrowRange: 30
   h1ArrowDmg: 40
-  h1MarkDmg: 85
+  h1MarkDmg: 170
   h1MarkTime: 7
   mistArrow: {fileID: 8600196668912157451, guid: 7124c6795c2af87409848768eda1688f, type: 3}
   fog: {fileID: 2898128195956867224, guid: 893f6336719ec634e8f310a306007bef, type: 3}
@@ -225,7 +225,7 @@ MonoBehaviour:
   arrowDashCount: 3
   arrowDashRange: 20
   arrowDashDmg: 20
-  valiConvAtSpd: 70
+  valiConvAtSpd: 40
 --- !u!50 &6379600470355968154
 Rigidbody2D:
   serializedVersion: 4

@@ -186,6 +186,8 @@ MonoBehaviour:
   element: 0
   spinObjects: {fileID: 0}
   hpBar: {fileID: 4526949437083878479}
+  hab1Image: {fileID: 0}
+  hab2Image: {fileID: 0}
   isActive: 0
   currentComboReset: 0
   strongAtSpdMultiplier: 0
@@ -237,6 +239,7 @@ MonoBehaviour:
   target: {fileID: 0}
   viewDist: 40
   pointer: {fileID: 3292360461422549603}
+  point: 1
   attackDmg: 40
   attackArea: 2.21
   attackRange: 10

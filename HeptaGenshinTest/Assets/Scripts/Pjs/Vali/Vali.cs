@@ -64,7 +64,7 @@ public class Vali : PjBase
             foreach (PjBase pj in GameManager.Instance.pjList)
             {
                 ValiBuff buff = pj.AddComponent<ValiBuff>();
-                buff.SetUp(this, CalculateControl(valiConvAtSpd));
+                buff.SetUp(this, valiConvAtSpd);
             }
         }
     }
