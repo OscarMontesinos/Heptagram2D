@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6989644e3145aac4d9cf200acd6ab92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character1: {fileID: 6379600470355968158, guid: 31fa933b775c63d44a2cdad1fa2f32f3, type: 3}
+  character1: {fileID: 6379600470355968158, guid: 34d808199935f3b4b82cc73551119300, type: 3}
   character2: {fileID: 6379600470355968158, guid: f2bbd8c208226994cbad9186ff3f2aff, type: 3}
   character3: {fileID: 6379600470355968158, guid: 03445fd36424447409a3bc61698833db, type: 3}
   pjList: []

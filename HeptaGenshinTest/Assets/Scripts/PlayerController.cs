@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
         cam.transform.position = new Vector3(transform.position.x, transform.position.y, cam.transform.position.z);
         if (targetBoss == null)
         {
-            
+            Camera.main.orthographicSize = maxViewportDistance;
         }
         else
         {
@@ -153,15 +153,15 @@ public class PlayerController : MonoBehaviour
         {
             character.StrongAttack();
         }
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             character.Hab1();
         }
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             character.Hab2();
         }
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             character.BasicDash();
         }

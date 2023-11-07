@@ -95,7 +95,7 @@ public class Enemy : PjBase
         }
         Vector2 distance = destinyPoint - new Vector2(transform.position.x, transform.position.y);
         yield return null;
-        while (distance.magnitude > 1 && dashing)
+        while (distance.magnitude > 1 && dashing && stunTime <=0)
         {
             if (distance.magnitude > 0.7)
             {

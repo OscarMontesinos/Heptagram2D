@@ -305,7 +305,7 @@ public class HunterBoss : Enemy
         AI();
     }
 
-        public void AttackingOff()
+    public void AttackingOff()
     {
         attacking = false;
     }

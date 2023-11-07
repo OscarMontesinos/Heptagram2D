@@ -111,56 +111,59 @@ public class GameManager : MonoBehaviour
 
     void DisplayCharacter(int character)
     {
-        switch (character)
+        if ( PlayerController.Instance.character == null || PlayerController.Instance.character.stats.hp <= 0 || (PlayerController.Instance.character.stunTime <= 0 && !PlayerController.Instance.character.IsCasting()) )
         {
-            case 1:
-                if (PlayerController.Instance.character != character1)
-                {
-                    character1.GetComponent<PjBase>().Activate(true);
-                    if (character2 != null)
+            switch (character)
+            {
+                case 1:
+                    if (PlayerController.Instance.character != character1)
                     {
-                        character2.GetComponent<PjBase>().Activate(false);
+                        character1.GetComponent<PjBase>().Activate(true);
+                        if (character2 != null)
+                        {
+                            character2.GetComponent<PjBase>().Activate(false);
+                        }
+                        if (character3 != null)
+                        {
+                            character3.GetComponent<PjBase>().Activate(false);
+                        }
+                        PlayerController.Instance.character = character1.GetComponent<PjBase>();
+                        PlayerController.Instance.rb = character1.GetComponent<Rigidbody2D>();
+                        PlayerController.Instance.backCharacter1 = character2.GetComponent<PjBase>();
+                        PlayerController.Instance.backCharacter2 = character3.GetComponent<PjBase>();
                     }
-                    if (character3 != null)
+                    break;
+                case 2:
+                    if (PlayerController.Instance.character != character2)
                     {
-                        character3.GetComponent<PjBase>().Activate(false);
+                        character1.GetComponent<PjBase>().Activate(false);
+                        character2.GetComponent<PjBase>().Activate(true);
+                        if (character3 != null)
+                        {
+                            character3.GetComponent<PjBase>().Activate(false);
+                        }
+                        PlayerController.Instance.rb = character2.GetComponent<Rigidbody2D>().GetComponent<Rigidbody2D>();
+                        PlayerController.Instance.character = character2.GetComponent<PjBase>();
+                        PlayerController.Instance.backCharacter1 = character1.GetComponent<PjBase>();
+                        PlayerController.Instance.backCharacter2 = character3.GetComponent<PjBase>();
                     }
-                    PlayerController.Instance.character = character1.GetComponent<PjBase>();
-                    PlayerController.Instance.rb = character1.GetComponent<Rigidbody2D>();
-                    PlayerController.Instance.backCharacter1 = character2.GetComponent<PjBase>();
-                    PlayerController.Instance.backCharacter2 = character3.GetComponent<PjBase>();
-                }
-                break;
-            case 2:
-                if (PlayerController.Instance.character != character2)
-                {
-                    character1.GetComponent<PjBase>().Activate(false);
-                    character2.GetComponent<PjBase>().Activate(true);
-                    if (character3 != null)
+                    break;
+                case 3:
+                    if (PlayerController.Instance.character != character3)
                     {
-                        character3.GetComponent<PjBase>().Activate(false);
+                        character1.GetComponent<PjBase>().Activate(false);
+                        if (character2 != null)
+                        {
+                            character2.GetComponent<PjBase>().Activate(false);
+                        }
+                        character3.GetComponent<PjBase>().Activate(true);
+                        PlayerController.Instance.rb = character3.GetComponent<Rigidbody2D>().GetComponent<Rigidbody2D>();
+                        PlayerController.Instance.character = character3.GetComponent<PjBase>();
+                        PlayerController.Instance.backCharacter1 = character1.GetComponent<PjBase>();
+                        PlayerController.Instance.backCharacter2 = character2.GetComponent<PjBase>();
                     }
-                    PlayerController.Instance.rb = character2.GetComponent<Rigidbody2D>().GetComponent<Rigidbody2D>();
-                    PlayerController.Instance.character = character2.GetComponent<PjBase>();
-                    PlayerController.Instance.backCharacter1 = character1.GetComponent<PjBase>();
-                    PlayerController.Instance.backCharacter2 = character3.GetComponent<PjBase>();
-                }
-                break;
-            case 3:
-                if (PlayerController.Instance.character != character3)
-                {
-                    character1.GetComponent<PjBase>().Activate(false); 
-                    if (character2 != null)
-                    {
-                        character2.GetComponent<PjBase>().Activate(false);
-                    }
-                    character3.GetComponent<PjBase>().Activate(true);
-                    PlayerController.Instance.rb = character3.GetComponent<Rigidbody2D>().GetComponent<Rigidbody2D>();
-                    PlayerController.Instance.character = character3.GetComponent<PjBase>();
-                    PlayerController.Instance.backCharacter1 = character1.GetComponent<PjBase>();
-                    PlayerController.Instance.backCharacter2 = character2.GetComponent<PjBase>();
-                }
-                break;
+                    break;
+            }
         }
     }
 }

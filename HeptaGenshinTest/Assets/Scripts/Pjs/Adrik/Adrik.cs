@@ -167,7 +167,7 @@ public class Adrik : PjBase
         if (!IsCasting() && currentHab1Cd <= 0)
         {
             StartCoroutine(Cast(0.75f));
-            currentHab1Cd = hab1Cd;
+            currentHab1Cd = CDR(hab1Cd);
             h1Charges = h1MaxCharges;
             UpdatePiroclasts();
         }
@@ -189,7 +189,7 @@ public class Adrik : PjBase
             }
             if (enemyList.Count > 0)
             {
-                currentHab2Cd = hab2Cd;
+                currentHab2Cd = CDR(hab2Cd);
                 StartCoroutine(FireBombing(enemyList));
             }
         }
