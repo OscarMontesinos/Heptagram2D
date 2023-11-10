@@ -170,21 +170,21 @@ MonoBehaviour:
     natureResist: 20
     lightningResist: 10
   statsPerLevel:
-    mHp: 5
+    mHp: 6
     hp: 0
     shield: 0
-    sinergy: 4
+    sinergy: 3
     atSpd: 0
-    control: 4.5
+    control: 4
     cdr: 0
     spd: 0
-    iceResist: 3
-    fireResist: 2
-    waterResist: 2
-    desertResist: 1
-    windResist: 1.5
-    natureResist: 1
-    lightningResist: 2
+    iceResist: 0
+    fireResist: 0
+    waterResist: 0
+    desertResist: 0
+    windResist: 0
+    natureResist: 0
+    lightningResist: 0
   damageTextOffset: 0
   a1Damage: 30
   a1Spd: 35
@@ -218,7 +218,7 @@ MonoBehaviour:
   homingSpd: 20
   homingTorque: 700
   homingDetour: 140
-  homingDmg: 10
+  homingDmg: 15
   dashArrow: {fileID: 8600196668912157451, guid: 515ae42dab6a1ba4caba465cf4421673, type: 3}
   currentArrowDashCd: 0
   arrowDashCd: 1

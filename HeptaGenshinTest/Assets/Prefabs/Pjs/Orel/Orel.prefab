@@ -171,21 +171,21 @@ MonoBehaviour:
     natureResist: 10
     lightningResist: 10
   statsPerLevel:
-    mHp: 5.5
+    mHp: 7.5
     hp: 0
     shield: 0
-    sinergy: 4.5
+    sinergy: 5
     atSpd: 0
-    control: 2
+    control: 3.5
     cdr: 0
     spd: 0
-    iceResist: 2
-    fireResist: 1
-    waterResist: 2
-    desertResist: 0.5
-    windResist: 4
-    natureResist: 1
-    lightningResist: 1
+    iceResist: 0
+    fireResist: 0
+    waterResist: 0
+    desertResist: 0
+    windResist: 0
+    natureResist: 0
+    lightningResist: 0
   damageTextOffset: 1
   desertFeather: {fileID: 8600196668912157451, guid: aeb5c77cea5bd284c9f6340a28caf7fe, type: 3}
   a1Damage: 20

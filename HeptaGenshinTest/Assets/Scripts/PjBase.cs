@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PjBase : MonoBehaviour, TakeDamage
 {
@@ -13,6 +14,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     public HitData.Element element;
     public GameObject spinObjects;
     public Slider hpBar;
+    public Slider stunnBar;
     public Sprite hab1Image;
     public Sprite hab2Image;
     [HideInInspector]
@@ -64,9 +66,23 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     public virtual void Update()
     {
-        if(stunTime > 0)
+        if (isActive)
         {
-            stunTime -= Time.deltaTime;
+            if (stunTime > 0)
+            {
+                stunTime -= Time.deltaTime;
+                if (stunnBar.maxValue < stunTime)
+                {
+                    stunnBar.maxValue = stunTime;
+                }
+
+                stunnBar.value = stunTime;
+            }
+            else
+            {
+                stunnBar.maxValue = 0.3f;
+                stunnBar.value = 0;
+            }
         }
 
         if (currentComboReset > 0)
@@ -172,6 +188,11 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     void TakeDamage.TakeDamage(float value, HitData.Element element)
     {
+        TakeDmg(value, element);
+    }
+
+    public virtual void TakeDmg(float value, HitData.Element element)
+    {
         if (isActive)
         {
             float calculo = 0;
@@ -236,7 +257,7 @@ public class PjBase : MonoBehaviour, TakeDamage
                     value = chosenShield.ChangeShieldAmount(-value);
 
                 }
-                
+
                 /*if(value != originalValue)
                 {
                     originalValue -= value;
@@ -254,15 +275,15 @@ public class PjBase : MonoBehaviour, TakeDamage
             {
                 GetComponent<TakeDamage>().Die();
             }
-            else if(!CompareTag("Enemy"))
+            else if (!CompareTag("Enemy"))
             {
                 OnDamageTaken();
-                foreach(PjBase pj in controller.team)
+                foreach (PjBase pj in controller.team)
                 {
                     pj.OnGlobalDamageTaken();
                 }
             }
-            if(hpBar != null)
+            if (hpBar != null)
             {
                 hpBar.maxValue = stats.mHp;
                 hpBar.value = stats.hp;
@@ -405,6 +426,49 @@ public class PjBase : MonoBehaviour, TakeDamage
         if (isBasicDash)
         {
             EndedBasicDash();
+        }
+    }
+
+    public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool isBasicDash, bool ignoreWalls)
+    {
+        GetComponent<Collider2D>().enabled = false;
+        dashing = true;
+
+        Vector2 destinyPoint = new Vector2(transform.position.x, transform.position.y) + direction.normalized * range;
+
+        Vector2 distance = destinyPoint - new Vector2(transform.position.x, transform.position.y);
+        yield return null;
+        while (distance.magnitude > 1 && dashing && stunTime <= 0)
+        {
+            if (distance.magnitude > 0.7)
+            {
+                controller.rb.velocity = distance.normalized * speed;
+            }
+            else
+            {
+                controller.rb.velocity = distance * speed;
+            }
+            distance = destinyPoint - new Vector2(transform.position.x, transform.position.y);
+            yield return null;
+        }
+        dashing = false;
+        GetComponent<Collider2D>().enabled = true;
+        controller.rb.velocity = new Vector2(0, 0);
+        if (isBasicDash)
+        {
+            EndedBasicDash();
+        }
+    }
+
+    public void AnimationCursorLock(int value)
+    {
+        if (value == 1)
+        {
+            controller.LockPointer(true);
+        }
+        else
+        {
+            controller.LockPointer(false);
         }
     }
 

@@ -6,9 +6,11 @@ using UnityEngine.UIElements;
 using UnityEngine.Rendering.Universal;
 using UnityEditor.Rendering;
 using Unity.VisualScripting;
+using TMPro;
 
 public class Noel : PjBase
 {
+    public Animator _animator;
     public LineRenderer a1RayLine;
     public GameObject a1EndPoint;
     public float a1Weight;
@@ -24,6 +26,7 @@ public class Noel : PjBase
     public float h1TurretRange;
     public int h1BulletCount;
     public float h1Dmg;
+    public float h1AtSpdMod;
     public float c4Slow;
     public float c4Duration;
     public int c2ExtraBullets;
@@ -117,18 +120,23 @@ public class Noel : PjBase
         if (!IsCasting())
         {
             StartCoroutine(Cast(CalculateAtSpd(stats.atSpd * strongAtSpdMultiplier)));
-            if (h1Count > 0)
-            {
-                h1CuckooList[0].position = c3Light1.transform.position;
-            }
-            if (h1Count > 1)
-            {
-                h1CuckooList[1].position = c3Light2.transform.position;
-            }
-            if (h1Count > 2)
-            {
-                h1CuckooList[2].position = c3Light3.transform.position;
-            }
+            _animator.Play("NoelStrongAttack");
+        }
+    }
+
+    public void ReplaceCuckoos()
+    {
+        if (h1Count > 0)
+        {
+            h1CuckooList[0].position = c3Light1.transform.position;
+        }
+        if (h1Count > 1)
+        {
+            h1CuckooList[1].position = c3Light2.transform.position;
+        }
+        if (h1Count > 2)
+        {
+            h1CuckooList[2].position = c3Light3.transform.position;
         }
     }
 

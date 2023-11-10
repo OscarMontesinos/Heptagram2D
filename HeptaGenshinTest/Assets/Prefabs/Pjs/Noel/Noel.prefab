@@ -579,6 +579,7 @@ GameObject:
   - component: {fileID: 3119079193080766999}
   - component: {fileID: 6379600470355968154}
   - component: {fileID: 6379600470355968155}
+  - component: {fileID: 8335904265600917851}
   m_Layer: 7
   m_Name: Noel
   m_TagString: Player
@@ -630,7 +631,7 @@ MonoBehaviour:
   currentHab1Cd: 0
   hab1Cd: 5
   currentHab2Cd: 0
-  hab2Cd: 240
+  hab2Cd: 180
   bDashSpeed: 30
   bDashRange: 7
   casting: 0
@@ -663,14 +664,15 @@ MonoBehaviour:
     control: 3
     cdr: 0
     spd: 0
-    iceResist: 5
-    fireResist: 1
-    waterResist: 1
-    desertResist: 1
-    windResist: 6
-    natureResist: 5
-    lightningResist: 8
+    iceResist: 0
+    fireResist: 0
+    waterResist: 0
+    desertResist: 0
+    windResist: 0
+    natureResist: 0
+    lightningResist: 0
   damageTextOffset: 0
+  _animator: {fileID: 8335904265600917851}
   a1RayLine: {fileID: 548718340540917103}
   a1EndPoint: {fileID: 7686477687736522339}
   a1Weight: 1
@@ -685,6 +687,7 @@ MonoBehaviour:
   h1TurretRange: 20
   h1BulletCount: 5
   h1Dmg: 4
+  h1AtSpdMod: 0.65
   c4Slow: 2
   c4Duration: 3
   c2ExtraBullets: 3
@@ -700,7 +703,7 @@ MonoBehaviour:
   c3Light1: {fileID: 7730986001700600250}
   c3Light2: {fileID: 6742652245004879319}
   c3Light3: {fileID: 5350370126721639110}
-  c3Pot: 15
+  c3Pot: 10
 --- !u!50 &6379600470355968154
 Rigidbody2D:
   serializedVersion: 4
@@ -748,6 +751,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.6097574}
   m_EdgeRadius: 0
+--- !u!95 &8335904265600917851
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6379600470355968158}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 94a8539474c7adf4b89e886fc72a44df, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6742652245004879319
 GameObject:
   m_ObjectHideFlags: 0

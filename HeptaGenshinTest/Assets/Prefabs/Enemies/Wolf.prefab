@@ -186,6 +186,7 @@ MonoBehaviour:
   element: 0
   spinObjects: {fileID: 0}
   hpBar: {fileID: 4526949437083878479}
+  stunnBar: {fileID: 1704536644213157686}
   hab1Image: {fileID: 0}
   hab2Image: {fileID: 0}
   isActive: 0
@@ -227,13 +228,13 @@ MonoBehaviour:
     control: 3
     cdr: 0
     spd: 0
-    iceResist: 5
-    fireResist: 1
-    waterResist: 2
-    desertResist: 3
-    windResist: 2
-    natureResist: 4
-    lightningResist: 1
+    iceResist: 0
+    fireResist: 0
+    waterResist: 0
+    desertResist: 0
+    windResist: 0
+    natureResist: 0
+    lightningResist: 0
   damageTextOffset: 0
   rb: {fileID: 0}
   target: {fileID: 0}
@@ -273,6 +274,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3292360461769596109}
     m_Modifications:
+    - target: {fileID: 1796947561412492037, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 3.3693
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979302134069253553, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979302134069253553, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6428835361692622154, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -387,6 +400,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}
+--- !u!114 &1704536644213157686 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2889938546423663261, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}
+  m_PrefabInstance: {fileID: 4592726898420524459}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4526949437083878479 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 103108080962019812, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}

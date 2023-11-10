@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
-public class Mine : Spell
+public class NoelMine : Spell
 {
     new Noel user;
     public bool showGizmos;

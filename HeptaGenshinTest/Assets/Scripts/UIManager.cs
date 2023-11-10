@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI hp3Text;
     public Slider shieldSlider;
     public TextMeshProUGUI shieldText;
+    public Slider stunSlider;
     public List<HabilityUIIndicator> habIndicators = new List<HabilityUIIndicator>();
 
     public GameObject pauseMenu;
@@ -74,6 +75,9 @@ public class UIManager : MonoBehaviour
         hp3Slider.maxValue = PlayerController.Instance.backCharacter2.stats.mHp;
         hp3Text.text = PlayerController.Instance.backCharacter2.stats.hp.ToString("F0");
 
+        PlayerController.Instance.character.stunnBar = stunSlider;
+        PlayerController.Instance.backCharacter1.stunnBar = stunSlider;
+        PlayerController.Instance.backCharacter2.stunnBar = stunSlider;
 
         shieldSlider.value = Shield.shieldAmount;
         shieldSlider.maxValue = PlayerController.Instance.character.stats.mHp*1.5f;

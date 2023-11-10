@@ -360,13 +360,13 @@ MonoBehaviour:
     control: 4
     cdr: 0
     spd: 0
-    iceResist: 3
-    fireResist: 2
-    waterResist: 5
-    desertResist: 1
-    windResist: 1
-    natureResist: 2
-    lightningResist: 2
+    iceResist: 0
+    fireResist: 0
+    waterResist: 0
+    desertResist: 0
+    windResist: 0
+    natureResist: 0
+    lightningResist: 0
   damageTextOffset: 1
   a1Point: {fileID: 8708404727031589226}
   a1Area: 2.5

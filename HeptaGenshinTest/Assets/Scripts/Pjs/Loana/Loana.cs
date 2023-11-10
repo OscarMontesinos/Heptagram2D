@@ -215,17 +215,7 @@ public class Loana : PjBase
     }
 
 
-    public void AnimationCursorLock(int value)
-    {
-        if (value == 1)
-        {
-            controller.LockPointer(true);
-        }
-        else
-        {
-            controller.LockPointer(false);
-        }
-    }
+    
 
     public override void OnGlobalDamageTaken()
     {

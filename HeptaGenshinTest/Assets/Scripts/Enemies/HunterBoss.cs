@@ -39,8 +39,20 @@ public class HunterBoss : Enemy
     {
         if (stunTime > 0)
         {
-            stunTime -= Time.deltaTime;
+            stunTime -= Time.deltaTime; 
+            if (stunnBar.maxValue < stunTime)
+            {
+                stunnBar.maxValue = stunTime;
+            }
+
+            stunnBar.value = stunTime;
         }
+        else
+        {
+            stunnBar.maxValue = 0.3f;
+            stunnBar.value = 0;
+        }
+    
 
         reachTime += Time.deltaTime;
 

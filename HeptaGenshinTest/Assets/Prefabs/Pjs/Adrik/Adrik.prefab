@@ -5223,13 +5223,13 @@ MonoBehaviour:
     control: 3
     cdr: 0
     spd: 0
-    iceResist: 3.5
-    fireResist: 4.5
-    waterResist: 2
-    desertResist: 3
-    windResist: 2.5
-    natureResist: 4
-    lightningResist: 2.5
+    iceResist: 0
+    fireResist: 0
+    waterResist: 0
+    desertResist: 0
+    windResist: 0
+    natureResist: 0
+    lightningResist: 0
   damageTextOffset: 0
   a1Bullet: {fileID: 8600196668912157451, guid: fd5c2187c36ffec498a0333d2e05e505, type: 3}
   a1Speed: 20
