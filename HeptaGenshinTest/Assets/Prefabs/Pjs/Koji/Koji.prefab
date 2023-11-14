@@ -356,6 +356,7 @@ MonoBehaviour:
   element: 4
   spinObjects: {fileID: 294524932057363568}
   hpBar: {fileID: 0}
+  stunnBar: {fileID: 0}
   hab1Image: {fileID: 21300000, guid: dc3de1555dd43f046abd46393c7d4eb9, type: 3}
   hab2Image: {fileID: 21300000, guid: dc485d848429552409052a50016934f3, type: 3}
   isActive: 0
@@ -430,7 +431,7 @@ MonoBehaviour:
   h2Range: 15
   c1Area: 2.3
   c2Stun: 2
-  c4AtSpdMod: 40
+  c4AtSpdMod: 30
   c4CdReduc: 2
   c7Particle33: {fileID: 5850488214819560022}
   c7Particle66: {fileID: 5708266824382595229}

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
-public class LoanaShield : Shield
+public class BarshaShield : Shield
 {
     public void SetUp(PjBase user, float amount, float time)
     {
@@ -15,7 +16,11 @@ public class LoanaShield : Shield
 
     public override void Die()
     {
-        shieldAmount -= singularShieldAmount;     
+        if (CharacterManager.Instance.data[6].convergence >= 6)
+        {
+            user.GetComponent<Barsha>().h1Particle.SetActive(false);
+        }
+        shieldAmount -= singularShieldAmount;
         base.Die();
     }
 }

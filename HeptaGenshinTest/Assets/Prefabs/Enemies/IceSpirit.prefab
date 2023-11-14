@@ -204,7 +204,7 @@ MonoBehaviour:
     natureResist: 50
     lightningResist: 30
   statsPerLevel:
-    mHp: 7
+    mHp: 28
     hp: 0
     shield: 0
     sinergy: 3

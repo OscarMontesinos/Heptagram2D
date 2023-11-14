@@ -10,7 +10,7 @@ public class ValiBuff : Buff
         untimed = true;
         this.user = user;
         target = GetComponent<PjBase>();
-        this.atSpd = target.stats.atSpd * atSpd / 100;
+        this.atSpd = target.stats.atSpd * atSpd;
         target.stats.atSpd += this.atSpd;
     }
 

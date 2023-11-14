@@ -28,11 +28,6 @@ public class ValiArrow : Projectile
                 ValiMistMark mark = collision.GetComponent<Enemy>().AddComponent<ValiMistMark>();
                 mark.SetUp(user.GetComponent<Vali>(), user.CalculateSinergy( user.GetComponent<Vali>().h1MarkDmg), user.GetComponent<Vali>().h1MarkTime);
 
-                if (CharacterManager.Instance.data[0].convergence >= 3)
-                {
-                    user.currentHab1Cd -= 1.5f;
-                }
-
             }
 
             Die();

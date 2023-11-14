@@ -23,15 +23,22 @@ public class CuckooBullet : Projectile
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.lightning);
-            user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
+            if (!first)
+            {
+                user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
+            }
+            else
+            {
+                user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.basic);
+            }
 
-            if (CharacterManager.Instance.data[3].convergence >= 4 && first)
+            if (CharacterManager.Instance.data[4].convergence >= 4 && first)
             {
                 TurretSlow slow = collision.GetComponent<Enemy>().gameObject.AddComponent<TurretSlow>();
                 slow.SetUp(user, turret.user.c4Slow, turret.user.c4Duration);
             }
 
-            if (CharacterManager.Instance.data[3].convergence >= 5 && first && turret.targetList.Count > 1)
+            if (CharacterManager.Instance.data[4].convergence >= 5 && first && turret.targetList.Count > 1)
             {
                 LineRenderer line = Instantiate(this.rayLine, collision.transform.position,transform.rotation).GetComponent<LineRenderer>();
                 List<Enemy> list = new List<Enemy>(turret.targetList);

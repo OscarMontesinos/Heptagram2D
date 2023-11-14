@@ -27,7 +27,7 @@ public class CuckooTurret : MonoBehaviour
         {
             attackTime -= Time.deltaTime;
         }
-        else if(targetList.Count > 0)
+        else if(targetList.Count > 0 && user.stats.hp > 0)
         {
             StartCoroutine(Shoot());
         }

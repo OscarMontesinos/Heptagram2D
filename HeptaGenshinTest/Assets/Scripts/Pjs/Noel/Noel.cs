@@ -47,11 +47,11 @@ public class Noel : PjBase
     public override void Start()
     {
         base.Start();
-        if (CharacterManager.Instance.data[3].convergence >= 1)
+        if (CharacterManager.Instance.data[4].convergence >= 1)
         {
             h1MaxCount++;
         }
-        if (CharacterManager.Instance.data[3].convergence >= 2)
+        if (CharacterManager.Instance.data[4].convergence >= 2)
         {
             h1BulletCount += c2ExtraBullets;
         }
@@ -61,7 +61,7 @@ public class Noel : PjBase
     IEnumerator PostStart()
     {
         yield return null;
-        if (CharacterManager.Instance.data[3].convergence >= 3)
+        if (CharacterManager.Instance.data[4].convergence >= 3)
         {
             c3Lights.SetActive(true);
             c3Light1.SetActive(false);
@@ -205,7 +205,7 @@ public class Noel : PjBase
                 cuckoo.SetUp(this, dist, h1BulletCount, h1Range, h1Spd);
                 h1CuckooList.Add(cuckoo);
                 h1Count++;
-                if (CharacterManager.Instance.data[3].convergence >= 3)
+                if (CharacterManager.Instance.data[4].convergence >= 3)
                 {
                     switch (h1Count)
                     {
@@ -264,7 +264,7 @@ public class Noel : PjBase
 
         Instantiate(h2Display3, transform.position, h2Display3.transform.rotation);
 
-        if (CharacterManager.Instance.data[3].convergence >= 7)
+        if (CharacterManager.Instance.data[4].convergence >= 7)
         {
             foreach(CuckooTurret turret in h1CuckooList)
             {
@@ -275,6 +275,8 @@ public class Noel : PjBase
         GetComponent<Collider2D>().enabled = true;
         
     }
+
+     
 
     public virtual void OnDrawGizmosSelected()
     {

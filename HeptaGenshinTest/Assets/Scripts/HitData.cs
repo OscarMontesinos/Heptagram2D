@@ -11,7 +11,7 @@ public class HitData
 
     public enum AttackType
     {
-        range, melee, aoe, dot, pot, heal
+        range, melee, aoe, dot, pot, heal, passive
     }
 
     public enum HabType

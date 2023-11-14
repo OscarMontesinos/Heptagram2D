@@ -50,6 +50,9 @@ public class Vali : PjBase
     public float valiConvAtSpd;
     int combo;
 
+    public int c3Times;
+    public float c3Delay;
+
     public override void Start()
     {
         base.Start();
@@ -125,9 +128,16 @@ public class Vali : PjBase
     {
         if (currentHab1Cd <= 0 && !IsCasting())
         {
-            MistArrow arrow = Instantiate(mistArrow, transform.position, controller.pointer.transform.rotation).GetComponent<MistArrow>();
+            ValiMistArrow arrow = Instantiate(mistArrow, transform.position, controller.pointer.transform.rotation).GetComponent<ValiMistArrow>();
             currentHab1Cd = CDR(hab1Cd);
-            arrow.SetUp(this, h1ArrowSpeed, h1Range, CalculateSinergy(h1Dmg), h1StunTime, h1ArrowDetour, h1ArrowBounceRange, h1ArrowSpeed, h1ArrowRange, CalculateSinergy(h1ArrowDmg));
+            if (CharacterManager.Instance.data[0].convergence >= 3)
+            {
+                arrow.SetUp(this, h1ArrowSpeed, h1Range, CalculateSinergy(h1Dmg), h1StunTime, h1ArrowDetour, h1ArrowBounceRange, h1ArrowSpeed, h1ArrowRange, CalculateSinergy(h1ArrowDmg), c3Delay, c3Times);
+            }
+            else
+            {
+                arrow.SetUp(this, h1ArrowSpeed, h1Range, CalculateSinergy(h1Dmg), h1StunTime, h1ArrowDetour, h1ArrowBounceRange, h1ArrowSpeed, h1ArrowRange, CalculateSinergy(h1ArrowDmg),0,1);
+            }
         }
         base.Hab2();
     }
@@ -173,7 +183,7 @@ public class Vali : PjBase
         Instantiate(preFog, transform.position, controller.pointer.transform.rotation);
         yield return StartCoroutine(Cast(0.7f));
         ValiFog fog = Instantiate(this.fog, transform.position, controller.pointer.transform.rotation).GetComponent<ValiFog>();
-        fog.SetUp(this, fogDuration, fogSlow, fogSpd, CalculateControl(fogAtSpd), fogIceDeb);
+        fog.SetUp(this, fogDuration, fogSlow, fogSpd, fogAtSpd, fogIceDeb);
         currentHab2Cd = CDR(hab2Cd);
         yield return StartCoroutine(SoftCast(0.25f));
     }
@@ -244,12 +254,13 @@ public class Vali : PjBase
         base.Interact(user, target, element, attackType, habType);
     }
 
-    public override void EndedBasicDash()
+    public override void EndedBasicDashGlobal()
     {
-        base.BasicDash();
+        base.EndedBasicDashGlobal();
         if (CharacterManager.Instance.data[0].convergence >= 2 && currentArrowDashCd <= 0)
         {
             ShootArrowsOnDash();
         }
     }
+    
 }

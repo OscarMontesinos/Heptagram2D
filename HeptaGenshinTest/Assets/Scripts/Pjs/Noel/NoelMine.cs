@@ -29,6 +29,11 @@ public class NoelMine : Spell
                 lightGO.SetActive(true);
             }
         }
+
+        if(user.stats.hp <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -80,7 +85,7 @@ public class NoelMine : Spell
             enemyColl.GetComponent<Enemy>().stunTime += stunnTime;
         }
 
-        if (CharacterManager.Instance.data[3].convergence >= 7)
+        if (CharacterManager.Instance.data[4].convergence >= 7)
         {
             currentDelay = delay;
             active = false;

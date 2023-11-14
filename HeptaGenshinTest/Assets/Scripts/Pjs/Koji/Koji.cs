@@ -103,7 +103,7 @@ public class Koji : PjBase
             if (currentKnife != null)
             {
                 currentKnife.targetList.Add(enemy);
-                if (CharacterManager.Instance.data[4].convergence >= 5)
+                if (CharacterManager.Instance.data[5].convergence >= 5)
                 {
                     currentKnife.targetList.Add(enemy);
                     currentKnife.targetList.Add(enemy);
@@ -154,7 +154,7 @@ public class Koji : PjBase
             if (currentKnife != null)
             {
                 currentKnife.targetList.Add(enemy);
-                if (CharacterManager.Instance.data[4].convergence >= 5)
+                if (CharacterManager.Instance.data[5].convergence >= 5)
                 {
                     currentKnife.targetList.Add(enemy);
                     currentKnife.targetList.Add(enemy);
@@ -175,7 +175,7 @@ public class Koji : PjBase
                 KojiKnife knife = Instantiate(h1Knife, transform.position, controller.pointer.transform.rotation).GetComponent<KojiKnife>();
                 knife.SetUp(this, CalculateSinergy(h1Dmg), h1Spd, h1Detour, h1ExtraRange, h1Range);
                 currentKnife = knife;
-                if (CharacterManager.Instance.data[4].convergence >= 4)
+                if (CharacterManager.Instance.data[5].convergence >= 4)
                 {
                     stats.atSpd += c4CurentAtSpdMod;
                 }
@@ -303,7 +303,7 @@ public class Koji : PjBase
         _animator.Play("KojiUlt1");
         GetComponent<Collider2D>().enabled = false;
         yield return StartCoroutine(Cast(1));
-        if (CharacterManager.Instance.data[4].convergence >= 7 && c7Premeditation > 0 && h2Target != null)
+        if (CharacterManager.Instance.data[5].convergence >= 7 && c7Premeditation > 0 && h2Target != null)
         {
 
             yield return StartCoroutine(Dash(-controller.pointer.transform.up, h2DashSpd, h2Range, false));
@@ -345,7 +345,7 @@ public class Koji : PjBase
             h2Target.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(h2Dmg/2), HitData.Element.wind);
             DamageDealed(this, h2Target, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.hability);
 
-            if (CharacterManager.Instance.data[4].convergence >= 2)
+            if (CharacterManager.Instance.data[5].convergence >= 2)
             {
                 h2Target.stunTime += c2Stun;
             }
@@ -353,7 +353,7 @@ public class Koji : PjBase
                 if (currentKnife != null)
             {
                 currentKnife.targetList.Add(h2Target);
-                if (CharacterManager.Instance.data[4].convergence >= 5)
+                if (CharacterManager.Instance.data[5].convergence >= 5)
                 {
                     currentKnife.targetList.Add(h2Target);
                     currentKnife.targetList.Add(h2Target);
@@ -375,7 +375,7 @@ public class Koji : PjBase
             if (currentKnife != null)
             {
                 currentKnife.targetList.Add(h2Target);
-                if (CharacterManager.Instance.data[4].convergence >= 5)
+                if (CharacterManager.Instance.data[5].convergence >= 5)
                 {
                     currentKnife.targetList.Add(h2Target);
                     currentKnife.targetList.Add(h2Target);
@@ -387,7 +387,7 @@ public class Koji : PjBase
 
     public override void TakeDmg(float value, HitData.Element element)
     {
-        if (CharacterManager.Instance.data[4].convergence >= 4 && currentKnife == null)
+        if (CharacterManager.Instance.data[5].convergence >= 4 && currentKnife == null)
         {
             value /= 2;
         }
@@ -397,7 +397,7 @@ public class Koji : PjBase
 
     public override void Interact(PjBase user, PjBase target, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
     {
-        if(user == this && CharacterManager.Instance.data[4].convergence >= 7)
+        if(user == this && CharacterManager.Instance.data[5].convergence >= 7)
         {
             c7Premeditation++;
             if(c7Premeditation > c7MaxPremeditation)

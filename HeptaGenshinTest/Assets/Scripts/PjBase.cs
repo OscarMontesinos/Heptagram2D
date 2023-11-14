@@ -145,6 +145,14 @@ public class PjBase : MonoBehaviour, TakeDamage
     { 
     
     }
+    public virtual void UsedBasicDashGlobal()
+    { 
+    
+    }
+    public virtual void EndedBasicDashGlobal()
+    { 
+    
+    }
 
     public IEnumerator Cast(float time)
     {
@@ -339,6 +347,21 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     }
 
+    public virtual void Stunn(PjBase target, float value)
+    {
+        target.stunTime += value;
+
+        foreach (PjBase pj in controller.team)
+        {
+            pj.OnGlobalStunn(target, value);
+        }
+    }
+
+    public virtual void OnGlobalStunn(PjBase target, float value)
+    {
+
+    }
+
     public virtual void OnGlobalDamageTaken()
     {
 
@@ -426,6 +449,10 @@ public class PjBase : MonoBehaviour, TakeDamage
         if (isBasicDash)
         {
             EndedBasicDash();
+            foreach (PjBase pj in controller.team)
+            {
+                pj.EndedBasicDashGlobal();
+            }
         }
     }
 
@@ -457,6 +484,10 @@ public class PjBase : MonoBehaviour, TakeDamage
         if (isBasicDash)
         {
             EndedBasicDash();
+            foreach (PjBase pj in controller.team)
+            {
+                pj.EndedBasicDashGlobal();
+            }
         }
     }
 
