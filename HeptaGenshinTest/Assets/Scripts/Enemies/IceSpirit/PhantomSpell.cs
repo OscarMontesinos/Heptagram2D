@@ -17,7 +17,7 @@ public class PhantomSpell : Projectile
     {
         if (collision.CompareTag("Player") || collision.CompareTag("PlayerBarrier"))
         {
-            collision.GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.ice);
+            collision.GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.ice);
             Die();
         }
         base.OnTriggerEnter2D(collision);

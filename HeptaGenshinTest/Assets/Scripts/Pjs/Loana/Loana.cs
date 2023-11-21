@@ -141,7 +141,7 @@ public class Loana : PjBase
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<Enemy>();
-            enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(a1Dmg), HitData.Element.water);
+            enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a1Dmg), HitData.Element.water);
             DamageDealed(this, enemy, HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
             if (CharacterManager.Instance.data[2].convergence >= 1)
             {
@@ -157,8 +157,8 @@ public class Loana : PjBase
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<Enemy>();
-            enemy.GetComponent<TakeDamage>().Stunn(a2Stunn);
-            enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(a2Dmg), HitData.Element.water);
+            Stunn(enemy,a2Stunn);
+            enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a2Dmg), HitData.Element.water);
             DamageDealed(this, enemy, HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
             if (CharacterManager.Instance.data[2].convergence >= 1)
             {
@@ -230,7 +230,7 @@ public class Loana : PjBase
                 foreach (Collider2D enemyColl in enemiesHit)
                 {
                     enemy = enemyColl.GetComponent<Enemy>();
-                    enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(a1Dmg), HitData.Element.water);
+                    enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a1Dmg), HitData.Element.water);
                     DamageDealed(this, enemy, HitData.Element.water, HitData.AttackType.aoe, HitData.HabType.hability);
                 }
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface TakeDamage
 {
-    void TakeDamage(float value, HitData.Element element);
+    void TakeDamage(PjBase user,float value, HitData.Element element);
     void Stunn(float stunnTime);
     void Die();
 }

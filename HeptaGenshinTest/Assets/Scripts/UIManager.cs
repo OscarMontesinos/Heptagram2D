@@ -9,10 +9,13 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public Slider hpSlider;
     public TextMeshProUGUI hpText;
+    public TextMeshProUGUI dmgText;
     public Slider hp2Slider;
     public TextMeshProUGUI hp2Text;
+    public TextMeshProUGUI dmg2Text;
     public Slider hp3Slider;
     public TextMeshProUGUI hp3Text;
+    public TextMeshProUGUI dmg3Text;
     public Slider shieldSlider;
     public TextMeshProUGUI shieldText;
     public Slider stunSlider;
@@ -42,6 +45,7 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
+
         UpdateHpBars();
 
         UpdateHabIndicators();
@@ -143,5 +147,12 @@ public class UIManager : MonoBehaviour
             habIndicators[4].Activate(false);
             habIndicators[5].Activate(false);
         }
+    }
+
+    public void UpdateDamageText()
+    {
+        dmgText.text = PlayerController.Instance.character.dmgDealed.ToString("F0");
+        dmg2Text.text = PlayerController.Instance.backCharacter1.dmgDealed.ToString("F0");
+        dmg3Text.text = PlayerController.Instance.backCharacter2.dmgDealed.ToString("F0");
     }
 }

@@ -193,6 +193,7 @@ MonoBehaviour:
     natureResist: 0
     lightningResist: 0
   damageTextOffset: 2
+  dmgDealed: 0
   rb: {fileID: 446603575103447976}
   target: {fileID: 0}
   viewDist: 50

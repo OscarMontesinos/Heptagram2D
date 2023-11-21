@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
     public LayerMask enemyLayer;
     public LayerMask playerLayer;
 
-
+    public float ch1Dmg;
+    public float ch2Dmg;
+    public float ch3Dmg;
 
     public GameObject damageText;
 

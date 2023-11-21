@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class NoelMine : Spell
 {
-    new Noel user;
+    Noel noel;
     public bool showGizmos;
     public ParticleSystem explosion;
     public GameObject particle;
@@ -30,7 +29,7 @@ public class NoelMine : Spell
             }
         }
 
-        if(user.stats.hp <= 0)
+        if(noel.stats.hp <= 0)
         {
             Destroy(gameObject);
         }
@@ -43,12 +42,13 @@ public class NoelMine : Spell
     public void SetUp()
     {
         lightGO.SetActive(false);
-        user = FindObjectOfType<Noel>();
-        dmg = user.h2Dmg;
-        delay = user.h2Delay; 
+        noel = FindObjectOfType<Noel>();
+        user = noel;
+        dmg = noel.h2Dmg;
+        delay = noel.h2Delay; 
         currentDelay = delay;
-        stunnTime = user.h2StunnDuration;
-        time = user.h2Duration;
+        stunnTime = noel.h2StunnDuration;
+        time = noel.h2Duration;
         particle = explosion.gameObject;
         if(transform.parent != null)
         {
@@ -80,9 +80,9 @@ public class NoelMine : Spell
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position, area, GameManager.Instance.enemyLayer);
         foreach (Collider2D enemyColl in enemiesHit)
         {
-            enemyColl.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user.CalculateSinergy(dmg), HitData.Element.lightning);
-            user.DamageDealed(user, enemyColl.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
-            enemyColl.GetComponent<Enemy>().stunTime += stunnTime;
+            enemyColl.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, noel.CalculateSinergy(dmg), HitData.Element.lightning);
+            noel.DamageDealed(noel, enemyColl.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
+            noel.Stunn(enemyColl.GetComponent<Enemy>(), stunnTime);
         }
 
         if (CharacterManager.Instance.data[4].convergence >= 7)

@@ -25,12 +25,12 @@ public class AxeBoss : Projectile
     {
         if (collision.CompareTag("Player") || collision.CompareTag("PlayerBarrier"))
         { 
-            collision.GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.ice);
+            collision.GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.ice);
             if (collision.CompareTag("Player"))
             {
                 speed = 0;
                 sprites.SetActive(false);
-                collision.GetComponent<PjBase>().stunTime = stunnTime;
+                user.Stunn(collision.GetComponent<PjBase>(), stunnTime);
                 Die();
             }
             else

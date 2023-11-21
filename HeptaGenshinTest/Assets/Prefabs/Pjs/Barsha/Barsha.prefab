@@ -19857,7 +19857,7 @@ MonoBehaviour:
   h2StunTime: 6
   c2AtSpdMod: 35
   c2StunnDuration: 4
-  c4Dmg: 85
+  c4Dmg: 65
   c4EnemyList: []
   c7DmgConversor: 0.2
 --- !u!50 &6379600470355968154

@@ -43,7 +43,7 @@ public class Barrier : MonoBehaviour, TakeDamage
 
     }
 
-    void TakeDamage.TakeDamage(float value, HitData.Element element)
+    void TakeDamage.TakeDamage(PjBase user, float value, HitData.Element element)
     {
         hp -= value;
         if (hp <= 0)

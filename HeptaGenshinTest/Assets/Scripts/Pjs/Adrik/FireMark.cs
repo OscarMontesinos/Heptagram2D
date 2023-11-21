@@ -15,7 +15,7 @@ public class AdrikMark : Buff
     }
     public void Explode()
     {
-        target.GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.fire);
+        target.GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.fire);
         user.DamageDealed(user, target, HitData.Element.fire, HitData.AttackType.range, HitData.HabType.hability);
         Die();
     }

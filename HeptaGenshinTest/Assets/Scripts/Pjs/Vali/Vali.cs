@@ -94,7 +94,7 @@ public class Vali : PjBase
             if (combo == 0)
             {
                 ValiArrow arrow = Instantiate(this.arrow, transform.position, controller.pointer.transform.rotation).GetComponent<ValiArrow>();
-                arrow.SetUp(this, a1Spd, a1Range, CalculateSinergy(a1Damage),false);
+                arrow.SetUp(this, a1Spd, a1Range, CalculateSinergy(a1Damage),false,0);
                 combo++;
                 currentComboReset = CalculateAtSpd(stats.atSpd) + 0.5f;
             }
@@ -154,10 +154,10 @@ public class Vali : PjBase
     {
         controller.LockPointer(true);
         ValiArrow arrow = Instantiate(this.arrow, transform.position, controller.pointer.transform.rotation).GetComponent<ValiArrow>();
-        arrow.SetUp(this, a1Spd, a1Range, CalculateSinergy(a1Damage), false);
+        arrow.SetUp(this, a1Spd, a1Range, CalculateSinergy(a1Damage), false, 0);
         yield return new WaitForSeconds(CalculateAtSpd(stats.atSpd) / 3.5f);
         ValiArrow arrow2 = Instantiate(this.arrow, transform.position, controller.pointer.transform.rotation).GetComponent<ValiArrow>();
-        arrow2.SetUp(this, a1Spd, a1Range, CalculateSinergy(a1Damage),false);
+        arrow2.SetUp(this, a1Spd, a1Range, CalculateSinergy(a1Damage),false, 0);
         controller.LockPointer(false);
     }
     IEnumerator IceArrow()
@@ -220,7 +220,7 @@ public class Vali : PjBase
             {
                 Vector2 enemyDir = chosenEnemy.transform.position - transform.position;
                 ValiArrow arrow = Instantiate(dashArrow, transform.position, transform.rotation).GetComponent<ValiArrow>();
-                arrow.SetUp(this, a1Spd, arrowDashRange, CalculateSinergy(arrowDashDmg),false);
+                arrow.SetUp(this, a1Spd, arrowDashRange, CalculateSinergy(arrowDashDmg),false, 0);
                 arrow.transform.up = enemyDir;
                 enemyList.Add(chosenEnemy);
             }

@@ -42,6 +42,8 @@ public class PjBase : MonoBehaviour, TakeDamage
     public Stats stats;
     public Stats statsPerLevel;
     public float damageTextOffset;
+    [HideInInspector]
+    public float dmgDealed;
     public virtual void Awake()
     {
         controller = PlayerController.Instance;
@@ -179,6 +181,15 @@ public class PjBase : MonoBehaviour, TakeDamage
         }
     }
 
+    public void RegisterDamage(float dmg)
+    {
+        if (controller != null)
+        {
+            dmgDealed += dmg;
+            UIManager.Instance.UpdateDamageText();
+        }
+    }
+
     public virtual void DamageDealed(PjBase user, PjBase target, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
     {
         foreach (PjBase pj in controller.team)
@@ -194,12 +205,12 @@ public class PjBase : MonoBehaviour, TakeDamage
         
     }
 
-    void TakeDamage.TakeDamage(float value, HitData.Element element)
+    void TakeDamage.TakeDamage(PjBase user,float value, HitData.Element element)
     {
-        TakeDmg(value, element);
+        TakeDmg(user, value, element);
     }
 
-    public virtual void TakeDmg(float value, HitData.Element element)
+    public virtual void TakeDmg(PjBase user,float value, HitData.Element element)
     {
         if (isActive)
         {
@@ -279,6 +290,7 @@ public class PjBase : MonoBehaviour, TakeDamage
             dText.damageText.text = value.ToString("F0");
 
             stats.hp -= value;
+            user.RegisterDamage(value);
             if (stats.hp <= 0)
             {
                 GetComponent<TakeDamage>().Die();
@@ -349,11 +361,14 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     public virtual void Stunn(PjBase target, float value)
     {
-        target.stunTime += value;
+        target.GetComponent<TakeDamage>().Stunn(value);
 
-        foreach (PjBase pj in controller.team)
+        if (controller != null)
         {
-            pj.OnGlobalStunn(target, value);
+            foreach (PjBase pj in controller.team)
+            {
+                pj.OnGlobalStunn(target, value);
+            }
         }
     }
 
@@ -372,7 +387,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     void TakeDamage.Stunn(float stunTime)
     {
-        this.stunTime = stunTime;
+        this.stunTime += stunTime;
     }
     void TakeDamage.Die()
     {

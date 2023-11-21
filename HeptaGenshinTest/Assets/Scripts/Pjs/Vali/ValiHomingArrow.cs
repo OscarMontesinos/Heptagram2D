@@ -24,8 +24,7 @@ public class ValiHomingArrow : Projectile
         this.torque = torque;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Update()
     {
         if (target != null)
         {
@@ -46,7 +45,7 @@ public class ValiHomingArrow : Projectile
     {
         if (collision.CompareTag("Enemy") && collision.gameObject == target)
         {
-            collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.ice);
+            collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.ice);
             user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.ice, HitData.AttackType.range, HitData.HabType.hability);
             Die();
         }

@@ -32,7 +32,7 @@ public class Piroclast : Projectile
         {
             if (collision.CompareTag("Enemy"))
             {
-                collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.fire);
+                collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.fire);
                 user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.fire, HitData.AttackType.range, HitData.HabType.hability);
 
                 if (CharacterManager.Instance.data[3].convergence >= 5 && collision.gameObject.GetComponent<AdrikMark>())
@@ -54,7 +54,7 @@ public class Piroclast : Projectile
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position, area, GameManager.Instance.enemyLayer);
         foreach (Collider2D enemyColl in enemiesHit)
         {
-            enemyColl.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.fire);
+            enemyColl.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.fire);
             user.DamageDealed(user, enemyColl.GetComponent<Enemy>(), HitData.Element.fire, HitData.AttackType.range, HitData.HabType.hability);
 
             if (CharacterManager.Instance.data[3].convergence >= 5 && enemyColl.gameObject.GetComponent<AdrikMark>())

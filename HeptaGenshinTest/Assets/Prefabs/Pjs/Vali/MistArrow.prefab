@@ -4955,13 +4955,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8600196668912157451}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0cd170a70e40a84183af1fe525931a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 01cfb42d50f258f4a95014e6bd31d8d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  range: 40
+  speed: 0
+  spdOverTime: 0
+  range: 0
   collideWalls: 0
   particle: {fileID: 4885004140497439716}
+  withoutRange: 0
   arrowSprite: {fileID: 8737771865701277727}
   particleMist: {fileID: 5076697050843929518, guid: a46c555e83dcb5b40adf8f4727d77abb, type: 3}
   arrow: {fileID: 8600196668912157451, guid: 515ae42dab6a1ba4caba465cf4421673, type: 3}
@@ -4972,6 +4974,8 @@ MonoBehaviour:
   arrowSpeed: 0
   arrowRange: 0
   arrowDmg: 0
+  delay: 0
+  times: 0
 --- !u!50 &8600196668912157454
 Rigidbody2D:
   serializedVersion: 4

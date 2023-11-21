@@ -22,7 +22,7 @@ public class CuckooBullet : Projectile
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.lightning);
+            collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.lightning);
             if (!first)
             {
                 user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
@@ -53,7 +53,7 @@ public class CuckooBullet : Projectile
                     {
                         line.SetPosition(count, enemy.transform.position);
 
-                        enemy.GetComponent<TakeDamage>().TakeDamage((dmg * turret.attackCount) * 0.5f, HitData.Element.lightning);
+                        enemy.GetComponent<TakeDamage>().TakeDamage(user, (dmg * turret.attackCount) * 0.5f, HitData.Element.lightning);
                         user.DamageDealed(user, enemy, HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
 
                         TurretSlow slow = enemy.gameObject.AddComponent<TurretSlow>();

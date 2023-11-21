@@ -42,7 +42,7 @@ public class FireBomb : Projectile
         foreach (Collider2D enemyColl in enemiesHit)
         {
 
-            enemyColl.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.fire);
+            enemyColl.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.fire);
             user.DamageDealed(user, enemyColl.GetComponent<Enemy>(), HitData.Element.fire, HitData.AttackType.range, HitData.HabType.hability);
             if (enemyColl.gameObject.GetComponent<AdrikMark>())
             {

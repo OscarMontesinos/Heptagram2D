@@ -134,7 +134,7 @@ public class Barsha : PjBase
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<Enemy>();
-            enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(a1Dmg), HitData.Element.nature);
+            enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a1Dmg), HitData.Element.nature);
             DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
         }
     }
@@ -177,7 +177,7 @@ public class Barsha : PjBase
                 if (!enemiesHitted.Contains(enemy))
                 {
                     enemiesHitted.Add(enemy);
-                    enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(a2Dmg3), HitData.Element.nature);
+                    enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a2Dmg3), HitData.Element.nature);
                     DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
                     Stunn(enemy, a2StunTime);
                 }
@@ -191,7 +191,7 @@ public class Barsha : PjBase
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<Enemy>();
-            enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(a2Dmg1), HitData.Element.nature);
+            enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a2Dmg1), HitData.Element.nature);
             DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
         }
     }
@@ -202,7 +202,7 @@ public class Barsha : PjBase
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<Enemy>();
-            enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(a2Dmg2), HitData.Element.nature);
+            enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a2Dmg2), HitData.Element.nature);
             DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
         }
     }
@@ -313,7 +313,7 @@ public class Barsha : PjBase
                     {
                         dmg += Shield.shieldAmount * c7DmgConversor;
                     }
-                        enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(dmg), HitData.Element.nature);
+                        enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(dmg), HitData.Element.nature);
                     DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.aoe, HitData.HabType.hability);
                     Stunn(enemy, h2StunTime);
                 }
@@ -330,7 +330,7 @@ public class Barsha : PjBase
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<Enemy>();
-            enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(h1Dmg), HitData.Element.nature);
+            enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h1Dmg), HitData.Element.nature);
             DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
             if (CharacterManager.Instance.data[6].convergence >= 2)
             {
@@ -345,14 +345,14 @@ public class Barsha : PjBase
     {
         if (attackType == HitData.AttackType.melee && (h1FervourCurrentDuration > 0 || (CharacterManager.Instance.data[6].convergence >= 6 && controller.GetComponent<BarshaShield>())))
         {
-            target.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(h1FervourDmg), HitData.Element.nature);
+            target.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h1FervourDmg), HitData.Element.nature);
             h1FervourCount += CalculateSinergy(h1FervourDmg);
             DamageDealed(this, target, HitData.Element.nature, HitData.AttackType.passive, HitData.HabType.hability);
             h1FervourDmg = 0;
         }
         if(!c4EnemyList.Contains(target) && target.stunTime > 0)
         {
-            target.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(c4Dmg), HitData.Element.nature);
+            target.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(c4Dmg), HitData.Element.nature);
             c4EnemyList.Add(target);
             DamageDealed(this, target, HitData.Element.nature, HitData.AttackType.passive, HitData.HabType.hability);
         }

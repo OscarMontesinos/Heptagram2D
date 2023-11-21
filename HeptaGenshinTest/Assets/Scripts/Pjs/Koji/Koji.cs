@@ -94,7 +94,7 @@ public class Koji : PjBase
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<Enemy>();
-            enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(a1Dmg), HitData.Element.wind);
+            enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a1Dmg), HitData.Element.wind);
             DamageDealed(this, enemy, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.basic);
             if (CharacterManager.Instance.data[4].convergence >= 4 && currentKnife == null)
             {
@@ -133,7 +133,7 @@ public class Koji : PjBase
             }
 
             StartCoroutine(Dash(controller.pointer.transform.up, speed, range, false));
-            StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd * strongAtSpdMultiplier)));
+            StartCoroutine(SoftCast(CalculateAtSpd(strongAtSpdMultiplier)));
             _animator.Play("KojiStrongAttack");
         }
         base.StrongAttack();
@@ -145,7 +145,7 @@ public class Koji : PjBase
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<Enemy>();
-            enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(a2Dmg), HitData.Element.wind);
+            enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a2Dmg), HitData.Element.wind);
             DamageDealed(this, enemy, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.basic);
             if (CharacterManager.Instance.data[4].convergence >= 4 && currentKnife == null)
             {
@@ -222,7 +222,7 @@ public class Koji : PjBase
                     enemy = enemyColl.GetComponent<Enemy>();
                     if (!enemiesHitted.Contains(enemy))
                     {
-                        enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(h1DmgAttack), HitData.Element.wind);
+                        enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h1DmgAttack), HitData.Element.wind);
                         DamageDealed(this, enemy, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.hability);
 
                         enemiesHitted.Add(enemy);
@@ -250,7 +250,7 @@ public class Koji : PjBase
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<Enemy>();
-            enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(h1DmgAttack), HitData.Element.wind);
+            enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h1DmgAttack), HitData.Element.wind);
             DamageDealed(this, enemy, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.basic);
             if (CharacterManager.Instance.data[4].convergence >= 4 && currentKnife == null)
             {
@@ -342,12 +342,12 @@ public class Koji : PjBase
     {
         if (h2Target != null) 
         {
-            h2Target.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(h2Dmg/2), HitData.Element.wind);
+            h2Target.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h2Dmg/2), HitData.Element.wind);
             DamageDealed(this, h2Target, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.hability);
 
             if (CharacterManager.Instance.data[5].convergence >= 2)
             {
-                h2Target.stunTime += c2Stun;
+                Stunn(h2Target, c2Stun);
             }
 
                 if (currentKnife != null)
@@ -367,7 +367,7 @@ public class Koji : PjBase
         {
             float dmg = c7MaxDmg * Mathf.InverseLerp(0,c7MaxPremeditation,c7Premeditation);
             c7Premeditation = 0;
-            h2Target.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(dmg), HitData.Element.wind);
+            h2Target.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(dmg), HitData.Element.wind);
             DamageDealed(this, h2Target, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.hability);
 
             c7Particle.Play(); 
@@ -385,13 +385,13 @@ public class Koji : PjBase
     }
 
 
-    public override void TakeDmg(float value, HitData.Element element)
+    public override void TakeDmg(PjBase user, float value, HitData.Element element)
     {
         if (CharacterManager.Instance.data[5].convergence >= 4 && currentKnife == null)
         {
             value /= 2;
         }
-            base.TakeDmg(value, element);
+            base.TakeDmg(user, value, element);
         
     }
 

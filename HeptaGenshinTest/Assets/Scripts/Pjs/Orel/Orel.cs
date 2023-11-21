@@ -182,7 +182,7 @@ public class Orel : PjBase
                 enemy = enemyColl.GetComponent<Enemy>();
                 if (!enemiesHitted.Contains(enemy))
                 {
-                    enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(h1Dmg), HitData.Element.desert);
+                    enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h1Dmg), HitData.Element.desert);
                     DamageDealed(this, enemy, HitData.Element.desert, HitData.AttackType.melee, HitData.HabType.hability);
 
                     if(CharacterManager.Instance.data[1].convergence >= 4)

@@ -5182,13 +5182,14 @@ MonoBehaviour:
   element: 1
   spinObjects: {fileID: 0}
   hpBar: {fileID: 0}
+  stunnBar: {fileID: 0}
   hab1Image: {fileID: 21300000, guid: 26140878b53d3044897f1d7eceaad2a0, type: 3}
   hab2Image: {fileID: 21300000, guid: ea53e7bed46a6e64999aad4e30410d45, type: 3}
   isActive: 0
   currentComboReset: 0
   strongAtSpdMultiplier: 2
   currentHab1Cd: 0
-  hab1Cd: 25
+  hab1Cd: 15
   currentHab2Cd: 0
   hab2Cd: 120
   bDashSpeed: 30
@@ -5231,10 +5232,11 @@ MonoBehaviour:
     natureResist: 0
     lightningResist: 0
   damageTextOffset: 0
+  dmgDealed: 0
   a1Bullet: {fileID: 8600196668912157451, guid: fd5c2187c36ffec498a0333d2e05e505, type: 3}
   a1Speed: 20
   a1Range: 15
-  a1Dmg: 15
+  a1Dmg: 20
   a2MaxCastingTime: 1
   a2HealObject: {fileID: 8600196668912157451, guid: 901a11a6147e6a04f9492f213875d302, type: 3}
   a2Particle: {fileID: 4556231244311116402}
@@ -5244,7 +5246,7 @@ MonoBehaviour:
   a2FireBlast: {fileID: 8600196668912157451, guid: 3d6ac42df797054448d383b2c2b604e5, type: 3}
   a2Speed: 35
   a2Range: 30
-  a2Dmg: 55
+  a2Dmg: 60
   h1Piroclast: {fileID: 8600196668912157451, guid: 92176fb52bc99a248b76a586ce62b7f7, type: 3}
   piroclastsVisulas:
   - {fileID: 2184410149572349551}
@@ -5254,11 +5256,11 @@ MonoBehaviour:
   - {fileID: 4023395180344036788}
   h1Speed: 40
   h1Range: 25
-  h1Dmg: 40
+  h1Dmg: 50
   h1MaxCharges: 5
   h1MarkDuration: 10
   h1MarkHeal: 15
-  h1MarkDmg: 70
+  h1MarkDmg: 80
   c3CdReduc: 3
   h2Bomb: {fileID: 8600196668912157451, guid: f3d51e69960416d4da86203a46d84999, type: 3}
   h2BombSpawner: {fileID: 5940115093305829713}

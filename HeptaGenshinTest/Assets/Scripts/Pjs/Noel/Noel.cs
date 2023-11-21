@@ -97,8 +97,8 @@ public class Noel : PjBase
 
                 if (ray2D.collider.GetComponent<Enemy>())
                 {
-                    ray2D.collider.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(a1Dmg), HitData.Element.lightning);
-                    DamageDealed(this, ray2D.collider.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.melee, HitData.HabType.basic);
+                    ray2D.collider.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a1Dmg), HitData.Element.lightning);
+                    DamageDealed(this, ray2D.collider.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.basic);
                 }
 
                 StartCoroutine(MainRay());

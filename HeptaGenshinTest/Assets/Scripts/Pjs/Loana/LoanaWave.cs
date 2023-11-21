@@ -23,7 +23,7 @@ public class LoanaWave : Projectile
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.water);
+            collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.water);
             user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.water, HitData.AttackType.range, HitData.HabType.hability);
             shield.ChangeShieldAmount(shieldAmount);
         }

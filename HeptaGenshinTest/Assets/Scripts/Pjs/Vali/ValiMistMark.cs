@@ -20,7 +20,7 @@ public class ValiMistMark : Buff, HitInteract
         if (!triggered && user != this.user)
         {
             triggered = true;
-            target.GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.ice);
+            target.GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.ice);
             user.DamageDealed(user, target, HitData.Element.ice, HitData.AttackType.range, HitData.HabType.hability);
             Die();
         }

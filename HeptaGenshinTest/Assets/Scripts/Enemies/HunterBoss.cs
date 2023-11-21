@@ -156,7 +156,7 @@ public class HunterBoss : Enemy
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<PjBase>();
-            enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(attackDmg), HitData.Element.ice);
+            enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(attackDmg), HitData.Element.ice);
         }
     }
 

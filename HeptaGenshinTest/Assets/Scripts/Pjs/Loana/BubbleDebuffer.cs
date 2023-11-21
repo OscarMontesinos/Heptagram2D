@@ -32,7 +32,7 @@ public class BubbleDebuffer : Spell
 
     public override void SpellEnter(Enemy target)
     {
-        target.stunTime += stunn;
+        user.Stunn(target, stunn);
         target.stats.spd -= slow;
         target.stats.sinergy -= exh;
         base.SpellEnter(target);

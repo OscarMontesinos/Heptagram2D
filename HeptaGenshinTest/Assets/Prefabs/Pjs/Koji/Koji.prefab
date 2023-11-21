@@ -361,7 +361,7 @@ MonoBehaviour:
   hab2Image: {fileID: 21300000, guid: dc485d848429552409052a50016934f3, type: 3}
   isActive: 0
   currentComboReset: 0
-  strongAtSpdMultiplier: 0.85
+  strongAtSpdMultiplier: 1
   currentHab1Cd: 0
   hab1Cd: 10
   currentHab2Cd: 0
@@ -406,6 +406,7 @@ MonoBehaviour:
     natureResist: 0
     lightningResist: 0
   damageTextOffset: 0
+  dmgDealed: 0
   _animator: {fileID: 8042746346624588376}
   a1Point: {fileID: 8708404727031589226}
   a1Area: 3

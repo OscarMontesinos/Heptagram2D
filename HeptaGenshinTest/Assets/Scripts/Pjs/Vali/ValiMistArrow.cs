@@ -49,7 +49,7 @@ public class ValiMistArrow : Projectile
         }
         else if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.ice);
+            collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.ice);
             collision.GetComponent<Enemy>().GetComponent<TakeDamage>().Stunn(stunTime);
             user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.ice, HitData.AttackType.range, HitData.HabType.hability);
             Die();
@@ -66,17 +66,17 @@ public class ValiMistArrow : Projectile
             GameObject arrowRef = Instantiate(arrow, transform.position, transform.rotation);
             arrowRef.transform.up = reflect;
             arrowList.Add(arrowRef);
-            arrowRef.GetComponent<ValiArrow>().SetUp(user, arrowSpeed, arrowBounceRange, arrowDmg, true);
+            arrowRef.GetComponent<ValiArrow>().SetUp(user, arrowSpeed, arrowBounceRange, arrowDmg, true, stunTime/10);
             GameObject arrowRef2 = Instantiate(arrow, transform.position, transform.rotation);
             arrowRef2.transform.up = reflect;
             arrowRef2.transform.eulerAngles = new Vector3(0, 0, arrowRef2.transform.eulerAngles.z + arrowDetour);
             arrowList.Add(arrowRef2);
-            arrowRef2.GetComponent<ValiArrow>().SetUp(user, arrowSpeed, arrowBounceRange, arrowDmg, true);
+            arrowRef2.GetComponent<ValiArrow>().SetUp(user, arrowSpeed, arrowBounceRange, arrowDmg, true, stunTime / 10);
             GameObject arrowRef3 = Instantiate(arrow, transform.position, transform.rotation);
             arrowRef3.transform.up = reflect;
             arrowRef3.transform.eulerAngles = new Vector3(0, 0, arrowRef3.transform.eulerAngles.z - arrowDetour);
             arrowList.Add(arrowRef3);
-            arrowRef3.GetComponent<ValiArrow>().SetUp(user, arrowSpeed, arrowBounceRange, arrowDmg, true);
+            arrowRef3.GetComponent<ValiArrow>().SetUp(user, arrowSpeed, arrowBounceRange, arrowDmg, true, stunTime / 10);
             List<Enemy> enemyList = new List<Enemy>();
             foreach (GameObject arrow in arrowList)
             {

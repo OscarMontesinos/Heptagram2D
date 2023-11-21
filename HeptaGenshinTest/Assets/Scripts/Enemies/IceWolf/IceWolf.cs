@@ -56,7 +56,7 @@ public class IceWolf : Enemy
                     enemy = enemyColl.GetComponent<PjBase>();
                     if (!enemiesHitted.Contains(enemy))
                     {
-                        enemy.GetComponent<TakeDamage>().TakeDamage(CalculateSinergy(attackDmg), HitData.Element.ice);
+                        enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(attackDmg), HitData.Element.ice);
 
                         enemiesHitted.Add(enemy);
                     }

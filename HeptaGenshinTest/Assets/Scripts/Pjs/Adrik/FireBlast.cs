@@ -30,7 +30,7 @@ public class FireBlast : Projectile
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position, area, GameManager.Instance.enemyLayer);
         foreach (Collider2D enemyColl in enemiesHit)
         {
-            enemyColl.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(dmg, HitData.Element.fire);
+            enemyColl.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.fire);
             user.DamageDealed(user, enemyColl.GetComponent<Enemy>(), HitData.Element.fire, HitData.AttackType.range, HitData.HabType.hability);
             if (CharacterManager.Instance.data[3].convergence >= 2 && enemyColl.gameObject.GetComponent<AdrikMark>())
             {

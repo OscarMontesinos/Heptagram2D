@@ -319,6 +319,7 @@ MonoBehaviour:
   element: 2
   spinObjects: {fileID: 294524932057363568}
   hpBar: {fileID: 0}
+  stunnBar: {fileID: 0}
   hab1Image: {fileID: 21300000, guid: a6dbe4e8d55646d4b83271d7ddea4604, type: 3}
   hab2Image: {fileID: 21300000, guid: 9a92d350aa0f8f048ab6f640d3a8a427, type: 3}
   isActive: 0
@@ -368,6 +369,7 @@ MonoBehaviour:
     natureResist: 0
     lightningResist: 0
   damageTextOffset: 1
+  dmgDealed: 0
   a1Point: {fileID: 8708404727031589226}
   a1Area: 2.5
   a1Dmg: 40
@@ -382,17 +384,17 @@ MonoBehaviour:
   h1Spd: 30
   h1SpdOverTime: 50
   h1Duration: 20
-  h1ShldAmount: 50
+  h1ShldAmount: 70
   h2Bubble: {fileID: 3387212674506252671, guid: 97889451c96699a49a9333f5842d9da0, type: 3}
   h2Amount: 350
   h2Duration: 30
   c6Particle: {fileID: 5819749510567234324, guid: 07bcc18768d7d8b48be84c0d57959a8a, type: 3}
   c3Area: 9
   c3Dmg: 40
-  c4Heal: 17.5
+  c4Heal: 20
   c4CurrentCd: 0
   c4Cd: 7
-  c5BuffAmount: 0
+  c5BuffAmount: 30
   c6BuffAmount: 35
   c7DebuffAmount: 40
   c7Slow: 2
