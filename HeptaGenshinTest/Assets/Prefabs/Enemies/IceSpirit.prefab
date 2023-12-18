@@ -220,6 +220,7 @@ MonoBehaviour:
     natureResist: 0
     lightningResist: 0
   damageTextOffset: 1.5
+  dmgDealed: 0
   rb: {fileID: 0}
   target: {fileID: 0}
   viewDist: 40
@@ -274,6 +275,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4470652349959714113}
     m_Modifications:
+    - target: {fileID: 2369449134891691676, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6428835361692622154, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

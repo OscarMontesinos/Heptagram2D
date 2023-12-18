@@ -162,7 +162,7 @@ public class PjBase : MonoBehaviour, TakeDamage
         yield return new WaitForSeconds(time);
         casting = false;
     }
-    public IEnumerator SoftCast(float time)
+    public virtual IEnumerator SoftCast(float time)
     {
         softCasting = true;
         yield return new WaitForSeconds(time);
