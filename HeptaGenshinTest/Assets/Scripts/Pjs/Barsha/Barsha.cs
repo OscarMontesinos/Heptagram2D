@@ -237,7 +237,7 @@ public class Barsha : PjBase
                 }
 
                 StartCoroutine(Dash(controller.pointer.transform.up, speed, range, false));
-                StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd)));
+                StartCoroutine(Cast(CalculateAtSpd(stats.atSpd*1.5f)));
                 _animator.Play("BarshaHabilityAttack");
                 h1Particle.SetActive(true);
                 currentHab1Cd = hab1Cd;
