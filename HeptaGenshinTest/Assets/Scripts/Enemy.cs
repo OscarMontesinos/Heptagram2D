@@ -30,6 +30,14 @@ public class Enemy : PjBase
         stats.natureResist += statsPerLevel.natureResist * (level - 1);
         stats.lightningResist += statsPerLevel.lightningResist * (level - 1);
         stats.hp = stats.mHp;
+
+
+        if (hpBar != null)
+        {
+            hpBar.maxValue = stats.mHp;
+            hpBar.value = stats.hp;
+                hpText.text = stats.hp.ToString("F0");
+        }
     }
 
     // Update is called once per frame

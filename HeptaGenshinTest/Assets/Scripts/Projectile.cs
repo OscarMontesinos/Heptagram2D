@@ -7,8 +7,10 @@ public class Projectile : MonoBehaviour
     public float speed;
     public float spdOverTime;
     public float range;
-    Rigidbody2D _rigidbody;
-    Vector2 startPos;
+    [HideInInspector]
+    public  Rigidbody2D _rigidbody;
+    [HideInInspector]
+    public Vector2 startPos;
     public bool collideWalls;
     public GameObject particle;
     public bool withoutRange;
@@ -22,7 +24,7 @@ public class Projectile : MonoBehaviour
     {
         speed += spdOverTime * Time.deltaTime;
     }
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         Vector2 dir = transform.up;
         _rigidbody.velocity = dir.normalized * speed;

@@ -170,6 +170,7 @@ MonoBehaviour:
   element: 0
   spinObjects: {fileID: 0}
   hpBar: {fileID: 7998548566664082281}
+  hpText: {fileID: 9090059958684154351}
   stunnBar: {fileID: 5077177460920211472}
   hab1Image: {fileID: 0}
   hab2Image: {fileID: 0}
@@ -219,7 +220,7 @@ MonoBehaviour:
     windResist: 0
     natureResist: 0
     lightningResist: 0
-  damageTextOffset: 1.5
+  damageTextOffset: 3
   dmgDealed: 0
   rb: {fileID: 0}
   target: {fileID: 0}
@@ -402,5 +403,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9090059958684154351 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1173395050022873954, guid: 1ffc2911cc331f3439ede73e0c969f2e, type: 3}
+  m_PrefabInstance: {fileID: 7957541458939892365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

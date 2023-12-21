@@ -1,6 +1,7 @@
 using Microsoft.Win32.SafeHandles;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     public HitData.Element element;
     public GameObject spinObjects;
     public Slider hpBar;
+    public TextMeshProUGUI hpText;
     public Slider stunnBar;
     public Sprite hab1Image;
     public Sprite hab2Image;
@@ -65,6 +67,8 @@ public class PjBase : MonoBehaviour, TakeDamage
 
 
         GameManager.Instance.pjList.Add(this);
+
+
     }
     public virtual void Update()
     {
@@ -307,6 +311,7 @@ public class PjBase : MonoBehaviour, TakeDamage
             {
                 hpBar.maxValue = stats.mHp;
                 hpBar.value = stats.hp;
+                hpText.text = stats.hp.ToString("F0");
             }
         }
     }
