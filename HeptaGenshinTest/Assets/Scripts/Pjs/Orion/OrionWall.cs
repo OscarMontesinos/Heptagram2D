@@ -16,6 +16,9 @@ public class OrionWall : MonoBehaviour, TakeDamage
     {
         RechargeShield();
     }
+    private void Update()
+    {
+    }
     public void RechargeShield()
     {
         hpBar.maxValue = mHp;
@@ -24,7 +27,6 @@ public class OrionWall : MonoBehaviour, TakeDamage
     }
     void TakeDamage.TakeDamage(PjBase user, float value, HitData.Element element)
     {
-        Debug.Log(value);
         hp -= value;
         hpBar.value = hp;
         if(hp <= 0)

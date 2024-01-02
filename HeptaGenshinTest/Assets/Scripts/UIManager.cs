@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -45,8 +46,10 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
-
-        UpdateHpBars();
+        if (PlayerController.Instance.character != null)
+        {
+            UpdateHpBars();
+        }
 
         UpdateHabIndicators();
 

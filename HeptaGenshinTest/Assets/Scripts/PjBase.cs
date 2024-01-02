@@ -9,6 +9,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class PjBase : MonoBehaviour, TakeDamage
 {
+    public GameManager manager;
     public PlayerController controller;
     public GameObject sprite;
     public string chName;
@@ -46,6 +47,8 @@ public class PjBase : MonoBehaviour, TakeDamage
     public float damageTextOffset;
     [HideInInspector]
     public float dmgDealed;
+
+    float healCount;
     public virtual void Awake()
     {
         controller = PlayerController.Instance;
@@ -237,6 +240,11 @@ public class PjBase : MonoBehaviour, TakeDamage
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.waterColor;
                     break;
+                case HitData.Element.blood:
+                    calculo = stats.waterResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.bloodColor;
+                    break;
                 case HitData.Element.desert:
                     calculo = stats.desertResist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
@@ -316,7 +324,7 @@ public class PjBase : MonoBehaviour, TakeDamage
         }
     }
 
-    public void Heal(float value, HitData.Element element)
+    public virtual void Heal(PjBase user, float value, HitData.Element element)
     {
         if (stats.hp > 0)
         {
@@ -326,40 +334,53 @@ public class PjBase : MonoBehaviour, TakeDamage
                 stats.hp = stats.mHp;
             }
 
-            DamageText dText = null;
-            switch (element)
+            if (value + healCount > 1)
             {
-                case HitData.Element.ice:
-                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                    dText.textColor = GameManager.Instance.iceColor;
-                    break;
-                case HitData.Element.fire:
-                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                    dText.textColor = GameManager.Instance.fireColor;
-                    break;
-                case HitData.Element.water:
-                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                    dText.textColor = GameManager.Instance.waterColor;
-                    break;
-                case HitData.Element.desert:
-                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                    dText.textColor = GameManager.Instance.desertColor;
-                    break;
-                case HitData.Element.wind:
-                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                    dText.textColor = GameManager.Instance.windColor;
-                    break;
-                case HitData.Element.nature:
-                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                    dText.textColor = GameManager.Instance.natureColor;
-                    break;
-                case HitData.Element.lightning:
-                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
-                    dText.textColor = GameManager.Instance.lightningColor;
-                    break;
-            }
+                value += healCount;
+                healCount = 0;
+                DamageText dText = null;
+                switch (element)
+                {
+                    case HitData.Element.ice:
+                        dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                        dText.textColor = GameManager.Instance.iceColor;
+                        break;
+                    case HitData.Element.fire:
+                        dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                        dText.textColor = GameManager.Instance.fireColor;
+                        break;
+                    case HitData.Element.water:
+                        dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                        dText.textColor = GameManager.Instance.waterColor;
+                        break;
+                    case HitData.Element.blood:
+                        dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                        dText.textColor = GameManager.Instance.bloodColor;
+                        break;
+                    case HitData.Element.desert:
+                        dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                        dText.textColor = GameManager.Instance.desertColor;
+                        break;
+                    case HitData.Element.wind:
+                        dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                        dText.textColor = GameManager.Instance.windColor;
+                        break;
+                    case HitData.Element.nature:
+                        dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                        dText.textColor = GameManager.Instance.natureColor;
+                        break;
+                    case HitData.Element.lightning:
+                        dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                        dText.textColor = GameManager.Instance.lightningColor;
+                        break;
+                }
 
-            dText.damageText.text = "+" + value.ToString("F0");
+                dText.damageText.text = "+" + value.ToString("F0");
+            }
+            else
+            {
+                healCount += value;
+            }
         }
 
     }
@@ -396,10 +417,13 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     void TakeDamage.Die()
     {
-        if (PlayerController.Instance.team.Contains(this))
+        if (manager.pjList.Contains(this))
         {
             stats.hp = 0;
-            GameManager.Instance.DisplayAliveCharacter();
+            if (GameManager.Instance.gamemode == GameManager.GameModes.singleplayer)
+            {
+                GameManager.Instance.DisplayAliveCharacter();
+            }
         }
         else
         {

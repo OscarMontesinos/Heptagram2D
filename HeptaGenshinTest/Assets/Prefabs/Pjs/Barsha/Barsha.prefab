@@ -1399,7 +1399,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 0.30588233}
+        key1: {r: 1, g: 1, b: 1, a: 0.49803922}
         key2: {r: 1, g: 1, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1415,10 +1415,10 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 22745
+        atime1: 46453
         atime2: 65535
-        atime3: 0
-        atime4: 0
+        atime3: 65535
+        atime4: 65535
         atime5: 0
         atime6: 0
         atime7: 0
@@ -11176,7 +11176,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 0.30588233}
+        key1: {r: 1, g: 1, b: 1, a: 0.49803922}
         key2: {r: 1, g: 1, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -11192,10 +11192,10 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 22745
+        atime1: 46453
         atime2: 65535
-        atime3: 0
-        atime4: 0
+        atime3: 65535
+        atime4: 65535
         atime5: 0
         atime6: 0
         atime7: 0
@@ -19772,12 +19772,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0a6febff3ff724f95f33a130382a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   controller: {fileID: 0}
   sprite: {fileID: 2692231894551362283}
   chName: Barsha
   element: 5
   spinObjects: {fileID: 294524932057363568}
   hpBar: {fileID: 0}
+  hpText: {fileID: 0}
   stunnBar: {fileID: 0}
   hab1Image: {fileID: 21300000, guid: 8f762e925c1acfd498c22492f25e2ca2, type: 3}
   hab2Image: {fileID: 21300000, guid: f25fc978a17a89642b628d5f1858b5de, type: 3}
@@ -19785,7 +19787,7 @@ MonoBehaviour:
   currentComboReset: 0
   strongAtSpdMultiplier: 0.75
   currentHab1Cd: 0
-  hab1Cd: 45
+  hab1Cd: 20
   currentHab2Cd: 0
   hab2Cd: 90
   bDashSpeed: 30
@@ -19847,11 +19849,13 @@ MonoBehaviour:
   h1Dmg: 60
   h1DashRange: 10
   h1DashSpd: 45
-  h1FervourMaxDmg: 25
-  h1FervourPerSeconds: 15
+  h1FervourMinDmg: 10
+  h1FervourMaxDmg: 45
+  h1FervourPerSeconds: 25
   h1FervourDuration: 15
-  h1ShieldConversor: 0.25
+  h1ShieldConversor: 0.5
   h1ShieldDuration: 20
+  h1MaxFervourCount: 500
   h2DashRange: 35
   h2DashSpd: 40
   h2Area: 0

@@ -52,6 +52,7 @@ public class Orion : PjBase
     public float c3Cd;
     [HideInInspector]
     public float c3CurrentCd;
+    public float c3Regen;
 
     public float c4ExtraCharge;
     public float c4ExtraShield;
@@ -76,6 +77,8 @@ public class Orion : PjBase
         if (c3CurrentCd > 0)
         {
             c3CurrentCd -= Time.deltaTime;
+            c3Wall.hpBar.maxValue = c3Cd;
+            c3Wall.hpBar.value = c3Cd - c3CurrentCd;
         }
         else if(c3Wall.hp <= 0)
         {
@@ -112,11 +115,16 @@ public class Orion : PjBase
             {
                 c3Shield.gameObject.SetActive(false);
             }
+            if(c3Wall.hp < c3Wall.mHp && c3Wall.hp != 0)
+            {
+                c3Wall.hp += Time.deltaTime * c3Regen;
+                c3Wall.hpBar.value = c3Wall.hp;
+            }
         }
 
         if (charge >= maxCharge)
         {
-            actualShield.ChangeShieldAmount(Time.deltaTime * (8 + CalculateSinergy(shieldPerSecond)));
+            actualShield.ChangeShieldAmount(Time.deltaTime * (CalculateSinergy(shieldPerSecond)));
         }
         else if (actualShield.singularShieldAmount > 0)
         {

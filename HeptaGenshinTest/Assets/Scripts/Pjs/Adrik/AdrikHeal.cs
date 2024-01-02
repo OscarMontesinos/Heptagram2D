@@ -28,7 +28,7 @@ public class AdrikHeal : Projectile
         {
             foreach (PjBase pj in user.controller.team)
             {
-                pj.Heal(heal, user.element);
+                pj.Heal(user, heal, user.element);
             }
             if (CharacterManager.Instance.data[3].convergence >= 3)
             {

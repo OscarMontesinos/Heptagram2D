@@ -6,7 +6,7 @@ public class HitData
 {
     public enum Element
     {
-        ice,fire,water,desert,wind,nature,lightning
+        ice,fire,water,desert,wind,nature,lightning,blood
     }
 
     public enum AttackType

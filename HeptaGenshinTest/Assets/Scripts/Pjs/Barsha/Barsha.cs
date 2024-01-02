@@ -32,6 +32,7 @@ public class Barsha : PjBase
     public float h1DashRange;
     public float h1DashSpd;
     float h1FervourDmg;
+    public float h1FervourMinDmg;
     public float h1FervourMaxDmg;
     public float h1FervourPerSeconds;
     public float h1FervourDuration;
@@ -39,6 +40,7 @@ public class Barsha : PjBase
     public float h1ShieldConversor;
     public float h1ShieldDuration;
     float h1FervourCount;
+    public float h1MaxFervourCount;
     bool h1Activated = true;
 
 
@@ -63,6 +65,8 @@ public class Barsha : PjBase
         base.Awake();
 
         c2CurentAtSpdMod = stats.atSpd * c2AtSpdMod / 100;
+
+        h1MaxFervourCount = CalculateControl(h1MaxFervourCount);
     }
 
     public override void Update()
@@ -75,21 +79,25 @@ public class Barsha : PjBase
         }
         else if (!h1Activated)
         {
-            h1Activated = true; 
+            h1Activated = true;
             if (CharacterManager.Instance.data[6].convergence < 6)
             {
                 h1Particle.SetActive(false);
             }
             if (CharacterManager.Instance.data[6].convergence >= 2)
-                {
-                    stats.atSpd -= c2CurentAtSpdMod;
-                }
-                if (controller.GetComponent<BarshaShield>())
-                {
-                    controller.GetComponent<BarshaShield>().Die();
-                }
-                BarshaShield shield = controller.AddComponent<BarshaShield>();
-                shield.SetUp(this, CalculateControl(h1FervourCount * h1ShieldConversor), h1ShieldDuration + h1FervourCurrentDuration);
+            {
+                stats.atSpd -= c2CurentAtSpdMod;
+            }
+
+            float actualShield = 0;
+
+            if (controller.GetComponent<BarshaShield>())
+            {
+                actualShield = controller.GetComponent<BarshaShield>().singularShieldAmount;
+                controller.GetComponent<BarshaShield>().Die();
+            }
+            BarshaShield shield = controller.AddComponent<BarshaShield>();
+            shield.SetUp(this, CalculateControl(h1FervourCount * h1ShieldConversor) + actualShield, h1ShieldDuration + h1FervourCurrentDuration);
         }
         if(h1FervourDmg < h1FervourMaxDmg)
         {
@@ -218,6 +226,20 @@ public class Barsha : PjBase
         {
             if (currentHab1Cd <= 0)
             {
+                if (h1FervourDuration > 0)
+                {
+                    float actualShield = 0;
+
+                    if (controller.GetComponent<BarshaShield>())
+                    {
+                        actualShield = controller.GetComponent<BarshaShield>().singularShieldAmount;
+                        controller.GetComponent<BarshaShield>().Die();
+                    }
+                    BarshaShield shield = controller.AddComponent<BarshaShield>();
+                    shield.SetUp(this, CalculateControl(h1FervourCount * h1ShieldConversor) + actualShield, h1ShieldDuration + h1FervourCurrentDuration);
+                }
+
+
                 a2Ready = true;
                 float range = h1DashRange;
                 float speed = h1DashSpd;
@@ -347,8 +369,12 @@ public class Barsha : PjBase
         {
             target.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h1FervourDmg), HitData.Element.nature);
             h1FervourCount += CalculateSinergy(h1FervourDmg);
+            if(h1FervourCount > h1MaxFervourCount)
+            {
+                h1FervourCount = h1MaxFervourCount;
+            }
             DamageDealed(this, target, HitData.Element.nature, HitData.AttackType.passive, HitData.HabType.hability);
-            h1FervourDmg = 0;
+            h1FervourDmg = h1FervourMinDmg;
         }
         if(!c4EnemyList.Contains(target) && target.stunTime > 0)
         {

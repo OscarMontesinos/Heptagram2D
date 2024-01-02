@@ -16,6 +16,7 @@ public class Enemy : PjBase
     {
         isActive = true;
         rb = GetComponent<Rigidbody2D>();
+            manager = GameManager.Instance;
     }
     public override void Start()
     {

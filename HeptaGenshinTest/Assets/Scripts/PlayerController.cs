@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public PjBase backCharacter2;
     bool lockPointer;
     public GameObject targetBoss;
-    float maxViewportDistance;
+    float maxViewportDistance = 16;
     public List<PjBase> team = new List<PjBase>();
 
     public void LockPointer(bool value)
@@ -29,31 +29,41 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
+        if (Instance == null || Instance == this)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
-        maxViewportDistance = Camera.main.orthographicSize;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = character.transform.position;
-        if (character.stunTime <= 0)
+        if(cam != Camera.main)
         {
-            HandlePointer();
-
-            HandleHabilities();
-
-            HandleMovement();
+            cam = Camera.main;
         }
 
-        HandleCamera();
+        if (character != null)
+        {
+            transform.position = character.transform.position;
+
+
+            if (character.stunTime <= 0)
+            {
+                HandlePointer();
+
+                HandleHabilities();
+
+                HandleMovement();
+            }
+
+            HandleCamera();
+        }
 
 
 
@@ -93,22 +103,25 @@ public class PlayerController : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
-        if (!character.dashing)
+        if (character != null)
         {
-            if (!character.casting && character.stunTime <= 0)
+            if (!character.dashing)
             {
-                if (!character.softCasting)
+                if (!character.casting && character.stunTime <= 0)
                 {
-                    rb.velocity = transform.right * character.stats.spd * inputMov.x + transform.up * character.stats.spd * inputMov.y;
+                    if (!character.softCasting)
+                    {
+                        rb.velocity = transform.right * character.stats.spd * inputMov.x + transform.up * character.stats.spd * inputMov.y;
+                    }
+                    else
+                    {
+                        rb.velocity = transform.right * (character.stats.spd / 1.5f) * inputMov.x + transform.up * (character.stats.spd / 1.5f) * inputMov.y;
+                    }
                 }
                 else
                 {
-                    rb.velocity = transform.right * (character.stats.spd / 1.5f) * inputMov.x + transform.up * (character.stats.spd / 1.5f) * inputMov.y;
+                    rb.velocity = Vector3.zero;
                 }
-            }
-            else
-            {
-                rb.velocity = Vector3.zero;
             }
         }
 

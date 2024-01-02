@@ -127,7 +127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.3599999}
+  m_AnchoredPosition: {x: 0, y: 1.4389999}
   m_SizeDelta: {x: 2.817, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &405376636688704052
@@ -1175,7 +1175,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.3599999}
+  m_AnchoredPosition: {x: 0, y: 1.133}
   m_SizeDelta: {x: 2.817, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7720228412896722555
@@ -1713,6 +1713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df6d89dcfb74ec44a6e40fd48215e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   controller: {fileID: 0}
   sprite: {fileID: 2692231894551362283}
   chName: Orion
@@ -1738,7 +1739,7 @@ MonoBehaviour:
   stunTime: 0
   level: 0
   stats:
-    mHp: 115
+    mHp: 85
     hp: 0
     shield: 0
     sinergy: 35
@@ -1746,15 +1747,15 @@ MonoBehaviour:
     control: 40
     cdr: 0
     spd: 6
-    iceResist: 40
-    fireResist: 10
-    waterResist: 20
-    desertResist: 40
-    windResist: 50
-    natureResist: 40
-    lightningResist: 60
+    iceResist: 30
+    fireResist: 7.5
+    waterResist: 15
+    desertResist: 30
+    windResist: 35
+    natureResist: 30
+    lightningResist: 45
   statsPerLevel:
-    mHp: 11.5
+    mHp: 8.5
     hp: 0
     shield: 0
     sinergy: 3.5
@@ -1782,7 +1783,7 @@ MonoBehaviour:
   a1Detour: 30
   a1Spd: 20
   a1Range: 12.5
-  a1Dmg: 5
+  a1Dmg: 4
   a2Missile: {fileID: 8600196668912157451, guid: 1d2193f14702e8b41a8e53b4cb447887, type: 3}
   a2Cost: 3
   a2Spd: 30
@@ -1803,6 +1804,7 @@ MonoBehaviour:
   c3Wall: {fileID: 1067209289260667532}
   c3Cd: 20
   c3CurrentCd: 0
+  c3Regen: 7.5
   c4ExtraCharge: 0.2
   c4ExtraShield: 40
   missileIndicator: {fileID: 5475651968214615631}
@@ -1899,7 +1901,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1929,7 +1931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   user: {fileID: 3684364662850604721}
   hpBar: {fileID: 654845800870541027}
-  mHp: 50
+  mHp: 40
   hp: 0
 --- !u!1 &7363779732816154603
 GameObject:

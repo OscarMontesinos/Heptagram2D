@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    bool ingame;
+
     public static GameManager Instance;
+
+    public GameModes gamemode;
+
+    public GameObject baseController;
+    public GameObject baseUIManager;
 
     public GameObject character1;
     public GameObject character2;
@@ -32,27 +39,74 @@ public class GameManager : MonoBehaviour
     public Color32 natureColor;
     public Color32 windColor;
     public Color32 lightningColor;
+    public Color32 bloodColor;
+
+    public enum GameModes
+    {
+        singleplayer, multiplayer
+    }
     // Start is called before the first frame update
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
-
-
-
-
     }
     void Start()
     {
+       
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (ingame)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1) && character1.GetComponent<PjBase>().stats.hp > 0)
+            {
+                DisplayCharacter(1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2) && character2.GetComponent<PjBase>().stats.hp > 0)
+            {
+                DisplayCharacter(2);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3) && character3.GetComponent<PjBase>().stats.hp > 0)
+            {
+                DisplayCharacter(3);
+            }
+            foreach (PjBase pj in PlayerController.Instance.team)
+            {
+                if (!pj.isActive)
+                {
+                    pj.transform.position = PlayerController.Instance.character.transform.position;
+                }
+            }
+        }
+    }
+
+    public IEnumerator StartGame()
+    {
+        ingame = true;
+
+        Instantiate(baseController);
+        Instantiate(baseUIManager);
+
+        yield return null;
+
+        CreateCharacters();
+    }
+
+    public void CreateCharacters()
+    {
         character1 = Instantiate(character1, transform.position, transform.rotation);
         PlayerController.Instance.team.Add(character1.GetComponent<PjBase>());
-        UIManager.Instance.ch1 =character1.GetComponent<PjBase>();
+        UIManager.Instance.ch1 = character1.GetComponent<PjBase>();
         if (character2 != null)
         {
             character2 = Instantiate(character2, transform.position, transform.rotation);
@@ -70,30 +124,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateHabIndicatorsImages();
 
         DisplayCharacter(1);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && character1.GetComponent<PjBase>().stats.hp > 0)
-        {
-            DisplayCharacter(1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && character2.GetComponent<PjBase>().stats.hp > 0)
-        {
-            DisplayCharacter(2);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && character3.GetComponent<PjBase>().stats.hp > 0)
-        {
-            DisplayCharacter(3);
-        }
-        foreach (PjBase pj in PlayerController.Instance.team)
-        {
-            if (!pj.isActive)
-            {
-                pj.transform.position = PlayerController.Instance.character.transform.position;
-            }
-        }
     }
 
     public void DisplayAliveCharacter()

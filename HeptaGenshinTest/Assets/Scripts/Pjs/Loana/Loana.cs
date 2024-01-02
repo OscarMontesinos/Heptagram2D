@@ -168,7 +168,7 @@ public class Loana : PjBase
             {
                 foreach(PjBase pj in controller.team)
                 {
-                    pj.Heal(CalculateControl(c4Heal), element);
+                    pj.Heal(this,CalculateControl(c4Heal), element);
                 }
                 c4CurrentCd = CDR(c4Cd);
             }
