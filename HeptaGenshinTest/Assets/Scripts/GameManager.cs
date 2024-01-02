@@ -121,6 +121,10 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.ch3 = character3.GetComponent<PjBase>();
         }
 
+        character1.GetComponent<PjBase>().manager = this;
+        character2.GetComponent<PjBase>().manager = this;
+        character3.GetComponent<PjBase>().manager = this;
+
         UIManager.Instance.UpdateHabIndicatorsImages();
 
         DisplayCharacter(1);

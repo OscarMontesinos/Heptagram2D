@@ -338,21 +338,91 @@ public class Michelle : PjBase
 
     public override void TakeDmg(PjBase user, float value, HitData.Element element)
     {
-        base.TakeDmg(user, value, element);
-
-        float missingHp = stats.mHp - stats.hp;
-
-        foreach(Transform blood in h2ParticlePlace.transform)
+        if (isActive)
         {
-            missingHp -= CalculateControl(h2HealBlood);
-            blood.gameObject.GetComponent<BloodParticle>().Activate();
-
-            if (missingHp <= 0)
+            float calculo = 0;
+            DamageText dText = null;
+            switch (element)
             {
-                break;
+                case HitData.Element.ice:
+                    calculo = stats.iceResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.iceColor;
+                    break;
+                case HitData.Element.fire:
+                    calculo = stats.fireResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.fireColor;
+                    break;
+                case HitData.Element.water:
+                    calculo = stats.waterResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.waterColor;
+                    break;
+                case HitData.Element.blood:
+                    calculo = stats.waterResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.bloodColor;
+                    break;
+                case HitData.Element.desert:
+                    calculo = stats.desertResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.desertColor;
+                    break;
+                case HitData.Element.wind:
+                    calculo = stats.windResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.windColor;
+                    break;
+                case HitData.Element.nature:
+                    calculo = stats.natureResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.natureColor;
+                    break;
+                case HitData.Element.lightning:
+                    calculo = stats.lightningResist;
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.lightningColor;
+                    break;
             }
-        }
 
+            if (calculo < 0)
+            {
+                calculo = 0;
+            }
+            value -= ((value * ((calculo / (100 + calculo) * 100))) / 100);
+
+            dText.damageText.text = value.ToString("F0");
+
+            stats.hp -= value;
+            user.RegisterDamage(value);
+            if (stats.hp <= 0)
+            {
+                GetComponent<TakeDamage>().Die();
+            }
+             
+            if (hpBar != null)
+            {
+                hpBar.maxValue = stats.mHp;
+                hpBar.value = stats.hp;
+                hpText.text = stats.hp.ToString("F0");
+            }
+
+
+            float missingHp = stats.mHp - stats.hp;
+
+            foreach (Transform blood in h2ParticlePlace.transform)
+            {
+                missingHp -= CalculateControl(h2HealBlood);
+                blood.gameObject.GetComponent<BloodParticle>().Activate();
+
+                if (missingHp <= 0)
+                {
+                    break;
+                }
+            }
+
+        }
     }
 
     private void OnDrawGizmosSelected()
