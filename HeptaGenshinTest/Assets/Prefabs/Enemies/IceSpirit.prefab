@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 4470652349959714126}
   - component: {fileID: 4470652349959714112}
   - component: {fileID: -327026331197976048}
+  - component: {fileID: 3544550746096217796}
   m_Layer: 6
   m_Name: IceSpirit
   m_TagString: Enemy
@@ -164,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86161feff4b60e548940e6c8f516e495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   controller: {fileID: 0}
   sprite: {fileID: 0}
   chName: 
@@ -196,7 +198,7 @@ MonoBehaviour:
     atSpd: 0
     control: 10
     cdr: 0
-    spd: 0
+    spd: 4
     iceResist: 70
     fireResist: -20
     waterResist: 40
@@ -227,11 +229,13 @@ MonoBehaviour:
   viewDist: 40
   pointer: {fileID: 4470652349570724847}
   point: 1
+  agent: {fileID: 0}
   spell: {fileID: 2570800995855543621, guid: 4d2a511e277607e4fa0a9a4a9f2ccda4, type: 3}
   spellSpeed: 10
   spellRange: 30
   spellDamage: 50
   atqSpd: 1.5
+  getCloserThreshold: 11
 --- !u!58 &4470652349959714112
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -269,6 +273,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!195 &3544550746096217796
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4470652349959714127}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &7957541458939892365
 PrefabInstance:
   m_ObjectHideFlags: 0

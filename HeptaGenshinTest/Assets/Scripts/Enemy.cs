@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : PjBase
 {
@@ -10,6 +11,7 @@ public class Enemy : PjBase
     public float viewDist;
     public GameObject pointer;
     public bool point = true;
+    public NavMeshAgent agent;
     // Start is called before the first frame update
 
     public override void Awake()
@@ -17,6 +19,14 @@ public class Enemy : PjBase
         isActive = true;
         rb = GetComponent<Rigidbody2D>();
             manager = GameManager.Instance;
+
+        if (GetComponent<NavMeshAgent>())
+        {
+            agent = GetComponent<NavMeshAgent>();
+            agent.speed = stats.spd;
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
+        }
     }
     public override void Start()
     {
@@ -64,13 +74,7 @@ public class Enemy : PjBase
         if (target != null)
         {
             Vector2 dist = target.transform.position - transform.position;
-            if (dist.magnitude > viewDist || Physics2D.Raycast(transform.position, dist, dist.magnitude, GameManager.Instance.wallLayer))
-            {
-
-                target = null;
-
-            }
-            else if (point)
+            if (point)
             {
                 pointer.transform.up = dist;
             }

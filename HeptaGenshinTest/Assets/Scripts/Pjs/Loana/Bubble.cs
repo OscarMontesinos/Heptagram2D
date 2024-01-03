@@ -10,6 +10,6 @@ public class Bubble : Barrier
     {
         base.SetUp(user, hp, duration);
         Loana loana = user.GetComponent<Loana>();
-        debuffer.SetUp(loana.c7Slow, user.CalculateControl(loana.c7DebuffAmount), loana.c7StunnTime);
+        debuffer.SetUp(loana ,loana.c7Slow, user.CalculateControl(loana.c7DebuffAmount), loana.c7StunnTime);
     }
 }

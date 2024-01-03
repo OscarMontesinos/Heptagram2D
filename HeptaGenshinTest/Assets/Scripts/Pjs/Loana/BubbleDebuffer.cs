@@ -7,8 +7,9 @@ public class BubbleDebuffer : Spell
     float slow;
     float exh;
     float stunn;
-    public void SetUp(float slow, float exh, float stunn)
+    public void SetUp(Loana user, float slow, float exh, float stunn)
     {
+        this.user = user;
         this.slow = slow;
         this.exh = exh;
         this.stunn = stunn;

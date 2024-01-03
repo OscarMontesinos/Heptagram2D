@@ -10018,7 +10018,7 @@ MonoBehaviour:
   currentHab1Cd: 0
   hab1Cd: 0
   currentHab2Cd: 0
-  hab2Cd: 150
+  hab2Cd: 130
   bDashSpeed: 30
   bDashRange: 7
   casting: 0
@@ -10030,8 +10030,8 @@ MonoBehaviour:
     mHp: 130
     hp: 0
     shield: 0
-    sinergy: 20
-    atSpd: 1.2
+    sinergy: 25
+    atSpd: 1.35
     control: 30
     cdr: 0
     spd: 7.5
@@ -10065,15 +10065,15 @@ MonoBehaviour:
     rgba: 4280821950
   a1Point: {fileID: 8708404727031589226}
   a1Area: 4
-  a1Dmg: 20
+  a1Dmg: 25
   a2Area: 7.5
-  a2Dmg: 25
-  h1PotMultiplier: 0.75
+  a2Dmg: 30
+  h1PotMultiplier: 0.8
   h1MaxPool: 90
   h1PoolLosedPerSecond: 1
   h1PoolExchangedPerSecond: 25
   h1pool: 0
-  h2Duration: 20
+  h2Duration: 30
   h2UIIndicator: {fileID: 1994338570950684700, guid: f5fc445ecf6807f438e75189313b3f78, type: 3}
   h2ParticlePlace: {fileID: 6229491795478242319}
   h2BloodParticle: {fileID: 2156933082647469334, guid: 975e1b771b1ddcf439ccf4ebebb924e4, type: 3}

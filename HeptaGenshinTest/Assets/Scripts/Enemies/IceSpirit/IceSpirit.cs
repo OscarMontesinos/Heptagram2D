@@ -10,6 +10,7 @@ public class IceSpirit : Enemy
     public float spellRange;
     public float spellDamage;
     public float atqSpd;
+    public float getCloserThreshold;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -17,14 +18,31 @@ public class IceSpirit : Enemy
         AI();
     }
 
-    
-   
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (target != null)
+        {
+            Vector2 dist = target.transform.position - transform.position;
+            if (stunTime <= 0 && (dist.magnitude > getCloserThreshold || Physics2D.Raycast(transform.position, dist, dist.magnitude, GameManager.Instance.wallLayer)))
+            {
+                agent.SetDestination(target.transform.position);
+            }
+            else
+            {
+                agent.SetDestination(transform.position);
+            }
+        }
+    }
 
     public override void AI()
     {
         if (target != null && stunTime <= 0)
         {
             StartCoroutine(ShootSpell(true));
+
         }
         else
         {

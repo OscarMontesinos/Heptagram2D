@@ -844,6 +844,10 @@ PrefabInstance:
       value: GameMAnager
       objectReference: {fileID: 0}
     - target: {fileID: 1571748197764339283, guid: da986920937ac1049b936dbe9f59005f, type: 3}
+      propertyPath: character3
+      value: 
+      objectReference: {fileID: 6379600470355968158, guid: 10f7efaa08d82e64cb43fefbe15254ad, type: 3}
+    - target: {fileID: 1571748197764339283, guid: da986920937ac1049b936dbe9f59005f, type: 3}
       propertyPath: bloodColor.rgba
       value: 4280229786
       objectReference: {fileID: 0}

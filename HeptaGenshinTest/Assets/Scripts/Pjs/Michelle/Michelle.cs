@@ -65,6 +65,11 @@ public class Michelle : PjBase
 
         currentHab1Cd = h1pool;
 
+        if (h2Active)
+        {
+            currentHab2Cd = h2CurrentDuration;
+        }
+
         h2ParticlePlace.transform.localEulerAngles = new Vector3(h2ParticlePlace.transform.localEulerAngles.x, h2ParticlePlace.transform.localEulerAngles.y, h2ParticlePlace.transform.localEulerAngles.z + (h2SpinSpeed * Time.deltaTime));
 
         if (h2CurrentDuration > 0)
@@ -82,6 +87,7 @@ public class Michelle : PjBase
                     Destroy(blood.gameObject);
                 }
             }
+            currentHab2Cd = hab2Cd;
         }
 
         if (h1pool > 0)
@@ -260,7 +266,7 @@ public class Michelle : PjBase
     IEnumerator PoolHeal()
     {
         casting = true;
-        while (Input.GetKey(KeyCode.E) && (stats.hp < stats.mHp || (CharacterManager.Instance.data[8].convergence >= 6 && stats.hp >= stats.mHp)))
+        while (Input.GetKey(KeyCode.E) && (stats.hp < stats.mHp || (CharacterManager.Instance.data[8].convergence >= 6 && stats.hp >= stats.mHp && currentHab2Cd > 0)))
         {
             yield return null;
             if (h1pool > 0)
@@ -302,7 +308,7 @@ public class Michelle : PjBase
 
     public override void Hab2()
     {
-        if (!IsCasting() && currentHab2Cd <= 0)
+        if (!IsCasting() && currentHab2Cd <= 0 && !h2Active)
         {
             h2CurrentDuration = h2Duration;
             GetComponent<Collider2D>().enabled = false;
@@ -316,7 +322,6 @@ public class Michelle : PjBase
         h2CurrentUIIndicator = Instantiate(h2UIIndicator, UIManager.Instance.transform);
         yield return new WaitForSeconds(1.5f);
         h2Active = true;
-        currentHab2Cd = hab2Cd;
         if (CharacterManager.Instance.data[8].convergence >= 1)
         {
             UpdatePool(c1ExtraBlood);
