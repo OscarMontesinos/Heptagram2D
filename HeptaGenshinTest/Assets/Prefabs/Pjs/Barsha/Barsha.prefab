@@ -19849,11 +19849,11 @@ MonoBehaviour:
   h1Dmg: 60
   h1DashRange: 10
   h1DashSpd: 45
-  h1FervourMinDmg: 10
-  h1FervourMaxDmg: 45
+  h1FervourMinDmg: 20
+  h1FervourMaxDmg: 65
   h1FervourPerSeconds: 25
   h1FervourDuration: 15
-  h1ShieldConversor: 0.5
+  h1ShieldConversor: 2.5
   h1ShieldDuration: 20
   h1MaxFervourCount: 500
   h2DashRange: 35

@@ -226,7 +226,7 @@ public class Barsha : PjBase
         {
             if (currentHab1Cd <= 0)
             {
-                if (h1FervourDuration > 0)
+                if (h1FervourCurrentDuration > 0)
                 {
                     float actualShield = 0;
 

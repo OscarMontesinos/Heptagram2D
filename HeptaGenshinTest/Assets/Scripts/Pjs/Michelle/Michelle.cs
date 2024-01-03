@@ -40,6 +40,8 @@ public class Michelle : PjBase
 
     public float c2MaxExtraDmg;
 
+    public float c4CdPerSecond;
+
     public float c7MaxPool;
     public override void Awake()
     {
@@ -54,6 +56,14 @@ public class Michelle : PjBase
         {
             h1MaxPool = c7MaxPool;
         }
+
+        h1MaxPool = (stats.mHp * h1MaxPool)/100;
+
+        h1PoolExchangedPerSecond = (h1PoolExchangedPerSecond * h1MaxPool) / 100;
+
+        h1PoolLosedPerSecond = (h1PoolLosedPerSecond * h1MaxPool) / 100;
+
+
         hab1Cd = h1MaxPool;
     }
 
@@ -266,7 +276,7 @@ public class Michelle : PjBase
     IEnumerator PoolHeal()
     {
         casting = true;
-        while (Input.GetKey(KeyCode.E) && (stats.hp < stats.mHp || (CharacterManager.Instance.data[8].convergence >= 6 && stats.hp >= stats.mHp && currentHab2Cd > 0)))
+        while (Input.GetKey(KeyCode.E) && (stats.hp < stats.mHp || (CharacterManager.Instance.data[8].convergence >= 6 && stats.hp >= stats.mHp && currentHab2Cd > 0 && !h2Active)))
         {
             yield return null;
             if (h1pool > 0)
@@ -279,7 +289,7 @@ public class Michelle : PjBase
                 else
                 {
                     h1pool -= h1PoolExchangedPerSecond * Time.deltaTime;
-                    currentHab2Cd -= h1PoolExchangedPerSecond * Time.deltaTime;
+                    currentHab2Cd -= c4CdPerSecond * Time.deltaTime;
                 }
             }
         }

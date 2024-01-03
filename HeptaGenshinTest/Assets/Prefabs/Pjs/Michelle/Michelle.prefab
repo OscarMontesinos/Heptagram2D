@@ -10030,7 +10030,7 @@ MonoBehaviour:
     mHp: 130
     hp: 0
     shield: 0
-    sinergy: 25
+    sinergy: 30
     atSpd: 1.35
     control: 30
     cdr: 0
@@ -10046,7 +10046,7 @@ MonoBehaviour:
     mHp: 13
     hp: 0
     shield: 0
-    sinergy: 4
+    sinergy: 3
     atSpd: 0
     control: 3
     cdr: 0
@@ -10082,6 +10082,7 @@ MonoBehaviour:
   h2HealBlood: 20
   c1ExtraBlood: 35
   c2MaxExtraDmg: 20
+  c4CdPerSecond: 55
   c7MaxPool: 135
 --- !u!50 &6379600470355968154
 Rigidbody2D:

@@ -350,12 +350,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4b452264dbbd44bab417fa34eaa686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   controller: {fileID: 0}
   sprite: {fileID: 2692231894551362283}
   chName: Koji
   element: 4
   spinObjects: {fileID: 294524932057363568}
   hpBar: {fileID: 0}
+  hpText: {fileID: 0}
   stunnBar: {fileID: 0}
   hab1Image: {fileID: 21300000, guid: dc3de1555dd43f046abd46393c7d4eb9, type: 3}
   hab2Image: {fileID: 21300000, guid: dc485d848429552409052a50016934f3, type: 3}
@@ -410,16 +412,16 @@ MonoBehaviour:
   _animator: {fileID: 8042746346624588376}
   a1Point: {fileID: 8708404727031589226}
   a1Area: 3
-  a1Dmg: 35
+  a1Dmg: 50
   a2Point: {fileID: 3837484798003312923}
   a2Area: 3
-  a2Dmg: 50
+  a2Dmg: 70
   a2DashSpd: 40
   a2DashRange: 15
   h1Knife: {fileID: 8600196668912157451, guid: 8b4a7fc18a2637744b89180e8d75bb03, type: 3}
   currentKnife: {fileID: 0}
-  h1Dmg: 15
-  h1DmgAttack: 90
+  h1Dmg: 25
+  h1DmgAttack: 110
   h1Spd: 45
   h1DashSpd: 35
   h1Range: 20
@@ -427,7 +429,7 @@ MonoBehaviour:
   h1Detour: 5
   h2Target: {fileID: 0}
   h2Particle: {fileID: 1315442089554195985}
-  h2Dmg: 300
+  h2Dmg: 350
   h2DashSpd: 50
   h2Range: 15
   c1Area: 2.3
@@ -438,7 +440,7 @@ MonoBehaviour:
   c7Particle66: {fileID: 5708266824382595229}
   c7Particle: {fileID: 7151722993145361904}
   c7MaxPremeditation: 30
-  c7MaxDmg: 500
+  c7MaxDmg: 600
 --- !u!50 &6379600470355968154
 Rigidbody2D:
   serializedVersion: 4

@@ -139,7 +139,7 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     public void BasicDash()
     {
-        if (!casting && !softCasting)
+        if (!casting)
         {
             StartCoroutine(Dash(controller.inputMov, bDashSpeed, bDashRange, true));
             StartCoroutine(Cast(0.5f));

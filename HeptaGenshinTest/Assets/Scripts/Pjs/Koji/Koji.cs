@@ -323,13 +323,14 @@ public class Koji : PjBase
             controller.LockPointer(true);
 
 
+            _animator.Play("KojiUlt2");
+
             yield return StartCoroutine(Dash(controller.pointer.transform.up, h2DashSpd, range, false));
 
             GetComponent<Collider2D>().enabled = false;
             dist = h2Target.transform.position - transform.position;
             controller.pointer.transform.up = dist;
 
-            _animator.Play("KojiUlt2");
 
             yield return StartCoroutine(Cast(1));
 

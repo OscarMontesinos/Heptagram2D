@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
+    public int generalLevel;
     public static CharacterManager Instance;
     public List<CharacterData> data = new List<CharacterData>();
     // Start is called before the first frame update
@@ -72,5 +73,17 @@ public class CharacterManager : MonoBehaviour
             PlayerPrefs.SetInt(data.name + "Level",data.level);
             PlayerPrefs.SetInt(data.name + "Convergence",data.convergence);
         }
+
+        UploadInfo();
+    }
+    [ContextMenu("Set Level")]
+    public void SetAllLevel()
+    {
+        foreach (CharacterData data in data)
+        {
+            data.level = generalLevel;
+        }
+
+        SafeInfo();
     }
 }
