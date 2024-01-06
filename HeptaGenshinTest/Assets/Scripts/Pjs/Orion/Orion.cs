@@ -171,7 +171,7 @@ public class Orion : PjBase
             attacking = true;
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd * a1AtSpdConvertion)));
             LightningBullet bullet = Instantiate(lighntingBullet, transform.position, controller.pointer.transform.rotation).GetComponent<LightningBullet>();
-            bullet.SetUp(this, a1Spd, a1Range, CalculateSinergy(a1Dmg));
+            bullet.SetUp(this, a1Spd, a1Range, CalculateSinergy(a1Dmg/a1AtSpdConvertion));
             bullet.transform.localEulerAngles = new Vector3(bullet.transform.localEulerAngles.x, bullet.transform.localEulerAngles.y, bullet.transform.localEulerAngles.z + Random.Range(-a1Detour * a1DetourMultiplier, a1Detour* a1DetourMultiplier));
         }
         base.MainAttack();

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SilfrheimEdge1.unity
     guid: 6c08d45be5f5e684a941dc857660bd1a
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelector.unity
+    guid: bef2ad349f7e4c84193c55b36974c706
   m_configObjects: {}

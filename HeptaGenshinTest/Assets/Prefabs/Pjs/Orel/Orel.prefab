@@ -132,12 +132,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac24426a8cbf9d94b86a68c9a6d9a2b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   controller: {fileID: 0}
   sprite: {fileID: 2692231894551362283}
   chName: Orel
+  id: 1
   element: 3
   spinObjects: {fileID: 0}
   hpBar: {fileID: 0}
+  hpText: {fileID: 0}
   stunnBar: {fileID: 0}
   hab1Image: {fileID: 21300000, guid: 0303da94fd09ccc4f9fe31a9d17bbbf6, type: 3}
   hab2Image: {fileID: 21300000, guid: 11272e29757842543bfd0b610495e9a2, type: 3}
@@ -188,13 +191,14 @@ MonoBehaviour:
     natureResist: 0
     lightningResist: 0
   damageTextOffset: 1
+  dmgDealed: 0
   desertFeather: {fileID: 8600196668912157451, guid: aeb5c77cea5bd284c9f6340a28caf7fe, type: 3}
-  a1Damage: 20
+  a1Damage: 30
   a1Spd: 40
   a1Range: 15
   a1detour: 5
   a1Modifier: 2
-  a2Damage: 15
+  a2Damage: 20
   a2Spd: 40
   a2Range: 10
   a2Detour: 10

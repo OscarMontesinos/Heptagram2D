@@ -97,7 +97,7 @@ public class Michelle : PjBase
                     Destroy(blood.gameObject);
                 }
             }
-            currentHab2Cd = hab2Cd;
+            currentHab2Cd = CDR(hab2Cd);
         }
 
         if (h1pool > 0)
@@ -236,7 +236,6 @@ public class Michelle : PjBase
             {
                 GameObject bloodParticle = Instantiate(h2BloodParticle, enemy.transform.position, transform.rotation);
                 bloodParticle.transform.parent = h2ParticlePlace.transform;
-
             }
         }
     }

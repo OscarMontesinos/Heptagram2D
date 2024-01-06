@@ -91,3 +91,10 @@ MonoBehaviour:
   bloodColor:
     serializedVersion: 2
     rgba: 4280821950
+  iceCrystal: {fileID: 21300000, guid: 9ae8af67bc43f744fa2c5816be713ef6, type: 3}
+  fireCrystal: {fileID: 21300000, guid: aed2508ca3e86e74bbc5542f97aa6907, type: 3}
+  waterCrystal: {fileID: 21300000, guid: 401f616451476314c8c123e59984414b, type: 3}
+  desertCrystal: {fileID: 21300000, guid: 0df3a1fce9ca81841b09f2b94da394ba, type: 3}
+  natureCrystal: {fileID: 21300000, guid: 6bb9b4ec43edf574e94193b596f75d23, type: 3}
+  windCrystal: {fileID: 21300000, guid: 702d5b6ab5ba72648a450370c2900ec6, type: 3}
+  lightningCrystal: {fileID: 21300000, guid: faf0daaba5f3d2346a50e83fd3e84ae0, type: 3}

@@ -22,6 +22,11 @@ public class Shield : Buff
             shieldAmount += value;
         }
 
+        if(shieldAmount < 0)
+        {
+            shieldAmount = 0;
+        }
+
         return -value;
     }
 }

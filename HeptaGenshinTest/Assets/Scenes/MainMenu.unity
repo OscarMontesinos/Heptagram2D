@@ -834,15 +834,15 @@ PrefabInstance:
     - target: {fileID: 1571748197764339283, guid: da986920937ac1049b936dbe9f59005f, type: 3}
       propertyPath: character1
       value: 
-      objectReference: {fileID: 6379600470355968158, guid: 71a851e0e73c7e14aa12a036166d9d36, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1571748197764339283, guid: da986920937ac1049b936dbe9f59005f, type: 3}
       propertyPath: character2
       value: 
-      objectReference: {fileID: 6379600470355968158, guid: d173a7135d36fd142bf25ab8cebdeb2c, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1571748197764339283, guid: da986920937ac1049b936dbe9f59005f, type: 3}
       propertyPath: character3
       value: 
-      objectReference: {fileID: 6379600470355968158, guid: f2bbd8c208226994cbad9186ff3f2aff, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1571748197764339283, guid: da986920937ac1049b936dbe9f59005f, type: 3}
       propertyPath: bloodColor.rgba
       value: 4280229786
@@ -893,6 +893,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da986920937ac1049b936dbe9f59005f, type: 3}
+--- !u!114 &1530197685 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1571748197764339283, guid: da986920937ac1049b936dbe9f59005f, type: 3}
+  m_PrefabInstance: {fileID: 1530197684}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6989644e3145aac4d9cf200acd6ab92b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1532087419
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,6 +1126,18 @@ MonoBehaviour:
       - m_Target: {fileID: 316296609}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Singleplayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1530197685}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OpenSelector
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

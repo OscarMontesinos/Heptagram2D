@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,6 +42,14 @@ public class GameManager : MonoBehaviour
     public Color32 lightningColor;
     public Color32 bloodColor;
 
+    public Sprite iceCrystal;
+    public Sprite fireCrystal;
+    public Sprite waterCrystal;
+    public Sprite desertCrystal;
+    public Sprite natureCrystal;
+    public Sprite windCrystal;
+    public Sprite lightningCrystal;
+
     public enum GameModes
     {
         singleplayer, multiplayer
@@ -60,7 +69,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
@@ -203,5 +212,14 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void OpenSelector()
+    {
+        SceneManager.LoadSceneAsync("CharacterSelector", LoadSceneMode.Additive);
+    }
+    public void CloseSelector()
+    {
+        SceneManager.UnloadSceneAsync("CharacterSelector");
     }
 }

@@ -13,6 +13,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     public PlayerController controller;
     public GameObject sprite;
     public string chName;
+    public int id;
     public HitData.Element element;
     public GameObject spinObjects;
     public Slider hpBar;

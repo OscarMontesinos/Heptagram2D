@@ -73,6 +73,7 @@ public class Orel : PjBase
     public override void Update()
     {
         h1Particles.transform.rotation = controller.pointer.transform.rotation;
+
         base.Update();
     }
 
@@ -135,7 +136,7 @@ public class Orel : PjBase
     }
     public override void Hab2()
     {
-        if (currentHab2Cd <= 0 && !IsCasting())
+        if (currentHab2Cd <= 0 && !IsCasting() && !GetComponent<OrelPredatorBuff>())
         {
             StartCoroutine(PredatorFlight());
         }
@@ -144,7 +145,6 @@ public class Orel : PjBase
 
     IEnumerator PredatorFlight()
     {
-        currentHab2Cd = CDR(hab2Cd);
         controller.LockPointer(true);
 
 

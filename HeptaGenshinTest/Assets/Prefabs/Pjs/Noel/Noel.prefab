@@ -617,12 +617,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386503461cf253e4e8a458cabe7744f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   controller: {fileID: 0}
   sprite: {fileID: 2692231894551362283}
   chName: Noel
+  id: 4
   element: 6
   spinObjects: {fileID: 8945252624713087600}
   hpBar: {fileID: 0}
+  hpText: {fileID: 0}
+  stunnBar: {fileID: 0}
   hab1Image: {fileID: 21300000, guid: 2ee0e9cdd9d789545ab660dc4476051d, type: 3}
   hab2Image: {fileID: 21300000, guid: e07139c5af53f9f4ca36c24ad9343438, type: 3}
   isActive: 0
@@ -672,6 +676,7 @@ MonoBehaviour:
     natureResist: 0
     lightningResist: 0
   damageTextOffset: 0
+  dmgDealed: 0
   _animator: {fileID: 8335904265600917851}
   a1RayLine: {fileID: 548718340540917103}
   a1EndPoint: {fileID: 7686477687736522339}

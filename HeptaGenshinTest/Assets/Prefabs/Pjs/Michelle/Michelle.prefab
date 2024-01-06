@@ -10005,6 +10005,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   sprite: {fileID: 2692231894551362283}
   chName: Michelle
+  id: 8
   element: 2
   spinObjects: {fileID: 294524932057363568}
   hpBar: {fileID: 0}

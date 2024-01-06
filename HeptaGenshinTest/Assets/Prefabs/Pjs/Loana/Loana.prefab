@@ -318,6 +318,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   sprite: {fileID: 8947138123045533742}
   chName: Loana
+  id: 2
   element: 2
   spinObjects: {fileID: 294524932057363568}
   hpBar: {fileID: 0}

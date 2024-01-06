@@ -53,9 +53,14 @@ public class OrelPredatorBuff : Buff
         {
             orel.a2Special = true;
         }
+        if (time > 0)
+        {
+            orel.currentHab2Cd = time;
+        }
     }
     public override void Die()
     {
+        orel.currentHab2Cd = orel.CDR(orel.hab2Cd);
         user.stats.spd -= spd;
         user.stats.atSpd -= atSpd;
         if (CharacterManager.Instance.data[1].convergence >= 3)

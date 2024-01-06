@@ -39,6 +39,11 @@ public class OrionShield : Shield
             shieldAmount += value;
         }
 
+        if (shieldAmount < 0)
+        {
+            shieldAmount = 0;
+        }
+
         return -value;
     }
 }

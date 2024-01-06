@@ -1717,6 +1717,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   sprite: {fileID: 2692231894551362283}
   chName: Orion
+  id: 7
   element: 6
   spinObjects: {fileID: 1387637062205093634}
   hpBar: {fileID: 0}
@@ -1780,17 +1781,17 @@ MonoBehaviour:
   maxShield: 200
   shieldPerSecond: 2.5
   lighntingBullet: {fileID: 8600196668912157451, guid: ccfd2c11346b8e24184209e58a5dac14, type: 3}
-  a1Detour: 30
+  a1Detour: 27.5
   a1Spd: 20
   a1Range: 12.5
-  a1Dmg: 4
+  a1Dmg: 80
   a2Missile: {fileID: 8600196668912157451, guid: 1d2193f14702e8b41a8e53b4cb447887, type: 3}
   a2Cost: 3
   a2Spd: 30
   a2Range: 20
   a2Dmg: 100
   a2StunTime: 1.5
-  a1AtSpdConvertion: 20
+  a1AtSpdConvertion: 10
   h1Charge: 15
   h2Wave: {fileID: 8600196668912157451, guid: 5e33f620a9edbad418bc7e218c0fa0e4, type: 3}
   h2CastTime: 0.5
