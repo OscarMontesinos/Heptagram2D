@@ -10,6 +10,7 @@ public class IceSpirit : Enemy
     public float spellRange;
     public float spellDamage;
     public float atqSpd;
+    public float atqSpdDetour;
     public float getCloserThreshold;
     // Start is called before the first frame update
     public override void Start()
@@ -58,7 +59,7 @@ public class IceSpirit : Enemy
             PhantomSpell spell = Instantiate(this.spell, transform.position, pointer.transform.rotation).GetComponent<PhantomSpell>();
             spell.SetUp(this, spellSpeed, spellRange, CalculateSinergy(spellDamage));
         }
-        yield return new WaitForSeconds(atqSpd);
+        yield return new WaitForSeconds(atqSpd + Random.Range(-atqSpdDetour, atqSpdDetour));
         if (loopAI)
         {
             AI();

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -32,6 +33,9 @@ public class PjBase : MonoBehaviour, TakeDamage
     [HideInInspector]
     public float currentHab2Cd;
     public float hab2Cd;
+    public float dashCd = 0.5f;
+    [HideInInspector]
+    public float currentDashCd;
     public float bDashSpeed;
     public float bDashRange;
     [HideInInspector]
@@ -42,6 +46,8 @@ public class PjBase : MonoBehaviour, TakeDamage
     public bool dashing;
     [HideInInspector]
     public float stunTime;
+    [HideInInspector]
+    public bool ignoreSoftCastDebuff;
     public int level;
     public Stats stats;
     public Stats statsPerLevel;
@@ -68,7 +74,7 @@ public class PjBase : MonoBehaviour, TakeDamage
         stats.natureResist += statsPerLevel.natureResist * (level - 1);
         stats.lightningResist += statsPerLevel.lightningResist * (level - 1);
         stats.hp = stats.mHp;
-
+        bDashSpeed -= stats.spd;
 
         GameManager.Instance.pjList.Add(this);
 
@@ -99,18 +105,27 @@ public class PjBase : MonoBehaviour, TakeDamage
         {
             currentComboReset -= Time.deltaTime;
         }
+
         if (currentHab1Cd > 0)
         {
             currentHab1Cd -= Time.deltaTime;
         }
+
         if (currentHab2Cd > 0)
         {
             currentHab2Cd -= Time.deltaTime;
         }
-        if(spinObjects != null)
+
+        if (currentDashCd > 0)
+        {
+            currentDashCd -= Time.deltaTime;
+        }
+
+        if (spinObjects != null)
         {
             spinObjects.transform.rotation = controller.pointer.transform.rotation;
         }
+
     }
 
     public virtual void Activate(bool active)
@@ -121,32 +136,47 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     public virtual void MainAttack()
     {
+        if (stunTime <= 0)
+        {
+            return;
+        }
     }
 
     public virtual void StrongAttack()
     {
-
+        if (stunTime <= 0)
+        {
+            return;
+        }
     }
 
     public virtual void Hab1()
     {
-
+        if (stunTime <= 0)
+        {
+            return;
+        }
     }
 
     public virtual void Hab2()
     {
-
-    }
-
-    public void BasicDash()
-    {
-        if (!casting)
+        if(stunTime <= 0)
         {
-            StartCoroutine(Dash(controller.inputMov, bDashSpeed, bDashRange, true));
-            StartCoroutine(Cast(0.5f));
-            UsedBasicDash();
+            return;
         }
     }
+
+
+    public virtual void BasicDash()
+    {
+        if (!casting && !dashing && currentDashCd <= 0)
+        {   
+            StartCoroutine(Dash(controller.inputMov, bDashSpeed, bDashRange, true));
+            UsedBasicDash();
+            currentDashCd = dashCd;
+        }
+    }
+
     public virtual void UsedBasicDash()
     { 
     
@@ -198,17 +228,17 @@ public class PjBase : MonoBehaviour, TakeDamage
         }
     }
 
-    public virtual void DamageDealed(PjBase user, PjBase target, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
+    public virtual void DamageDealed(PjBase user, PjBase target, float amount, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
     {
         foreach (PjBase pj in controller.team)
         {
-            pj.Interact(this, target, element, attackType, habType);
+            pj.Interact(this, target, amount, element, attackType, habType);
         }
 
         List<HitInteract> hitList = new List<HitInteract>( target.gameObject.GetComponents<HitInteract>());
         foreach (HitInteract hit in hitList)
         {
-            hit.Interact(user,target,element,attackType,habType);
+            hit.Interact(user,target,amount,element,attackType,habType);
         }
         
     }
@@ -227,42 +257,42 @@ public class PjBase : MonoBehaviour, TakeDamage
             switch (element)
             {
                 case HitData.Element.ice:
-                    calculo = stats.iceResist;
+                    calculo = stats.iceResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.iceColor;
                     break;
                 case HitData.Element.fire:
-                    calculo = stats.fireResist;
+                    calculo = stats.fireResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.fireColor;
                     break;
                 case HitData.Element.water:
-                    calculo = stats.waterResist;
+                    calculo = stats.waterResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.waterColor;
                     break;
                 case HitData.Element.blood:
-                    calculo = stats.waterResist;
+                    calculo = stats.waterResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.bloodColor;
                     break;
                 case HitData.Element.desert:
-                    calculo = stats.desertResist;
+                    calculo = stats.desertResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.desertColor;
                     break;
                 case HitData.Element.wind:
-                    calculo = stats.windResist;
+                    calculo = stats.windResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.windColor;
                     break;
                 case HitData.Element.nature:
-                    calculo = stats.natureResist;
+                    calculo = stats.natureResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.natureColor;
                     break;
                 case HitData.Element.lightning:
-                    calculo = stats.lightningResist;
+                    calculo = stats.lightningResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.lightningColor;
                     break;
@@ -412,6 +442,11 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
 
     }
+
+    public virtual void Moving(float magnitude)
+    {
+
+    }
     void TakeDamage.Stunn(float stunTime)
     {
         this.stunTime += stunTime;
@@ -465,7 +500,23 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool isBasicDash)
     {
-        GetComponent<Collider2D>().enabled = false;
+        yield return null;
+        StartCoroutine(Dash(direction, speed, range, isBasicDash, false, false));
+    }
+    public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool isBasicDash, bool ignoreWalls, bool shutDownCollider)
+    {
+        if (isBasicDash)
+        {
+            speed += stats.spd;
+        }
+        if (!shutDownCollider)
+        {
+            GetComponent<Collider2D>().isTrigger = true;
+        }
+        else
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
         dashing = true;
         Vector2 destinyPoint = Physics2D.Raycast(transform.position, direction, range, GameManager.Instance.wallLayer).point;
         yield return null;
@@ -475,7 +526,7 @@ public class PjBase : MonoBehaviour, TakeDamage
         }
         Vector2 distance = destinyPoint - new Vector2(transform.position.x, transform.position.y);
         yield return null;
-        while (distance.magnitude > 1 && dashing && stunTime <=0)
+        while (distance.magnitude > 1 && dashing && stunTime <= 0)
         {
             if (distance.magnitude > 0.7)
             {
@@ -491,6 +542,10 @@ public class PjBase : MonoBehaviour, TakeDamage
         dashing = false;
         GetComponent<Collider2D>().enabled = true;
         controller.rb.velocity = new Vector2(0, 0);
+        if (!shutDownCollider)
+        {
+            GetComponent<Collider2D>().isTrigger = false;
+        }
         if (isBasicDash)
         {
             EndedBasicDash();
@@ -503,6 +558,10 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool isBasicDash, bool ignoreWalls)
     {
+        if (isBasicDash)
+        {
+            speed += stats.spd;
+        }
         GetComponent<Collider2D>().enabled = false;
         dashing = true;
 
@@ -553,11 +612,7 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     }
 
-    public virtual void Interact(PjBase user, Enemy target, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
-    {
-
-    }
-    public virtual void Interact(PjBase user, PjBase target, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
+    public virtual void Interact(PjBase user, PjBase target, float amount, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
     {
 
     }

@@ -31,7 +31,7 @@ public class FireBlast : Projectile
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemyColl.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.fire);
-            user.DamageDealed(user, enemyColl.GetComponent<Enemy>(), HitData.Element.fire, HitData.AttackType.range, HitData.HabType.hability);
+            user.DamageDealed(user, enemyColl.GetComponent<Enemy>(),dmg, HitData.Element.fire, HitData.AttackType.range, HitData.HabType.hability);
             if (CharacterManager.Instance.data[3].convergence >= 2 && enemyColl.gameObject.GetComponent<AdrikMark>())
             {
                 enemyColl.gameObject.GetComponent<AdrikMark>().Explode();

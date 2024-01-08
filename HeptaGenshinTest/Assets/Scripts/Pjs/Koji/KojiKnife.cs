@@ -90,7 +90,7 @@ public class KojiKnife : MonoBehaviour
                     enemiesHitted.Add(enemy);
 
                     enemy.GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.wind);
-                    user.DamageDealed(user, enemy, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.basic);
+                    user.DamageDealed(user, enemy,dmg, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.basic);
                 }
             }
         }

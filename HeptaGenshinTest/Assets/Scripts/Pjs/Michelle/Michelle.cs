@@ -134,6 +134,7 @@ public class Michelle : PjBase
 
     public override void MainAttack()
     {
+        base.MainAttack();
         if (combo != 0 && currentComboReset <= 0)
         {
             combo = 0;
@@ -168,11 +169,11 @@ public class Michelle : PjBase
                 }
             }
         }
-        base.MainAttack();
     }
 
     public override void StrongAttack()
     {
+            base.StrongAttack();
         if (!IsCasting())
         {
             StartCoroutine(Cast(CalculateAtSpd(stats.atSpd / strongAtSpdMultiplier)));
@@ -192,7 +193,6 @@ public class Michelle : PjBase
                     _animator.Play("StrongAttack");
                 }
             }
-            base.StrongAttack();
         }
     }
 
@@ -209,7 +209,7 @@ public class Michelle : PjBase
                 extraDmg = c2MaxExtraDmg - (c2MaxExtraDmg * (enemy.stats.hp / enemy.stats.mHp));
             }
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a1Dmg + extraDmg), HitData.Element.blood);
-            DamageDealed(this, enemy, HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
+            DamageDealed(this, enemy, CalculateSinergy(a1Dmg + extraDmg), HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
             if (CharacterManager.Instance.data[2].convergence >= 1)
             {
                 currentHab1Cd -= 1;
@@ -230,7 +230,7 @@ public class Michelle : PjBase
                 extraDmg = c2MaxExtraDmg - (c2MaxExtraDmg * (enemy.stats.hp / enemy.stats.mHp));
             }
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a2Dmg + extraDmg), HitData.Element.blood);
-            DamageDealed(this, enemy, HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
+            DamageDealed(this, enemy, CalculateSinergy(a2Dmg + extraDmg), HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
 
             if (h2Active)
             {
@@ -256,7 +256,7 @@ public class Michelle : PjBase
         {
             enemy = enemyColl.GetComponent<Enemy>();
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h2CrimsonDmgPerBlood * count), HitData.Element.blood);
-            DamageDealed(this, enemy, HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
+            DamageDealed(this, enemy, CalculateSinergy(h2CrimsonDmgPerBlood * count), HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
 
         }
 
@@ -265,11 +265,11 @@ public class Michelle : PjBase
 
     public override void Hab1()
     {
+        base.Hab1();
         if (!IsCasting())
         {
             StartCoroutine(PoolHeal());
         }
-        base.Hab1();
     }
 
     IEnumerator PoolHeal()
@@ -317,6 +317,7 @@ public class Michelle : PjBase
 
     public override void Hab2()
     {
+        base.Hab2();
         if (!IsCasting() && currentHab2Cd <= 0 && !h2Active)
         {
             h2CurrentDuration = h2Duration;
@@ -359,42 +360,42 @@ public class Michelle : PjBase
             switch (element)
             {
                 case HitData.Element.ice:
-                    calculo = stats.iceResist;
+                    calculo = stats.iceResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.iceColor;
                     break;
                 case HitData.Element.fire:
-                    calculo = stats.fireResist;
+                    calculo = stats.fireResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.fireColor;
                     break;
                 case HitData.Element.water:
-                    calculo = stats.waterResist;
+                    calculo = stats.waterResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.waterColor;
                     break;
                 case HitData.Element.blood:
-                    calculo = stats.waterResist;
+                    calculo = stats.waterResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.bloodColor;
                     break;
                 case HitData.Element.desert:
-                    calculo = stats.desertResist;
+                    calculo = stats.desertResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.desertColor;
                     break;
                 case HitData.Element.wind:
-                    calculo = stats.windResist;
+                    calculo = stats.windResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.windColor;
                     break;
                 case HitData.Element.nature:
-                    calculo = stats.natureResist;
+                    calculo = stats.natureResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.natureColor;
                     break;
                 case HitData.Element.lightning:
-                    calculo = stats.lightningResist;
+                    calculo = stats.lightningResist + stats.resist;
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.lightningColor;
                     break;

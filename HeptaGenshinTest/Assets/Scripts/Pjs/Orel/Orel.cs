@@ -61,13 +61,7 @@ public class Orel : PjBase
         if (CharacterManager.Instance.data[1].convergence >= 3)
         {
             actualResistBuff = CalculateControl(resistBuff);
-            stats.desertResist += actualResistBuff;
-            stats.waterResist += actualResistBuff;
-            stats.iceResist += actualResistBuff;
-            stats.natureResist += actualResistBuff;
-            stats.fireResist += actualResistBuff;
-            stats.windResist += actualResistBuff;
-            stats.lightningResist += actualResistBuff;
+            stats.desertResist += resistBuff;
         }
     }
     public override void Update()
@@ -89,6 +83,7 @@ public class Orel : PjBase
 
     public override void MainAttack()
     {
+        base.MainAttack();
         if (!IsCasting())
         {
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd)));
@@ -104,11 +99,11 @@ public class Orel : PjBase
                 feather3.transform.localEulerAngles = new Vector3(feather3.transform.localEulerAngles.x, feather3.transform.localEulerAngles.y, feather3.transform.localEulerAngles.z - Random.Range(1, a1detour));
             }
         }
-        base.MainAttack();
     }
 
     public override void StrongAttack()
     {
+        base.StrongAttack();
         if (!IsCasting() && !dashing)
         {
             if (CharacterManager.Instance.data[1].convergence >= 1 && a2Special)
@@ -123,24 +118,23 @@ public class Orel : PjBase
                 StartCoroutine(FeatherDischarge());
             }
         }
-        base.StrongAttack();
     }
 
     public override void Hab1()
     {
+        base.Hab1();
         if (currentHab1Cd <= 0 && !IsCasting())
         {
             StartCoroutine(Assault());
         }
-        base.Hab1();
     }
     public override void Hab2()
     {
+        base.Hab2();
         if (currentHab2Cd <= 0 && !IsCasting() && !GetComponent<OrelPredatorBuff>())
         {
             StartCoroutine(PredatorFlight());
         }
-        base.Hab1();
     }
 
     IEnumerator PredatorFlight()
@@ -183,7 +177,7 @@ public class Orel : PjBase
                 if (!enemiesHitted.Contains(enemy))
                 {
                     enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h1Dmg), HitData.Element.desert);
-                    DamageDealed(this, enemy, HitData.Element.desert, HitData.AttackType.melee, HitData.HabType.hability);
+                    DamageDealed(this, enemy, CalculateSinergy(h1Dmg), HitData.Element.desert, HitData.AttackType.melee, HitData.HabType.hability);
 
                     if(CharacterManager.Instance.data[1].convergence >= 4)
                     {

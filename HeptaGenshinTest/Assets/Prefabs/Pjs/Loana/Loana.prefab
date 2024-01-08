@@ -333,12 +333,15 @@ MonoBehaviour:
   hab1Cd: 15
   currentHab2Cd: 0
   hab2Cd: 300
-  bDashSpeed: 30
-  bDashRange: 7
+  dashCd: 0.5
+  currentDashCd: 0
+  bDashSpeed: 20
+  bDashRange: 4.5
   casting: 0
   softCasting: 0
   dashing: 0
   stunTime: 0
+  ignoreSoftCastDebuff: 0
   level: 0
   stats:
     mHp: 150
@@ -356,6 +359,7 @@ MonoBehaviour:
     windResist: 20
     natureResist: 30
     lightningResist: 30
+    resist: 0
   statsPerLevel:
     mHp: 6
     hp: 0
@@ -372,6 +376,7 @@ MonoBehaviour:
     windResist: 0
     natureResist: 0
     lightningResist: 0
+    resist: 0
   damageTextOffset: 1
   dmgDealed: 0
   a1Point: {fileID: 8708404727031589226}

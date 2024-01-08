@@ -18,7 +18,7 @@ public class FireBullet : Projectile
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.fire);
-            user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.fire, HitData.AttackType.range, HitData.HabType.basic);
+            user.DamageDealed(user, collision.GetComponent<Enemy>(), dmg, HitData.Element.fire, HitData.AttackType.range, HitData.HabType.basic);
 
             Die();
         }

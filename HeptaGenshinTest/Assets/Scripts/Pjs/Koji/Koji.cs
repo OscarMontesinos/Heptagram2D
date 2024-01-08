@@ -64,6 +64,7 @@ public class Koji : PjBase
 
     public override void MainAttack()
     {
+        base.MainAttack();
         if (combo != 0 && currentComboReset <= 0)
         {
             combo = 0;
@@ -84,7 +85,6 @@ public class Koji : PjBase
                 combo = 0;
             }
         }
-        base.MainAttack();
     }
 
     public void KojiAttack()
@@ -95,7 +95,7 @@ public class Koji : PjBase
         {
             enemy = enemyColl.GetComponent<Enemy>();
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a1Dmg), HitData.Element.wind);
-            DamageDealed(this, enemy, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.basic);
+            DamageDealed(this, enemy, CalculateSinergy(a1Dmg), HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.basic);
             if (CharacterManager.Instance.data[4].convergence >= 4 && currentKnife == null)
             {
                 currentHab2Cd -= c4CdReduc;
@@ -113,6 +113,7 @@ public class Koji : PjBase
     }
     public override void StrongAttack()
     {
+        base.StrongAttack();
         if (!IsCasting())
         {
             float range = a2DashRange;
@@ -136,7 +137,6 @@ public class Koji : PjBase
             StartCoroutine(SoftCast(CalculateAtSpd(strongAtSpdMultiplier)));
             _animator.Play("KojiStrongAttack");
         }
-        base.StrongAttack();
     }
     public void KojiStrongAttack()
     {
@@ -146,7 +146,7 @@ public class Koji : PjBase
         {
             enemy = enemyColl.GetComponent<Enemy>();
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a2Dmg), HitData.Element.wind);
-            DamageDealed(this, enemy, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.basic);
+            DamageDealed(this, enemy, CalculateSinergy(a2Dmg), HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.basic);
             if (CharacterManager.Instance.data[4].convergence >= 4 && currentKnife == null)
             {
                 currentHab2Cd -= c4CdReduc;
@@ -223,7 +223,7 @@ public class Koji : PjBase
                     if (!enemiesHitted.Contains(enemy))
                     {
                         enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h1DmgAttack), HitData.Element.wind);
-                        DamageDealed(this, enemy, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.hability);
+                        DamageDealed(this, enemy, CalculateSinergy(h1DmgAttack), HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.hability);
 
                         enemiesHitted.Add(enemy);
                     }
@@ -251,7 +251,7 @@ public class Koji : PjBase
         {
             enemy = enemyColl.GetComponent<Enemy>();
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h1DmgAttack), HitData.Element.wind);
-            DamageDealed(this, enemy, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.basic);
+            DamageDealed(this, enemy, CalculateSinergy(h1DmgAttack), HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.basic);
             if (CharacterManager.Instance.data[4].convergence >= 4 && currentKnife == null)
             {
                 currentHab2Cd -= 1;
@@ -344,7 +344,7 @@ public class Koji : PjBase
         if (h2Target != null) 
         {
             h2Target.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h2Dmg/2), HitData.Element.wind);
-            DamageDealed(this, h2Target, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.hability);
+            DamageDealed(this, h2Target, CalculateSinergy(h2Dmg / 2), HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.hability);
 
             if (CharacterManager.Instance.data[5].convergence >= 2)
             {
@@ -369,7 +369,7 @@ public class Koji : PjBase
             float dmg = c7MaxDmg * Mathf.InverseLerp(0,c7MaxPremeditation,c7Premeditation);
             c7Premeditation = 0;
             h2Target.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(dmg), HitData.Element.wind);
-            DamageDealed(this, h2Target, HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.hability);
+            DamageDealed(this, h2Target, CalculateSinergy(dmg), HitData.Element.wind, HitData.AttackType.melee, HitData.HabType.hability);
 
             c7Particle.Play(); 
             
@@ -396,7 +396,7 @@ public class Koji : PjBase
         
     }
 
-    public override void Interact(PjBase user, PjBase target, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
+    public override void Interact(PjBase user, PjBase target, float amount, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
     {
         if(user == this && CharacterManager.Instance.data[5].convergence >= 7)
         {
@@ -426,7 +426,7 @@ public class Koji : PjBase
             }
 
         }
-        base.Interact(user, target, element, attackType, habType);
+        base.Interact(user, target, amount, element, attackType, habType);
     }
 
     private void OnDrawGizmosSelected()

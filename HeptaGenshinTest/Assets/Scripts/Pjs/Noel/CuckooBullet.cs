@@ -25,11 +25,11 @@ public class CuckooBullet : Projectile
             collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.lightning);
             if (!first)
             {
-                user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
+                user.DamageDealed(user, collision.GetComponent<Enemy>(), dmg, HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
             }
             else
             {
-                user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.basic);
+                user.DamageDealed(user, collision.GetComponent<Enemy>(), dmg, HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.basic);
             }
 
             if (CharacterManager.Instance.data[4].convergence >= 4 && first)
@@ -54,7 +54,7 @@ public class CuckooBullet : Projectile
                         line.SetPosition(count, enemy.transform.position);
 
                         enemy.GetComponent<TakeDamage>().TakeDamage(user, (dmg * turret.attackCount) * 0.5f, HitData.Element.lightning);
-                        user.DamageDealed(user, enemy, HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
+                        user.DamageDealed(user, enemy, (dmg * turret.attackCount) * 0.5f, HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
 
                         TurretSlow slow = enemy.gameObject.AddComponent<TurretSlow>();
                         slow.SetUp(user, turret.user.c4Slow, turret.user.c4Duration);

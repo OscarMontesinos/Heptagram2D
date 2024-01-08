@@ -23,4 +23,5 @@ public class Stats
     public float windResist;
     public float natureResist;
     public float lightningResist;
+    public float resist;
 }

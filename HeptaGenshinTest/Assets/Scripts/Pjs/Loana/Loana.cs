@@ -62,13 +62,13 @@ public class Loana : PjBase
     {
         yield return null;
 
-        if (CharacterManager.Instance.data[2].convergence >= 4)
+        if (CharacterManager.Instance.data[id].convergence >= 4)
         {
             foreach (PjBase pj in GameManager.Instance.pjList)
             {
                 if (pj.element == HitData.Element.water && pj != this )
                 {
-                    if (CharacterManager.Instance.data[2].convergence >= 6)
+                    if (CharacterManager.Instance.data[id].convergence >= 6)
                     {
                         LoanaBuff buff = pj.AddComponent<LoanaBuff>();
                         buff.SetUp(this, CalculateControl(c5BuffAmount), CalculateControl(c6BuffAmount));
@@ -79,7 +79,7 @@ public class Loana : PjBase
                         buff.SetUp(this, CalculateControl(c5BuffAmount), CalculateControl(0));
                     }
                 }
-                else
+                else if (CharacterManager.Instance.data[id].convergence >= 6)
                 {
                     LoanaBuff buff = pj.AddComponent<LoanaBuff>();
                     buff.SetUp(this, CalculateControl(0), CalculateControl(c6BuffAmount));
@@ -101,6 +101,7 @@ public class Loana : PjBase
 
     public override void MainAttack()
     {
+        base.MainAttack();
         if (combo != 0 && currentComboReset <= 0)
         {
             combo = 0;
@@ -121,16 +122,15 @@ public class Loana : PjBase
                 combo = 0;
             }
         }
-        base.MainAttack();
     }
 
     public override void StrongAttack()
     {
+            base.StrongAttack();
         if (!IsCasting())
         {
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd / strongAtSpdMultiplier)));
             _animator.Play("LoanaAttack3");
-            base.StrongAttack();
         }
     }
 
@@ -142,8 +142,8 @@ public class Loana : PjBase
         {
             enemy = enemyColl.GetComponent<Enemy>();
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a1Dmg), HitData.Element.water);
-            DamageDealed(this, enemy, HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
-            if (CharacterManager.Instance.data[2].convergence >= 1)
+            DamageDealed(this, enemy, CalculateSinergy(a1Dmg), HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
+            if (CharacterManager.Instance.data[id].convergence >= 1)
             {
                 currentHab1Cd -= 1;
             }
@@ -159,12 +159,12 @@ public class Loana : PjBase
             enemy = enemyColl.GetComponent<Enemy>();
             Stunn(enemy,a2Stunn);
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a2Dmg), HitData.Element.water);
-            DamageDealed(this, enemy, HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
-            if (CharacterManager.Instance.data[2].convergence >= 1)
+            DamageDealed(this, enemy, CalculateSinergy(a2Dmg), HitData.Element.water, HitData.AttackType.melee, HitData.HabType.basic);
+            if (CharacterManager.Instance.data[id].convergence >= 1)
             {
                 currentHab1Cd -= 1;
             }
-            if (CharacterManager.Instance.data[2].convergence >= 4 && c4CurrentCd <=0)
+            if (CharacterManager.Instance.data[id].convergence >= 4 && c4CurrentCd <=0)
             {
                 foreach(PjBase pj in controller.team)
                 {
@@ -177,27 +177,27 @@ public class Loana : PjBase
 
     public override void Hab1()
     {
+        base.Hab1();
         if (!IsCasting() && currentHab1Cd <= 0)
         {
             StartCoroutine(SoftCast(2));
             _animator.Play("LoanaWave");
         }
-        base.Hab1();
     }
 
     public override void Hab2()
     {
         if (!IsCasting() && currentHab2Cd <= 0)
         {
+            base.Hab2();
             StartCoroutine(Cast(1));
             Bubble bubble = Instantiate(h2Bubble, transform.position, new Quaternion(0, 0, 0, 0)).GetComponent<Bubble>();
             bubble.SetUp(this, CalculateControl(h2Amount), h2Duration);
-            if (CharacterManager.Instance.data[2].convergence >= 2)
+            if (CharacterManager.Instance.data[id].convergence >= 2)
             {
                 bubble.hp += Shield.shieldAmount;
             }
             currentHab2Cd = CDR(hab2Cd);
-            base.Hab2();
         }
     }
     public void CreateWave()
@@ -219,10 +219,10 @@ public class Loana : PjBase
 
     public override void OnGlobalDamageTaken()
     {
-        if (CharacterManager.Instance.data[2].convergence >= 2)
+        if (CharacterManager.Instance.data[id].convergence >= 2)
         {
             int random = Random.Range(1, 4);
-            if (random == 3 ||  CharacterManager.Instance.data[2].convergence >= 6 && controller.GetComponent<LoanaShield>() && controller.GetComponent<LoanaShield>().singularShieldAmount > 0)
+            if (random == 3 ||  CharacterManager.Instance.data[id].convergence >= 6 && controller.GetComponent<LoanaShield>() && controller.GetComponent<LoanaShield>().singularShieldAmount > 0)
             {
                 Instantiate(c6Particle, transform);
                 Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position, c3Area, GameManager.Instance.enemyLayer);
@@ -231,7 +231,7 @@ public class Loana : PjBase
                 {
                     enemy = enemyColl.GetComponent<Enemy>();
                     enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a1Dmg), HitData.Element.water);
-                    DamageDealed(this, enemy, HitData.Element.water, HitData.AttackType.aoe, HitData.HabType.hability);
+                    DamageDealed(this, enemy, CalculateSinergy(a1Dmg), HitData.Element.water, HitData.AttackType.aoe, HitData.HabType.hability);
                 }
             }
         }

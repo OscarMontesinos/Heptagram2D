@@ -51,7 +51,7 @@ public class ValiMistArrow : Projectile
         {
             collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.ice);
             collision.GetComponent<Enemy>().GetComponent<TakeDamage>().Stunn(stunTime);
-            user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.ice, HitData.AttackType.range, HitData.HabType.hability);
+            user.DamageDealed(user, collision.GetComponent<Enemy>(), dmg, HitData.Element.ice, HitData.AttackType.range, HitData.HabType.hability);
             Die();
         }
     }

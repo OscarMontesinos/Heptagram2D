@@ -49,9 +49,9 @@ public class Adrik : PjBase
 
     public override void MainAttack()
     {
+        base.MainAttack();
         if (!IsCasting())
         {
-            base.MainAttack();
             if (h1Charges <= 0)
             {
                 StartCoroutine(AdrikNormalAttack());

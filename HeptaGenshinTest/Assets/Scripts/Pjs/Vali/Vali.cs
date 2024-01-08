@@ -84,6 +84,7 @@ public class Vali : PjBase
 
     public override void MainAttack()
     {
+        base.MainAttack();
         if(combo!=0 && currentComboReset <= 0)
         {
             combo = 0;  
@@ -105,11 +106,11 @@ public class Vali : PjBase
                 combo=0;
             }
         }
-        base.MainAttack();
     }
 
     public override void StrongAttack()
     {
+        base.StrongAttack();
         if (!IsCasting())
         {
             if (CharacterManager.Instance.data[0].convergence >= 7)
@@ -121,11 +122,11 @@ public class Vali : PjBase
                 StartCoroutine(IceArrow());
             }
         }
-        base.StrongAttack();
     }
 
     public override void Hab1()
     {
+        base.Hab1();
         if (currentHab1Cd <= 0 && !IsCasting())
         {
             ValiMistArrow arrow = Instantiate(mistArrow, transform.position, controller.pointer.transform.rotation).GetComponent<ValiMistArrow>();
@@ -139,15 +140,14 @@ public class Vali : PjBase
                 arrow.SetUp(this, h1ArrowSpeed, h1Range, CalculateSinergy(h1Dmg), h1StunTime, h1ArrowDetour, h1ArrowBounceRange, h1ArrowSpeed, h1ArrowRange, CalculateSinergy(h1ArrowDmg),0,1);
             }
         }
-        base.Hab2();
     }
     public override void Hab2()
     {
+        base.Hab2();
         if (currentHab2Cd <= 0 && !IsCasting())
         {
             StartCoroutine(Fog());
         }
-        base.Hab2();
     }
 
     IEnumerator Basic2()
@@ -244,14 +244,14 @@ public class Vali : PjBase
         homingDir = !homingDir;
     }
 
-    public override void Interact(PjBase user, PjBase target,  HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
+    public override void Interact(PjBase user, PjBase target, float amount, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
     {
         if (CharacterManager.Instance.data[0].convergence >= 1 && habType == HitData.HabType.basic && attackType == HitData.AttackType.range)
         {
             HomingArrow(target.gameObject);
         }
 
-        base.Interact(user, target, element, attackType, habType);
+        base.Interact(user, target, amount, element, attackType, habType);
     }
 
     public override void EndedBasicDashGlobal()

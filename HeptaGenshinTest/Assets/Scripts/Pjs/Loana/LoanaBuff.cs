@@ -5,7 +5,7 @@ using UnityEngine;
 public class LoanaBuff : Buff
 {
     float pot;
-    float prot;
+    public float prot;
     public void SetUp(PjBase user, float pot, float prot)
     {
         untimed = true;

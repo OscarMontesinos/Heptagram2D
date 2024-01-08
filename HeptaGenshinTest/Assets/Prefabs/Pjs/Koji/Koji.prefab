@@ -369,12 +369,15 @@ MonoBehaviour:
   hab1Cd: 10
   currentHab2Cd: 0
   hab2Cd: 100
-  bDashSpeed: 30
-  bDashRange: 7
+  dashCd: 0.5
+  currentDashCd: 0
+  bDashSpeed: 20
+  bDashRange: 4.5
   casting: 0
   softCasting: 0
   dashing: 0
   stunTime: 0
+  ignoreSoftCastDebuff: 0
   level: 1
   stats:
     mHp: 105

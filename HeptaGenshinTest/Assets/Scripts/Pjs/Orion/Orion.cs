@@ -166,6 +166,7 @@ public class Orion : PjBase
     public override void MainAttack()
     {
        
+        base.MainAttack();
         if (!IsCasting())
         {
             attacking = true;
@@ -174,10 +175,10 @@ public class Orion : PjBase
             bullet.SetUp(this, a1Spd, a1Range, CalculateSinergy(a1Dmg/a1AtSpdConvertion));
             bullet.transform.localEulerAngles = new Vector3(bullet.transform.localEulerAngles.x, bullet.transform.localEulerAngles.y, bullet.transform.localEulerAngles.z + Random.Range(-a1Detour * a1DetourMultiplier, a1Detour* a1DetourMultiplier));
         }
-        base.MainAttack();
     }
     public override void StrongAttack()
     {
+        base.StrongAttack();
 
         if (!IsCasting() && (charge >= a2Cost || (CharacterManager.Instance.data[7].convergence >= 6 && c6CurrentCd <= 0 && c6CurrentCd <= 0)))
         {
@@ -195,7 +196,6 @@ public class Orion : PjBase
                 charge -= a2Cost;
             }
         }
-        base.StrongAttack();
     }
 
     public void LaunchMissile(Quaternion rotation, float stunnTime, float range)
@@ -206,6 +206,7 @@ public class Orion : PjBase
 
     public override void Hab1()
     {
+            base.Hab1();
         if (!IsCasting() && currentHab1Cd <= 0)
         {
             charge = h1Charge;
@@ -218,18 +219,17 @@ public class Orion : PjBase
                     buff.SetUp(this, CalculateControl(c1Amount));
                 }
             }
-            base.Hab1();
         }
     }
 
     public override void Hab2()
     {
+        base.Hab2();
         if (!IsCasting() && currentHab2Cd <= 0)
         {
             StartCoroutine(OrionPulse());
             currentHab2Cd = CDR(hab2Cd);
         }
-        base.Hab2();
     }
 
     IEnumerator OrionPulse()

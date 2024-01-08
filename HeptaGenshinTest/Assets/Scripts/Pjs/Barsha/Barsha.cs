@@ -106,6 +106,7 @@ public class Barsha : PjBase
     }
     public override void MainAttack()
     {
+        base.MainAttack();
         if (combo != 0 && currentComboReset <= 0)
         {
             combo = 0;
@@ -131,7 +132,6 @@ public class Barsha : PjBase
                 combo = 0;
             }
         }
-        base.MainAttack();
     }
 
 
@@ -143,12 +143,13 @@ public class Barsha : PjBase
         {
             enemy = enemyColl.GetComponent<Enemy>();
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a1Dmg), HitData.Element.nature);
-            DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
+            DamageDealed(this, enemy, CalculateSinergy(a1Dmg), HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
         }
     }
 
     public override void StrongAttack()
     {
+            base.StrongAttack();
         if (!IsCasting())
         {
             if (!a2Ready)
@@ -165,7 +166,6 @@ public class Barsha : PjBase
                 a2Ready = false;
             }
         }
-            base.StrongAttack();
     }
 
     IEnumerator SpecialStrong()
@@ -186,7 +186,7 @@ public class Barsha : PjBase
                 {
                     enemiesHitted.Add(enemy);
                     enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a2Dmg3), HitData.Element.nature);
-                    DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
+                    DamageDealed(this, enemy, CalculateSinergy(a2Dmg3), HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
                     Stunn(enemy, a2StunTime);
                 }
             }
@@ -200,7 +200,7 @@ public class Barsha : PjBase
         {
             enemy = enemyColl.GetComponent<Enemy>();
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a2Dmg1), HitData.Element.nature);
-            DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
+            DamageDealed(this, enemy, CalculateSinergy(a2Dmg1), HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
         }
     }
     public void BarshaStrongAttack2()
@@ -211,7 +211,7 @@ public class Barsha : PjBase
         {
             enemy = enemyColl.GetComponent<Enemy>();
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(a2Dmg2), HitData.Element.nature);
-            DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
+            DamageDealed(this, enemy, CalculateSinergy(a2Dmg2), HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
         }
     }
 
@@ -222,6 +222,7 @@ public class Barsha : PjBase
 
     public override void Hab1()
     {
+        base.Hab1();
         if (!IsCasting() && currentHab1Cd <= 0)
         {
             if (currentHab1Cd <= 0)
@@ -271,7 +272,6 @@ public class Barsha : PjBase
                 }
             }
         }
-        base.Hab1();
     }
 
     public override void Hab2()
@@ -336,7 +336,7 @@ public class Barsha : PjBase
                         dmg += Shield.shieldAmount * c7DmgConversor;
                     }
                         enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(dmg), HitData.Element.nature);
-                    DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.aoe, HitData.HabType.hability);
+                    DamageDealed(this, enemy, CalculateSinergy(dmg), HitData.Element.nature, HitData.AttackType.aoe, HitData.HabType.hability);
                     Stunn(enemy, h2StunTime);
                 }
             }
@@ -353,7 +353,7 @@ public class Barsha : PjBase
         {
             enemy = enemyColl.GetComponent<Enemy>();
             enemy.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(h1Dmg), HitData.Element.nature);
-            DamageDealed(this, enemy, HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
+            DamageDealed(this, enemy, CalculateSinergy(h1Dmg), HitData.Element.nature, HitData.AttackType.melee, HitData.HabType.basic);
             if (CharacterManager.Instance.data[6].convergence >= 2)
             {
                 Stunn( enemy,c2StunnDuration);
@@ -363,7 +363,7 @@ public class Barsha : PjBase
         currentComboReset = CalculateAtSpd(stats.atSpd) + 0.5f;
     }
 
-    public override void Interact(PjBase user, PjBase target, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
+    public override void Interact(PjBase user, PjBase target, float amount, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)
     {
         if (attackType == HitData.AttackType.melee && (h1FervourCurrentDuration > 0 || (CharacterManager.Instance.data[6].convergence >= 6 && controller.GetComponent<BarshaShield>())))
         {
@@ -373,16 +373,16 @@ public class Barsha : PjBase
             {
                 h1FervourCount = h1MaxFervourCount;
             }
-            DamageDealed(this, target, HitData.Element.nature, HitData.AttackType.passive, HitData.HabType.hability);
+            DamageDealed(this, target, CalculateSinergy(h1FervourDmg), HitData.Element.nature, HitData.AttackType.passive, HitData.HabType.hability);
             h1FervourDmg = h1FervourMinDmg;
         }
         if(!c4EnemyList.Contains(target) && target.stunTime > 0)
         {
             target.GetComponent<TakeDamage>().TakeDamage(this, CalculateSinergy(c4Dmg), HitData.Element.nature);
             c4EnemyList.Add(target);
-            DamageDealed(this, target, HitData.Element.nature, HitData.AttackType.passive, HitData.HabType.hability);
+            DamageDealed(this, target, CalculateSinergy(c4Dmg), HitData.Element.nature, HitData.AttackType.passive, HitData.HabType.hability);
         }
-        base.Interact(user, target, element, attackType, habType);
+        base.Interact(user, target, amount, element, attackType, habType);
     }
 
     public override void OnGlobalStunn(PjBase target, float value)

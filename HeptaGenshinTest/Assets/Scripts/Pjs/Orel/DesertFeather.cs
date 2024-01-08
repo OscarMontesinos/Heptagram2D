@@ -19,7 +19,7 @@ public class DesertFeather : Projectile
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.desert);
-            user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.desert, HitData.AttackType.range, HitData.HabType.basic);
+            user.DamageDealed(user, collision.GetComponent<Enemy>(),dmg, HitData.Element.desert, HitData.AttackType.range, HitData.HabType.basic);
 
             Die();
         }

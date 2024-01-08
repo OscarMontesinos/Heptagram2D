@@ -23,7 +23,7 @@ public class OrionWave : Projectile
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.lightning);
-            user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
+            user.DamageDealed(user, collision.GetComponent<Enemy>(),dmg, HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
             collision.gameObject.AddComponent<OrionDebuff>().SetUp(user, debuff, time);
             if (CharacterManager.Instance.data[7].convergence >= 6)
             {

@@ -52,12 +52,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = character.transform.position;
 
+            HandleHabilities();
 
             if (character.stunTime <= 0)
             {
                 HandlePointer();
-
-                HandleHabilities();
 
                 HandleMovement();
             }
@@ -109,7 +108,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (!character.casting && character.stunTime <= 0)
                 {
-                    if (!character.softCasting)
+                    if (!character.softCasting || character.ignoreSoftCastDebuff)
                     {
                         rb.velocity = transform.right * character.stats.spd * inputMov.x + transform.up * character.stats.spd * inputMov.y;
                     }
@@ -123,7 +122,13 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = Vector3.zero;
                 }
             }
+
+            if (rb.velocity.magnitude > 0)
+            {
+                character.Moving(rb.velocity.magnitude * Time.deltaTime);
+            }
         }
+
 
     }
 
@@ -174,7 +179,7 @@ public class PlayerController : MonoBehaviour
         {
             character.Hab2();
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && character.stunTime <= 0)
         {
             character.BasicDash();
         }

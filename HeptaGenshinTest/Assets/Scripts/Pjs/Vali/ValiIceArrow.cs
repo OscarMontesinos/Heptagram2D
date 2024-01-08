@@ -20,7 +20,7 @@ public class ValiIceArrow : Projectile
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.ice);
-            user.DamageDealed(user, collision.GetComponent<Enemy>(),HitData.Element.ice, HitData.AttackType.range, HitData.HabType.basic);
+            user.DamageDealed(user, collision.GetComponent<Enemy>(), dmg, HitData.Element.ice, HitData.AttackType.range, HitData.HabType.basic);
             if (!piercing)
             {
                 Die();

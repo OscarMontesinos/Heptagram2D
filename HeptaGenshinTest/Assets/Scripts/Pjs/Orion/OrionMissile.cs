@@ -47,7 +47,7 @@ public class OrionMissile : Projectile
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemyColl.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.lightning);
-            user.DamageDealed(user, enemyColl.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
+            user.DamageDealed(user, enemyColl.GetComponent<Enemy>(), dmg, HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
             user.Stunn(enemyColl.GetComponent<Enemy>(), stunTime);
             if (CharacterManager.Instance.data[7].convergence >= 6)
             {

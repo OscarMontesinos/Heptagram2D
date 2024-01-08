@@ -18,7 +18,7 @@ public class LightningBullet : Projectile
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, dmg, HitData.Element.lightning);
-            user.DamageDealed(user, collision.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.basic);
+            user.DamageDealed(user, collision.GetComponent<Enemy>(), dmg, HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.basic);
             if (CharacterManager.Instance.data[7].convergence >= 6)
             {
                 if(user.charge < user.maxCharge)

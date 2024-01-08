@@ -169,6 +169,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   sprite: {fileID: 0}
   chName: 
+  id: 0
   element: 0
   spinObjects: {fileID: 0}
   hpBar: {fileID: 7998548566664082281}
@@ -189,6 +190,7 @@ MonoBehaviour:
   softCasting: 0
   dashing: 0
   stunTime: 0
+  ignoreSoftCastDebuff: 0
   level: 1
   stats:
     mHp: 70
@@ -235,6 +237,7 @@ MonoBehaviour:
   spellRange: 30
   spellDamage: 50
   atqSpd: 1.5
+  atqSpdDetour: 0.2
   getCloserThreshold: 11
 --- !u!58 &4470652349959714112
 CircleCollider2D:

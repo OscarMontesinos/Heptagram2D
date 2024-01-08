@@ -81,7 +81,7 @@ public class NoelMine : Spell
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemyColl.GetComponent<Enemy>().GetComponent<TakeDamage>().TakeDamage(user, noel.CalculateSinergy(dmg), HitData.Element.lightning);
-            noel.DamageDealed(noel, enemyColl.GetComponent<Enemy>(), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
+            noel.DamageDealed(noel, enemyColl.GetComponent<Enemy>(), noel.CalculateSinergy(dmg), HitData.Element.lightning, HitData.AttackType.range, HitData.HabType.hability);
             noel.Stunn(enemyColl.GetComponent<Enemy>(), stunnTime);
         }
 
