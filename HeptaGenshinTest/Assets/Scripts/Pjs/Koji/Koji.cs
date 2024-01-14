@@ -69,7 +69,7 @@ public class Koji : PjBase
         {
             combo = 0;
         }
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd)));
             if (combo == 0)
@@ -114,7 +114,7 @@ public class Koji : PjBase
     public override void StrongAttack()
     {
         base.StrongAttack();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             float range = a2DashRange;
             float speed = a2DashSpd;
@@ -133,7 +133,7 @@ public class Koji : PjBase
                 }
             }
 
-            StartCoroutine(Dash(controller.pointer.transform.up, speed, range, false));
+            StartCoroutine(Dash(controller.pointer.transform.up, speed, range, false,false,false));
             StartCoroutine(SoftCast(CalculateAtSpd(strongAtSpdMultiplier)));
             _animator.Play("KojiStrongAttack");
         }
@@ -168,7 +168,7 @@ public class Koji : PjBase
     public override void Hab1()
     {
         base.Hab1();
-        if (!IsCasting() && !dashing && currentHab1Cd <= 0)
+        if (!IsCasting() && !IsStunned() && !dashing && currentHab1Cd <= 0)
         {
             if (currentKnife == null)
             {
@@ -266,7 +266,7 @@ public class Koji : PjBase
     public override void Hab2()
     {
         base.Hab2();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             h2Particle.Play();
             _animator.Play("KojiUltPreparation");

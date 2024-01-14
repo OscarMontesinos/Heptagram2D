@@ -126,6 +126,10 @@ public class PlayerController : MonoBehaviour
             if (rb.velocity.magnitude > 0)
             {
                 character.Moving(rb.velocity.magnitude * Time.deltaTime);
+                foreach (PjBase pj in GameManager.Instance.pjList)
+                {
+                    pj.GlobalMoving(rb.velocity.magnitude * Time.deltaTime, character);
+                }
             }
         }
 

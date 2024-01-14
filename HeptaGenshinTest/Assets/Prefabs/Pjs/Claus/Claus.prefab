@@ -547,7 +547,7 @@ MonoBehaviour:
   currentHab1Cd: 0
   hab1Cd: 0
   currentHab2Cd: 0
-  hab2Cd: 135
+  hab2Cd: 115
   dashCd: 0.5
   currentDashCd: 0
   bDashSpeed: 30
@@ -613,12 +613,13 @@ MonoBehaviour:
   h1RealCd: 1.5
   h1Cost: 10
   h1Range: 4.5
-  h1Heal: 10
+  h1Heal: 12.5
   h1Delay: 0.95
   h1PulsesCd: 0.05
   h2Active: 0
+  h2UltReturnPercentage: 60
   h2Prot: 600
-  h2Duration: 20
+  h2Duration: 25
   h2CurrentDuration: 0
   h2Particles: {fileID: 2696014476839240995, guid: 2b304a636dc7b634cb1a6b7a4631c300, type: 3}
   currentParticles:

@@ -167,7 +167,7 @@ public class Orion : PjBase
     {
        
         base.MainAttack();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             attacking = true;
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd * a1AtSpdConvertion)));
@@ -180,7 +180,7 @@ public class Orion : PjBase
     {
         base.StrongAttack();
 
-        if (!IsCasting() && (charge >= a2Cost || (CharacterManager.Instance.data[7].convergence >= 6 && c6CurrentCd <= 0 && c6CurrentCd <= 0)))
+        if (!IsCasting() && !IsStunned() && (charge >= a2Cost || (CharacterManager.Instance.data[7].convergence >= 6 && c6CurrentCd <= 0 && c6CurrentCd <= 0)))
         {
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd * strongAtSpdMultiplier)));
 
@@ -207,7 +207,7 @@ public class Orion : PjBase
     public override void Hab1()
     {
             base.Hab1();
-        if (!IsCasting() && currentHab1Cd <= 0)
+        if (!IsCasting() && !IsStunned() && currentHab1Cd <= 0)
         {
             charge = h1Charge;
             currentHab1Cd = CDR(hab1Cd);
@@ -225,7 +225,7 @@ public class Orion : PjBase
     public override void Hab2()
     {
         base.Hab2();
-        if (!IsCasting() && currentHab2Cd <= 0)
+        if (!IsCasting() && !IsStunned() && currentHab2Cd <= 0)
         {
             StartCoroutine(OrionPulse());
             currentHab2Cd = CDR(hab2Cd);

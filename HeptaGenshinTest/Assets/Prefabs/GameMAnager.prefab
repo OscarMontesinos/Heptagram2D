@@ -47,9 +47,9 @@ MonoBehaviour:
   gamemode: 0
   baseController: {fileID: 2297667835147027760, guid: cce1037fca2ba254f82fd7e01faafc19, type: 3}
   baseUIManager: {fileID: 3160418526335597406, guid: 9951dc35b407f974db774e7f02674eaa, type: 3}
-  character1: {fileID: 6379600470355968158, guid: a2b2a0182a05e9749aa880f02cac7eee, type: 3}
-  character2: {fileID: 6379600470355968158, guid: f2bbd8c208226994cbad9186ff3f2aff, type: 3}
-  character3: {fileID: 6379600470355968158, guid: 03445fd36424447409a3bc61698833db, type: 3}
+  character1: {fileID: 0}
+  character2: {fileID: 0}
+  character3: {fileID: 0}
   pjList: []
   wallLayer:
     serializedVersion: 2
@@ -90,7 +90,7 @@ MonoBehaviour:
     rgba: 4287488999
   bloodColor:
     serializedVersion: 2
-    rgba: 4280821950
+    rgba: 4280229786
   iceCrystal: {fileID: 21300000, guid: 9ae8af67bc43f744fa2c5816be713ef6, type: 3}
   fireCrystal: {fileID: 21300000, guid: aed2508ca3e86e74bbc5542f97aa6907, type: 3}
   waterCrystal: {fileID: 21300000, guid: 401f616451476314c8c123e59984414b, type: 3}

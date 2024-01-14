@@ -50,6 +50,7 @@ public class Claus : PjBase
 
     [HideInInspector]
     public bool h2Active;
+    public float h2UltReturnPercentage;
     public float h2Prot;
     public float h2Duration;
     [HideInInspector]
@@ -224,7 +225,7 @@ public class Claus : PjBase
     {
         base.MainAttack();
 
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             if (CharacterManager.Instance.data[id].convergence >= 1)
             {
@@ -252,7 +253,7 @@ public class Claus : PjBase
     {
         base.StrongAttack();
 
-        if (!dashing)
+        if (!dashing && !IsStunned())
         {
             Vector3 destiny = UtilsClass.GetMouseWorldPosition();
             Vector3 dist = destiny - transform.position;
@@ -293,7 +294,7 @@ public class Claus : PjBase
     public override void Hab1()
     {
         base.Hab1();
-        if (!IsCasting() && h1SelectedQuantity > 0 && h1CurrentRealCd <= 0)
+        if (!IsCasting() && !IsStunned() && h1SelectedQuantity > 0 && h1CurrentRealCd <= 0)
         {
             Vector3 destiny = UtilsClass.GetMouseWorldPosition();
             Vector3 dist = destiny - transform.position;
@@ -341,6 +342,10 @@ public class Claus : PjBase
         }
         if (!IsCasting() && currentHab2Cd <= 0)
         {
+            foreach (PjBase pj in GameManager.Instance.pjList)
+            {
+                pj.currentHab2Cd -= ((h2UltReturnPercentage * pj.hab2Cd) / 100);
+            }
             if (CharacterManager.Instance.data[id].convergence >= 3)
             {
                 stunTime = 0;
@@ -373,6 +378,23 @@ public class Claus : PjBase
             AddMana(magnitude * manaGainedMultiplier * 3);
         }
         base.Moving(magnitude);
+    }
+
+    public override void GlobalMoving(float magnitude, PjBase user)
+    {
+        base.GlobalMoving(magnitude, user); 
+        if (user != this)
+        {
+            int players = 0;
+            foreach (PjBase pj in GameManager.Instance.pjList)
+            {
+                if (pj.isActive)
+                {
+                    players++;
+                }
+            }
+            AddMana((magnitude * manaGainedMultiplier)/players);
+        }
     }
 
     public override void Interact(PjBase user, PjBase target, float amount, HitData.Element element, HitData.AttackType attackType, HitData.HabType habType)

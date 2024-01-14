@@ -154,7 +154,7 @@ MonoBehaviour:
   dashCd: 0.5
   currentDashCd: 0
   bDashSpeed: 20
-  bDashRange: 4.5
+  bDashRange: 5.5
   casting: 0
   softCasting: 0
   dashing: 0
@@ -177,6 +177,7 @@ MonoBehaviour:
     windResist: 50
     natureResist: 10
     lightningResist: 10
+    resist: 0
   statsPerLevel:
     mHp: 7.5
     hp: 0
@@ -193,6 +194,7 @@ MonoBehaviour:
     windResist: 0
     natureResist: 0
     lightningResist: 0
+    resist: 0
   damageTextOffset: 1
   dmgDealed: 0
   desertFeather: {fileID: 8600196668912157451, guid: aeb5c77cea5bd284c9f6340a28caf7fe, type: 3}

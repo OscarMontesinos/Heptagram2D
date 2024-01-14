@@ -82,7 +82,7 @@ public class Noel : PjBase
     public override void MainAttack()
     {
         base.MainAttack();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd)));
             Vector2 dist = UtilsClass.GetMouseWorldPositionWithZ() - transform.position;
@@ -117,7 +117,7 @@ public class Noel : PjBase
     public override void StrongAttack()
     {
         base.StrongAttack(); 
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(Cast(CalculateAtSpd(stats.atSpd * strongAtSpdMultiplier)));
             _animator.Play("NoelStrongAttack");
@@ -150,7 +150,7 @@ public class Noel : PjBase
     public override void Hab1()
     {
         base.Hab1();
-        if (currentHab1Cd <= 0 && !IsCasting())
+        if (currentHab1Cd <= 0 && !IsCasting() && !IsStunned())
         {
             Vector2 dist = UtilsClass.GetMouseWorldPosition() - transform.position;
             if (dist.magnitude > h1TurretRange)
@@ -243,7 +243,7 @@ public class Noel : PjBase
     public override void Hab2()
     {
         base.Hab2();
-        if (!IsCasting() && currentHab2Cd <= 0)
+        if (!IsCasting() && !IsStunned() && currentHab2Cd <= 0)
         {
             StartCoroutine(MineDisplace());
             currentHab2Cd = CDR( hab2Cd);

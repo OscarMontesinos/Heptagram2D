@@ -84,7 +84,7 @@ public class Orel : PjBase
     public override void MainAttack()
     {
         base.MainAttack();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd)));
             DesertFeather feather = Instantiate(desertFeather, transform.position, controller.pointer.transform.rotation).GetComponent<DesertFeather>();
@@ -104,7 +104,7 @@ public class Orel : PjBase
     public override void StrongAttack()
     {
         base.StrongAttack();
-        if (!IsCasting() && !dashing)
+        if (!IsCasting() && !IsStunned() && !dashing)
         {
             if (CharacterManager.Instance.data[1].convergence >= 1 && a2Special)
             {
@@ -123,7 +123,7 @@ public class Orel : PjBase
     public override void Hab1()
     {
         base.Hab1();
-        if (currentHab1Cd <= 0 && !IsCasting())
+        if (currentHab1Cd <= 0 && !IsCasting() && !IsStunned())
         {
             StartCoroutine(Assault());
         }
@@ -131,7 +131,7 @@ public class Orel : PjBase
     public override void Hab2()
     {
         base.Hab2();
-        if (currentHab2Cd <= 0 && !IsCasting() && !GetComponent<OrelPredatorBuff>())
+        if (currentHab2Cd <= 0 && !IsCasting() && !IsStunned() && !GetComponent<OrelPredatorBuff>())
         {
             StartCoroutine(PredatorFlight());
         }
@@ -164,6 +164,8 @@ public class Orel : PjBase
             particle.Play();
         }
         StartCoroutine(Dash(dir, h1Spd, h1Range, false));
+
+        yield return null;
 
         List<Enemy> enemiesHitted = new List<Enemy>();
 

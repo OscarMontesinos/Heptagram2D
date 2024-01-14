@@ -137,9 +137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b0f1146e9a0a64887922e6d2c6b60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   controller: {fileID: 0}
   sprite: {fileID: 446603575539577665}
   chName: 
+  id: 0
   element: 0
   spinObjects: {fileID: 0}
   hpBar: {fileID: 2454857229369185607}
@@ -154,15 +156,18 @@ MonoBehaviour:
   hab1Cd: 0
   currentHab2Cd: 0
   hab2Cd: 0
+  dashCd: 0.5
+  currentDashCd: 0
   bDashSpeed: 0
   bDashRange: 0
   casting: 0
   softCasting: 0
   dashing: 0
   stunTime: 0
+  ignoreSoftCastDebuff: 0
   level: 1
   stats:
-    mHp: 1000
+    mHp: 1400
     hp: 0
     shield: 0
     sinergy: 50
@@ -177,6 +182,7 @@ MonoBehaviour:
     windResist: 10
     natureResist: 60
     lightningResist: 30
+    resist: 0
   statsPerLevel:
     mHp: 400
     hp: 0
@@ -193,6 +199,7 @@ MonoBehaviour:
     windResist: 0
     natureResist: 0
     lightningResist: 0
+    resist: 0
   damageTextOffset: 3.5
   dmgDealed: 0
   rb: {fileID: 446603575103447976}
@@ -200,6 +207,7 @@ MonoBehaviour:
   viewDist: 50
   pointer: {fileID: 446603575523894538}
   point: 0
+  agent: {fileID: 0}
   attackPoint: {fileID: 5205610274486845087}
   attackDmg: 40
   attackRange: 4

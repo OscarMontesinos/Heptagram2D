@@ -851,22 +851,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameMAnager
       objectReference: {fileID: 0}
-    - target: {fileID: 1571748197764339283, guid: da986920937ac1049b936dbe9f59005f, type: 3}
-      propertyPath: character1
-      value: 
-      objectReference: {fileID: 6379600470355968158, guid: c3bcdf1bed45fed40b81b7d016cee867, type: 3}
-    - target: {fileID: 1571748197764339283, guid: da986920937ac1049b936dbe9f59005f, type: 3}
-      propertyPath: character2
-      value: 
-      objectReference: {fileID: 6379600470355968158, guid: 03445fd36424447409a3bc61698833db, type: 3}
-    - target: {fileID: 1571748197764339283, guid: da986920937ac1049b936dbe9f59005f, type: 3}
-      propertyPath: character3
-      value: 
-      objectReference: {fileID: 6379600470355968158, guid: a2b2a0182a05e9749aa880f02cac7eee, type: 3}
-    - target: {fileID: 1571748197764339283, guid: da986920937ac1049b936dbe9f59005f, type: 3}
-      propertyPath: bloodColor.rgba
-      value: 4280229786
-      objectReference: {fileID: 0}
     - target: {fileID: 1571748197764339284, guid: da986920937ac1049b936dbe9f59005f, type: 3}
       propertyPath: m_RootOrder
       value: 5

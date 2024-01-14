@@ -89,7 +89,7 @@ public class Vali : PjBase
         {
             combo = 0;  
         }
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd)));
             if (combo == 0)
@@ -111,7 +111,7 @@ public class Vali : PjBase
     public override void StrongAttack()
     {
         base.StrongAttack();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             if (CharacterManager.Instance.data[0].convergence >= 7)
             {
@@ -127,7 +127,7 @@ public class Vali : PjBase
     public override void Hab1()
     {
         base.Hab1();
-        if (currentHab1Cd <= 0 && !IsCasting())
+        if (currentHab1Cd <= 0 && !IsCasting() && !IsStunned())
         {
             ValiMistArrow arrow = Instantiate(mistArrow, transform.position, controller.pointer.transform.rotation).GetComponent<ValiMistArrow>();
             currentHab1Cd = CDR(hab1Cd);
@@ -144,7 +144,7 @@ public class Vali : PjBase
     public override void Hab2()
     {
         base.Hab2();
-        if (currentHab2Cd <= 0 && !IsCasting())
+        if (currentHab2Cd <= 0 && !IsCasting() && !IsStunned())
         {
             StartCoroutine(Fog());
         }

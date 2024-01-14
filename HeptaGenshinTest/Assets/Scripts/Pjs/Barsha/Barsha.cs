@@ -111,7 +111,7 @@ public class Barsha : PjBase
         {
             combo = 0;
         }
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd)));
             if (combo == 0)
@@ -150,7 +150,7 @@ public class Barsha : PjBase
     public override void StrongAttack()
     {
             base.StrongAttack();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             if (!a2Ready)
             {
@@ -223,7 +223,7 @@ public class Barsha : PjBase
     public override void Hab1()
     {
         base.Hab1();
-        if (!IsCasting() && currentHab1Cd <= 0)
+        if (!IsCasting() && !IsStunned() && currentHab1Cd <= 0)
         {
             if (currentHab1Cd <= 0)
             {
@@ -277,7 +277,7 @@ public class Barsha : PjBase
     public override void Hab2()
     {
         base.Hab2();
-        if (!IsCasting() && currentHab2Cd <= 0)
+        if (!IsCasting() && !IsStunned() && currentHab2Cd <= 0)
         {
             h2Activated = true;
             currentHab2Cd = hab2Cd;

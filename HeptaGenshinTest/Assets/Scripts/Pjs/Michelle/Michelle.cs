@@ -139,7 +139,7 @@ public class Michelle : PjBase
         {
             combo = 0;
         }
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd)));
             if (h2Active)
@@ -174,7 +174,7 @@ public class Michelle : PjBase
     public override void StrongAttack()
     {
             base.StrongAttack();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(Cast(CalculateAtSpd(stats.atSpd / strongAtSpdMultiplier)));
             if (h2Active)
@@ -266,7 +266,7 @@ public class Michelle : PjBase
     public override void Hab1()
     {
         base.Hab1();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(PoolHeal());
         }
@@ -318,7 +318,7 @@ public class Michelle : PjBase
     public override void Hab2()
     {
         base.Hab2();
-        if (!IsCasting() && currentHab2Cd <= 0 && !h2Active)
+        if (!IsCasting() && !IsStunned() && currentHab2Cd <= 0 && !h2Active)
         {
             h2CurrentDuration = h2Duration;
             GetComponent<Collider2D>().enabled = false;

@@ -106,7 +106,7 @@ public class Loana : PjBase
         {
             combo = 0;
         }
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd)));
             if (combo == 0)
@@ -127,7 +127,7 @@ public class Loana : PjBase
     public override void StrongAttack()
     {
             base.StrongAttack();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(SoftCast(CalculateAtSpd(stats.atSpd / strongAtSpdMultiplier)));
             _animator.Play("LoanaAttack3");
@@ -178,7 +178,7 @@ public class Loana : PjBase
     public override void Hab1()
     {
         base.Hab1();
-        if (!IsCasting() && currentHab1Cd <= 0)
+        if (!IsCasting() && !IsStunned() && currentHab1Cd <= 0)
         {
             StartCoroutine(SoftCast(2));
             _animator.Play("LoanaWave");
@@ -187,7 +187,7 @@ public class Loana : PjBase
 
     public override void Hab2()
     {
-        if (!IsCasting() && currentHab2Cd <= 0)
+        if (!IsCasting() && !IsStunned() && currentHab2Cd <= 0)
         {
             base.Hab2();
             StartCoroutine(Cast(1));

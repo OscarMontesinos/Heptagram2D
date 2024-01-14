@@ -136,34 +136,22 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     public virtual void MainAttack()
     {
-        if (stunTime <= 0)
-        {
-            return;
-        }
+        
     }
 
     public virtual void StrongAttack()
     {
-        if (stunTime <= 0)
-        {
-            return;
-        }
+        
     }
 
     public virtual void Hab1()
     {
-        if (stunTime <= 0)
-        {
-            return;
-        }
+        
     }
 
     public virtual void Hab2()
     {
-        if(stunTime <= 0)
-        {
-            return;
-        }
+        
     }
 
 
@@ -216,6 +204,18 @@ public class PjBase : MonoBehaviour, TakeDamage
         else
         {
             return true;
+        }
+    }
+
+    public bool IsStunned()
+    {
+        if (stunTime > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -447,6 +447,11 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
 
     }
+
+    public virtual void GlobalMoving(float magnitude, PjBase user)
+    {
+
+    }
     void TakeDamage.Stunn(float stunTime)
     {
         this.stunTime += stunTime;
@@ -501,7 +506,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool isBasicDash)
     {
         yield return null;
-        StartCoroutine(Dash(direction, speed, range, isBasicDash, false, false));
+        StartCoroutine(Dash(direction, speed, range, isBasicDash, false, true));
     }
     public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool isBasicDash, bool ignoreWalls, bool shutDownCollider)
     {

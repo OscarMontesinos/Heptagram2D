@@ -38,7 +38,7 @@ public class ClausProtBuff : Buff
         if (dmg > 0)
         {
             ClausShield shield = claus.controller.gameObject.AddComponent<ClausShield>();
-            shield.SetUp(claus, dmg * claus.CalculateControl(claus.c7ShieldPerOneDmg), claus.hab2Cd / 2);
+            shield.SetUp(claus, dmg * claus.CalculateControl(claus.c7ShieldPerOneDmg), claus.hab2Cd / 4);
         }
         claus.h2Active = false;
         claus.currentHab2Cd = claus.CDR(claus.hab2Cd);

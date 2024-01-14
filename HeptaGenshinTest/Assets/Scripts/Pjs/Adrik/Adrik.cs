@@ -50,7 +50,7 @@ public class Adrik : PjBase
     public override void MainAttack()
     {
         base.MainAttack();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             if (h1Charges <= 0)
             {
@@ -115,7 +115,7 @@ public class Adrik : PjBase
     public override void StrongAttack()
     {
         base.StrongAttack();
-        if (!IsCasting())
+        if (!IsCasting() && !IsStunned())
         {
             StartCoroutine(AdrikStrongAttack());
         }
@@ -164,7 +164,7 @@ public class Adrik : PjBase
     public override void Hab1()
     {
         base.Hab1();
-        if (!IsCasting() && currentHab1Cd <= 0)
+        if (!IsCasting() && !IsStunned() && currentHab1Cd <= 0)
         {
             StartCoroutine(Cast(0.75f));
             currentHab1Cd = CDR(hab1Cd);
@@ -176,7 +176,7 @@ public class Adrik : PjBase
     public override void Hab2()
     {
         base.Hab2();
-        if (!IsCasting() && currentHab2Cd <= 0)
+        if (!IsCasting() && !IsStunned() && currentHab2Cd <= 0)
         {
             List<Enemy> enemyList = new List<Enemy>();
             foreach (Enemy enemy in FindObjectsOfType<Enemy>())
